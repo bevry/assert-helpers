@@ -43,10 +43,10 @@ helpers.equal = helpers.assertEqual = (argsActual, argsExpected, testName) ->
 			Comparison Error:
 			#{helpers.inspect(checkError.stack)}
 
-			Comparison Input:
+			Comparison Actual:
 			#{helpers.inspect(argsActual)}
 
-			Comparison Expected Input:
+			Comparison Expected:
 			#{helpers.inspect(argsExpected)}
 			------------------------------------\n
 			"""
@@ -62,14 +62,19 @@ helpers.deepEqual = helpers.assertDeepEqual = (argsActual, argsExpected, testNam
 			\nComparison Error:
 			#{helpers.inspect(checkError.stack)}
 
-			Comparison Input:
+			Comparison Actual:
 			#{helpers.inspect(argsActual)}
 
-			Comparison Expected Input:
+			Comparison Expected:
 			#{helpers.inspect(argsExpected)}
 			------------------------------------\n
 			"""
 		throw checkError
+
+# Calling contains will check if actual contains expected
+helpers.contains = (actual, expected, testName) ->
+	testName ?= "Expected `#{actual}` to contain `#{expected}`"
+	assert.ok(actual.indexOf(expected) isnt -1, testName)
 
 # Calling errorEqual with the error  you expect will return a callback that will the arguments you expect to the callback's received arguments
 # E.g. .done(errorEqual('the error message we expected'))
@@ -90,7 +95,7 @@ helpers.errorEqual = helpers.assertErrorEqual = (actualError, expectedError, tes
 
 	try
 		if actualErrorMessage and expectedErrorMessage
-			assert.ok(actualErrorMessage.indexOf(expectedErrorMessage) isnt -1, testName)
+			helpers.contains(actualErrorMessage, expectedErrorMessage, testName)
 		else
 			helpers.equal(actualError, expectedError, testName)
 
@@ -100,11 +105,11 @@ helpers.errorEqual = helpers.assertErrorEqual = (actualError, expectedError, tes
 			\nComparison Error:
 			#{helpers.inspect(checkError.stack)}
 
-			Comparison Input:
-			#{helpers.inspect(inputError?.stack or inputError?.message or inputError)}
+			Comparison Actual:
+			#{helpers.inspect(actualError?.stack or actualError?.message or actualError)}
 
-			Comparison Expected Input:
-			#{helpers.inspect(actualErrorMessage)}
+			Comparison Expected:
+			#{helpers.inspect(expectedErrorMessage)}
 			------------------------------------\n
 			"""
 		throw checkError

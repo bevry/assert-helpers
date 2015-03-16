@@ -29,6 +29,26 @@ Common utilities and helpers to make testing assertions easier
 <!-- /DESCRIPTION -->
 
 
+<!-- INSTALL/ -->
+
+## Install
+
+### [NPM](http://npmjs.org/)
+- Use: `require('assert-helpers')`
+- Install: `npm install --save assert-helpers`
+
+### [Browserify](http://browserify.org/)
+- Use: `require('assert-helpers')`
+- Install: `npm install --save assert-helpers`
+- CDN URL: `//wzrd.in/bundle/assert-helpers@1.0.1`
+
+### [Ender](http://enderjs.com)
+- Use: `require('assert-helpers')`
+- Install: `ender add assert-helpers`
+
+<!-- /INSTALL -->
+
+
 ## Usage
 
 ``` coffeescript
@@ -41,11 +61,19 @@ chaiHelpers.throwUnexpected()
 # ^ this will throw an error stating that the error was unexpected
 
 chaiHelpers.expectEqual('actual results', 'expected results', 'the test name')
-# ^ this will translate to expect('actual', 'test name').to.equal('expected')
+# ^ this will check that the actual requests equals the expected results
 # it will output the comparison if the comparison fails
 
 chaiHelpers.expectDeepEqual('actual results', 'expected results', 'the test name')
-# ^ this will translate to expect('actual', 'test name').to.deep.equal('expected')
+# ^ this will check that the actual requests deeply equal the expected results
+# it will output the comparison if the comparison fails
+
+chaiHelpers.contains('string one', 'string two', 'the test name')
+# ^ this will check that string one contains string two
+# it will output the comparison if the comparison fails
+
+chaiHelpers.expectError(theErrorWeReceived, 'the error we expect it to be', 'the test name')
+# ^ this will check that the error we received is the error we expect
 # it will output the comparison if the comparison fails
 
 chaiHelpers.returnViaCallback('result')
@@ -59,10 +87,6 @@ chaiHelpers.returnErrorViaCallback('the error or error message')
 
 chaiHelpers.expectViaCallback('expected', 'result', 'arguments')
 # ^ this will return a function that will compare it's received arguments with our expected arguments
-
-chaiHelpers.expectError(theErrorWeReceived, 'the error we expect it to be', 'the test name')
-# ^ this will check that the error we received is the error we expect
-# it will output the comparison if the comparison fails
 
 chaiHelpers.expectErrorViaCallback('the error we expect', anOptionalCompletionCallback)
 # ^ this will return a function that will compare its received error (its first received argument) with the error we expect it to be
@@ -109,8 +133,11 @@ No sponsors yet! Will you be the first?
 
 ### Contributors
 
-No contributors yet! Will you be the first?
-[Discover how you can contribute by heading on over to the `CONTRIBUTING.md` file.](https://github.com/bevry/assert-helpers/blob/master/CONTRIBUTING.md#files)
+These amazing people have contributed code to this project:
+
+- [Benjamin Lupton](https://github.com/balupton) <b@lupton.cc> — [view contributions](https://github.com/bevry/assert-helpers/commits?author=balupton)
+
+[Become a contributor!](https://github.com/bevry/assert-helpers/blob/master/CONTRIBUTING.md#files)
 
 <!-- /BACKERS -->
 

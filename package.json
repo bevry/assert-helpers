@@ -1,7 +1,7 @@
 {
   "title": "Assert Utilities & Helpers",
   "name": "assert-helpers",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Common utilities and helpers to make testing assertions easier",
   "homepage": "https://github.com/bevry/assert-helpers",
   "license": {
@@ -32,7 +32,9 @@
   "maintainers": [
     "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
   ],
-  "contributors": [],
+  "contributors": [
+    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
+  ],
   "bugs": {
     "url": "https://github.com/bevry/assert-helpers/issues"
   },
