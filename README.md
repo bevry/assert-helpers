@@ -40,7 +40,7 @@ Common utilities and helpers to make testing assertions easier
 ### [Browserify](http://browserify.org/)
 - Use: `require('assert-helpers')`
 - Install: `npm install --save assert-helpers`
-- CDN URL: `//wzrd.in/bundle/assert-helpers@1.0.1`
+- CDN URL: `//wzrd.in/bundle/assert-helpers@1.0.2`
 
 ### [Ender](http://enderjs.com)
 - Use: `require('assert-helpers')`
@@ -52,43 +52,43 @@ Common utilities and helpers to make testing assertions easier
 ## Usage
 
 ``` coffeescript
-chaiHelpers = require('chai-helpers')
+assertHelpers = require('assert-helpers')
 
-chaiHelpers.wait 1000, ->
+assertHelpers.wait 1000, ->
 	# this will execute after 1 second
 
-chaiHelpers.throwUnexpected()
+assertHelpers.throwUnexpected()
 # ^ this will throw an error stating that the error was unexpected
 
-chaiHelpers.expectEqual('actual results', 'expected results', 'the test name')
+assertHelpers.expectEqual('actual results', 'expected results', 'the test name')
 # ^ this will check that the actual requests equals the expected results
 # it will output the comparison if the comparison fails
 
-chaiHelpers.expectDeepEqual('actual results', 'expected results', 'the test name')
+assertHelpers.expectDeepEqual('actual results', 'expected results', 'the test name')
 # ^ this will check that the actual requests deeply equal the expected results
 # it will output the comparison if the comparison fails
 
-chaiHelpers.contains('string one', 'string two', 'the test name')
+assertHelpers.contains('string one', 'string two', 'the test name')
 # ^ this will check that string one contains string two
 # it will output the comparison if the comparison fails
 
-chaiHelpers.expectError(theErrorWeReceived, 'the error we expect it to be', 'the test name')
+assertHelpers.expectError(theErrorWeReceived, 'the error we expect it to be', 'the test name')
 # ^ this will check that the error we received is the error we expect
 # it will output the comparison if the comparison fails
 
-chaiHelpers.returnViaCallback('result')
+assertHelpers.returnViaCallback('result')
 # ^ this will return a function that will return the result
 
-chaiHelpers.completeViaCallback('result', 100)
+assertHelpers.completeViaCallback('result', 100)
 # ^ this will return a function that will receive a completion callback as its first argument, that will call the competion callback with the result after the delay
 
-chaiHelpers.returnErrorViaCallback('the error or error message')
+assertHelpers.returnErrorViaCallback('the error or error message')
 # ^ this will return a function that will return the error
 
-chaiHelpers.expectViaCallback('expected', 'result', 'arguments')
+assertHelpers.expectViaCallback('expected', 'result', 'arguments')
 # ^ this will return a function that will compare it's received arguments with our expected arguments
 
-chaiHelpers.expectErrorViaCallback('the error we expect', anOptionalCompletionCallback)
+assertHelpers.expectErrorViaCallback('the error we expect', anOptionalCompletionCallback)
 # ^ this will return a function that will compare its received error (its first received argument) with the error we expect it to be
 # it will output the comparison if the comparison fails
 # it accepts an optional completion callback argument if you'd prefer not to throw the error or are doing an asynchronous test

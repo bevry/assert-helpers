@@ -1,5 +1,8 @@
 # History
 
+## v1.0.2 March 16, 2015
+- Fixed readme examples
+
 ## v1.0.1 March 16, 2015
 - Added `contains(superString, subString, testName)`
 - Fixed comparison output on `errorEqual`
