@@ -1,0 +1,62 @@
+{
+  "title": "Assert Utilities & Helpers",
+  "name": "assert-helpers",
+  "version": "1.0.0",
+  "description": "Common utilities and helpers to make testing assertions easier",
+  "homepage": "https://github.com/bevry/assert-helpers",
+  "license": {
+    "type": "MIT"
+  },
+  "badges": {
+    "travis": true,
+    "npm": true,
+    "npmdownloads": true,
+    "david": true,
+    "daviddev": true,
+    "gratipay": "bevry",
+    "flattr": "344188/balupton-on-Flattr",
+    "paypal": "QB8GQPZAH84N6",
+    "bitcoin": "https://coinbase.com/checkouts/9ef59f5479eec1d97d63382c9ebcb93a",
+    "wishlist": "http://amzn.com/w/2F8TXKSNAFG4V"
+  },
+  "keywords": [
+    "assert",
+    "testing",
+    "test",
+    "tests",
+    "util",
+    "utilities",
+    "expect"
+  ],
+  "author": "2015+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
+  "maintainers": [
+    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
+  ],
+  "contributors": [],
+  "bugs": {
+    "url": "https://github.com/bevry/assert-helpers/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/bevry/assert-helpers.git"
+  },
+  "browsers": true,
+  "engines": {
+    "node": ">=0.8"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "coffee-script": "^1.9.1",
+    "projectz": "^0.5.0"
+  },
+  "directories": {
+    "lib": "./out/lib"
+  },
+  "scripts": {
+    "test": "echo 'no tests yet'"
+  },
+  "main": "./out/lib/helpers.js",
+  "cakeConfiguration": {
+    "COFFEE_SRC_PATH": "src"
+  }
+}

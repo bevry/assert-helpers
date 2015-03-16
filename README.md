@@ -1,0 +1,132 @@
+
+<!-- TITLE/ -->
+
+# Assert Utilities & Helpers
+
+<!-- /TITLE -->
+
+
+<!-- BADGES/ -->
+
+[![Build Status](https://img.shields.io/travis/bevry/assert-helpers/master.svg)](http://travis-ci.org/bevry/assert-helpers "Check this project's build status on TravisCI")
+[![NPM version](https://img.shields.io/npm/v/assert-helpers.svg)](https://npmjs.org/package/assert-helpers "View this project on NPM")
+[![NPM downloads](https://img.shields.io/npm/dm/assert-helpers.svg)](https://npmjs.org/package/assert-helpers "View this project on NPM")
+[![Dependency Status](https://img.shields.io/david/bevry/assert-helpers.svg)](https://david-dm.org/bevry/assert-helpers)
+[![Dev Dependency Status](https://img.shields.io/david/dev/bevry/assert-helpers.svg)](https://david-dm.org/bevry/assert-helpers#info=devDependencies)<br/>
+[![Gratipay donate button](https://img.shields.io/gratipay/bevry.svg)](https://www.gratipay.com/bevry/ "Donate weekly to this project using Gratipay")
+[![Flattr donate button](https://img.shields.io/badge/flattr-donate-yellow.svg)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
+[![PayPayl donate button](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
+[![BitCoin donate button](https://img.shields.io/badge/bitcoin-donate-yellow.svg)](https://coinbase.com/checkouts/9ef59f5479eec1d97d63382c9ebcb93a "Donate once-off to this project using BitCoin")
+[![Wishlist browse button](https://img.shields.io/badge/wishlist-donate-yellow.svg)](http://amzn.com/w/2F8TXKSNAFG4V "Buy an item on our wishlist for us")
+
+<!-- /BADGES -->
+
+
+<!-- DESCRIPTION/ -->
+
+Common utilities and helpers to make testing assertions easier
+
+<!-- /DESCRIPTION -->
+
+
+## Usage
+
+``` coffeescript
+chaiHelpers = require('chai-helpers')
+
+chaiHelpers.wait 1000, ->
+	# this will execute after 1 second
+
+chaiHelpers.throwUnexpected()
+# ^ this will throw an error stating that the error was unexpected
+
+chaiHelpers.expectEqual('actual results', 'expected results', 'the test name')
+# ^ this will translate to expect('actual', 'test name').to.equal('expected')
+# it will output the comparison if the comparison fails
+
+chaiHelpers.expectDeepEqual('actual results', 'expected results', 'the test name')
+# ^ this will translate to expect('actual', 'test name').to.deep.equal('expected')
+# it will output the comparison if the comparison fails
+
+chaiHelpers.returnViaCallback('result')
+# ^ this will return a function that will return the result
+
+chaiHelpers.completeViaCallback('result', 100)
+# ^ this will return a function that will receive a completion callback as its first argument, that will call the competion callback with the result after the delay
+
+chaiHelpers.returnErrorViaCallback('the error or error message')
+# ^ this will return a function that will return the error
+
+chaiHelpers.expectViaCallback('expected', 'result', 'arguments')
+# ^ this will return a function that will compare it's received arguments with our expected arguments
+
+chaiHelpers.expectError(theErrorWeReceived, 'the error we expect it to be', 'the test name')
+# ^ this will check that the error we received is the error we expect
+# it will output the comparison if the comparison fails
+
+chaiHelpers.expectErrorViaCallback('the error we expect', anOptionalCompletionCallback)
+# ^ this will return a function that will compare its received error (its first received argument) with the error we expect it to be
+# it will output the comparison if the comparison fails
+# it accepts an optional completion callback argument if you'd prefer not to throw the error or are doing an asynchronous test
+```
+
+<!-- HISTORY/ -->
+
+## History
+[Discover the change history by heading on over to the `HISTORY.md` file.](https://github.com/bevry/assert-helpers/blob/master/HISTORY.md#files)
+
+<!-- /HISTORY -->
+
+
+<!-- CONTRIBUTE/ -->
+
+## Contribute
+
+[Discover how you can contribute by heading on over to the `CONTRIBUTING.md` file.](https://github.com/bevry/assert-helpers/blob/master/CONTRIBUTING.md#files)
+
+<!-- /CONTRIBUTE -->
+
+
+<!-- BACKERS/ -->
+
+## Backers
+
+### Maintainers
+
+These amazing people are maintaining this project:
+
+- Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)
+
+### Sponsors
+
+No sponsors yet! Will you be the first?
+
+[![Gratipay donate button](https://img.shields.io/gratipay/bevry.svg)](https://www.gratipay.com/bevry/ "Donate weekly to this project using Gratipay")
+[![Flattr donate button](https://img.shields.io/badge/flattr-donate-yellow.svg)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
+[![PayPayl donate button](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
+[![BitCoin donate button](https://img.shields.io/badge/bitcoin-donate-yellow.svg)](https://coinbase.com/checkouts/9ef59f5479eec1d97d63382c9ebcb93a "Donate once-off to this project using BitCoin")
+[![Wishlist browse button](https://img.shields.io/badge/wishlist-donate-yellow.svg)](http://amzn.com/w/2F8TXKSNAFG4V "Buy an item on our wishlist for us")
+
+### Contributors
+
+No contributors yet! Will you be the first?
+[Discover how you can contribute by heading on over to the `CONTRIBUTING.md` file.](https://github.com/bevry/assert-helpers/blob/master/CONTRIBUTING.md#files)
+
+<!-- /BACKERS -->
+
+
+<!-- LICENSE/ -->
+
+## License
+
+Unless stated otherwise all works are:
+
+- Copyright &copy; 2015+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)
+
+and licensed under:
+
+- The incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT License](http://opensource.org/licenses/mit-license.php)
+
+<!-- /LICENSE -->
+
+
