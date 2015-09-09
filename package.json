@@ -16,8 +16,8 @@
     "gratipay": "bevry",
     "flattr": "344188/balupton-on-Flattr",
     "paypal": "QB8GQPZAH84N6",
-    "bitcoin": "https://coinbase.com/checkouts/9ef59f5479eec1d97d63382c9ebcb93a",
-    "wishlist": "http://amzn.com/w/2F8TXKSNAFG4V"
+    "bitcoin": "https://bevry.me/bitcoin",
+    "wishlist": "https://bevry.me/wishlist"
   },
   "keywords": [
     "assert",
@@ -44,21 +44,31 @@
   },
   "browsers": true,
   "engines": {
-    "node": ">=0.8"
+    "node": ">=0.12"
   },
   "dependencies": {},
   "devDependencies": {
-    "coffee-script": "^1.9.1",
+    "babel": "^5.8.23",
+    "babel-eslint": "^4.1.1",
+    "eslint": "^1.3.1",
+    "joe": "^1.6.0",
+    "joe-reporter-console": "^1.2.1",
     "projectz": "^0.5.0"
   },
-  "directories": {
-    "lib": "./out/lib"
-  },
+  "main": "./esnextguardian.js",
   "scripts": {
+    "clean": "node --harmony nakefile.js clean",
+    "setup": "node --harmony nakefile.js setup",
+    "compile": "node --harmony nakefile.js compile",
+    "watch": "node --harmony nakefile.js watch",
+    "verify": "node --harmony nakefile.js verify",
+    "meta": "node --harmony nakefile.js meta",
+    "prepare": "node --harmony nakefile.js prepare",
+    "release": "node --harmony nakefile.js release",
     "test": "echo 'no tests yet'"
   },
-  "main": "./out/lib/helpers.js",
-  "cakeConfiguration": {
-    "COFFEE_SRC_PATH": "src"
+  "nakeConfiguration": {
+    "BABEL_SRC_PATH": "esnext",
+    "ESLINT_SRC_PATH": "esnext"
   }
 }
