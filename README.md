@@ -51,7 +51,7 @@ Common utilities and helpers to make testing assertions easier
 
 ## Usage
 
-[Technical API Documentation](https://rawgit.com/bevry/assert-helpers/master/docs/)
+[Read the source.](https://github.com/bevry/assert-helpers/blob/master/esnext/lib/helpers.js)
 
 
 <!-- HISTORY/ -->
@@ -115,5 +115,3 @@ and licensed under:
 - The incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT License](http://opensource.org/licenses/mit-license.php)
 
 <!-- /LICENSE -->
-
-

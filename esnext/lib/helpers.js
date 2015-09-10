@@ -1,10 +1,4 @@
 /* eslint no-use-before-define:0 no-console:0 */
-/**
-Assert Helpers
-This is not actually a class, but a necessary convention to get YUIdoc to document standalone items.
-@class helpers
-*/
-
 
 // Import
 const util = require('util')
