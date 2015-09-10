@@ -1,5 +1,9 @@
 # History
 
+## v3.0.0 September 11, 2015
+- `expectErrorViaCallback` now accepts the arguments `error`, `testName`, `next`
+- Added `expectFunctionToThrow`
+
 ## v2.0.0 September 11, 2015
 - Moved from CoffeeScript to ES6+
 - Renamed several methods and changed their arguments to provide greater consistency

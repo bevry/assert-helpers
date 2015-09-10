@@ -40,7 +40,7 @@ Common utilities and helpers to make testing assertions easier
 ### [Browserify](http://browserify.org/)
 - Use: `require('assert-helpers')`
 - Install: `npm install --save assert-helpers`
-- CDN URL: `//wzrd.in/bundle/assert-helpers@2.0.0`
+- CDN URL: `//wzrd.in/bundle/assert-helpers@3.0.0`
 
 ### [Ender](http://enderjs.com)
 - Use: `require('assert-helpers')`

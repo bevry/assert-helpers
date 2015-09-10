@@ -7,8 +7,8 @@ const assert = require('assert')
 /**
 Alias for setTimeout with paramaters reversed
 @private
-@method wait
 @static
+@method wait
 @param {Number} delay Delay to send to setTimeout
 @param {Function} fn Function to send to setTimeout
 @return {Object} result of the setTimeout call
@@ -20,8 +20,8 @@ function wait (delay, fn) {
 /**
 Whether or not stdout and stderr are interactive
 @private
-@method isTTY
 @static
+@method isTTY
 @return {Boolean} Yes they are, or no they aren't.
 */
 export function isTTY () {
@@ -30,8 +30,8 @@ export function isTTY () {
 
 /**
 Return a stringified version of the value with indentation and colors where applicable
-@method inspect
 @static
+@method inspect
 @param {Mixed} value The value to inspect
 @param {Object} [opts={}] The options to pass to util.inspect
 @return {String} The inspected string of the value
@@ -58,8 +58,8 @@ export function inspect (value, opts = {}) {
 
 /**
 Log the inspected values of each of the arguments to stdout
-@method log
 @static
+@method log
 @param {Mixed} ...args The arguments to inspect and log
 */
 export function log (...args) {
@@ -71,8 +71,8 @@ export function log (...args) {
 /**
 Output a comparison of the failed result to stderr
 @private
-@method logComparison
 @static
+@method logComparison
 @param {Mixed} actual The result data
 @param {Mixed} expected The anticipated data
 @param {Error|String} error The error instance or error message string to report
@@ -96,8 +96,8 @@ export function logComparison (actual, expected, error) {
 
 /**
 Same as assert.equal in that it performs a strict equals check, but if a failure occurs it will output detailed information
-@method equal
 @static
+@method equal
 @param {Mixed} actual The result data
 @param {Mixed} expected The anticipated data
 @param {String} [testName] The name of the test
@@ -115,8 +115,8 @@ export function equal (actual, expected, testName) {
 
 /**
 Same as assert.deepEQual in that it performs a deep equals check, but if a failure occurs it will output detailed information
-@method deepEqual
 @static
+@method deepEqual
 @param {Mixed} actual The result data
 @param {Mixed} expected The anticipated data
 @param {String} [testName] The name of the test
@@ -134,8 +134,8 @@ export function deepEqual (actual, expected, testName) {
 
 /**
 Checks to see if the actual result contains the expected result
-@method contains
 @static
+@method contains
 @param {Mixed} actual The result data
 @param {Mixed} expected The anticipated data
 @param {String} [testName] The name of the test
@@ -148,8 +148,8 @@ export function contains (actual, expected, testName) {
 
 /**
 Checks to see if an error was as expected, if a failure occurs it will output detailed information
-@method errorEqual
 @static
+@method errorEqual
 @param {Error} actual The result error
 @param {Error|String|Null} expected The anticipated error instance or message, can be null if you expect there to be no error
 @param {String} [testName] The name of the test
@@ -200,8 +200,8 @@ export function errorEqual (actualError, expectedError, testName) {
 
 /**
 Generate a callback that will return the specified result
-@method returnViaCallback
 @static
+@method returnViaCallback
 @param {Mixed} result The result that the callback should return
 @return {Function} The callback that will return the specified result
 */
@@ -213,8 +213,8 @@ export function returnViaCallback (result) {
 
 /**
 Generate a callback that will receive a completion callback and call it with the specified result after the specified delay
-@method completeViaCallback
 @static
+@method completeViaCallback
 @param {Mixed} result The result that the callback should pass to the completion callback
 @param {Number} [delay=100] The delay in milliseconds that we should wait before calling the completion callback
 @return {Function} The callback that will provide the specified result
@@ -229,8 +229,8 @@ export function completeViaCallback (result, delay = 100) {
 
 /**
 Generate a callback that return an error instance with the specified message/error
-@method returnErrorViaCallback
 @static
+@method returnErrorViaCallback
 @param {Error|String} [error='an error occured'] The error instance or message string that the callback will return
 @return {Function} The callback that will return the specified result
 */
@@ -247,8 +247,8 @@ export function returnErrorViaCallback (error = 'an error occured') {
 
 /**
 Generate a callback that throw an error instance with the specified message/error
-@method throwErrorViaCallback
 @static
+@method throwErrorViaCallback
 @param {Error|String} [error='an error occured']  The error instance or message string that the callback will throw
 @return {Function} The callback that will throw the specified error
 */
@@ -265,8 +265,8 @@ export function throwErrorViaCallback (error = 'an error occured') {
 
 /**
 Generate a callback that will check the arguments it received with the arguments specified, if a failure occurs it will output detailed information
-@method expectViaCallback
 @static
+@method expectViaCallback
 @param {Mixed} ...argsExpected The arguments that we expect the callback to receive when it is called
 @return {Function} The callback that will check the arguments it receives for the expected arguments
 */
@@ -279,13 +279,13 @@ export function expectViaCallback (...argsExpected) {
 
 /**
 Generate a callback that will check the error (if any) it receives for the expected error (if any), if a failure occurs it will output detailed information
-@method expectErrorViaCallback
 @static
+@method expectErrorViaCallback
 @param {Mixed} error The error instance or message string that we expected, passed as the second argument to errorEqual
 @param {Function} [next] An optional completion callback to call with the result of the compairson, if not specified and a failure occurs, the error will be thrown
 @return {Function} The callback that will check the error (if any) it receives for the expected error (if any)
 */
-export function expectErrorViaCallback (error, next) {
+export function expectErrorViaCallback (error, testName, next) {
 	return function (inputError) {
 		try {
 			errorEqual(inputError, error)
@@ -300,5 +300,22 @@ export function expectErrorViaCallback (error, next) {
 			}
 		}
 		if ( next )  next()
+	}
+}
+
+/**
+Expect the passed function to throw the passed error (if any)
+@static
+@method expectFunctionToThrow
+@param {Function} fn The function that we will call and expect to throw the passed error
+@param {Mixed} error The error instance or message string that we expected, passed as the second argument to errorEqual
+@param {String} [testName] The name of the test
+*/
+export function expectFunctionToThrow (fn, error, testName) {
+	try {
+		fn()
+	}
+	catch ( checkError ) {
+		errorEqual(checkError, error, testName)
 	}
 }
