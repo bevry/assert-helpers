@@ -1,7 +1,7 @@
 
 <!-- TITLE/ -->
 
-# Assert Utilities & Helpers
+# Assert Helpers
 
 <!-- /TITLE -->
 
