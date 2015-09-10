@@ -64,11 +64,11 @@
     "verify": "node --harmony nakefile.js verify",
     "meta": "node --harmony nakefile.js meta",
     "prepare": "node --harmony nakefile.js prepare",
-    "release": "test --harmony ./es5/test/helpers-test.js"
+    "release": "node --harmony nakefile.js release",
+    "test": "node --harmony ./es5/test/helpers-test.js"
   },
   "nakeConfiguration": {
     "BABEL_SRC_PATH": "esnext",
-    "ESLINT_SRC_PATH": "esnext",
-    "YUIDOC_SRC_PATH": "esnext"
+    "ESLINT_SRC_PATH": "esnext"
   }
 }
