@@ -1,0 +1,16 @@
+{
+  "name": "Assert Helpers API",
+  "description": "Technical API documentation for Bevry's Assert Helpers package.",
+  "version": "2.0.0",
+  "url": "https://github.com/bevry/assert-helpers",
+  "options": {
+    "linkNatives": true,
+    "attributesEmit": true,
+    "selleck": false,
+    "ignorePaths": [ "test" ],
+    "paths": "./esnext",
+    "outdir": "./docs",
+    "tabtospace": 4,
+    "markdown": "default"
+  }
+}

@@ -1,0 +1,14 @@
+{
+    "project": {
+        "name": "Assert Helpers API",
+        "description": "Technical API documentation for Bevry's Assert Helpers package.",
+        "version": "2.0.0",
+        "url": "https://github.com/bevry/assert-helpers"
+    },
+    "files": {},
+    "modules": {},
+    "classes": {},
+    "elements": {},
+    "classitems": [],
+    "warnings": []
+}

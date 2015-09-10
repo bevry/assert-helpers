@@ -16,8 +16,8 @@
 [![Gratipay donate button](https://img.shields.io/gratipay/bevry.svg)](https://www.gratipay.com/bevry/ "Donate weekly to this project using Gratipay")
 [![Flattr donate button](https://img.shields.io/badge/flattr-donate-yellow.svg)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
 [![PayPayl donate button](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
-[![BitCoin donate button](https://img.shields.io/badge/bitcoin-donate-yellow.svg)](https://coinbase.com/checkouts/9ef59f5479eec1d97d63382c9ebcb93a "Donate once-off to this project using BitCoin")
-[![Wishlist browse button](https://img.shields.io/badge/wishlist-donate-yellow.svg)](http://amzn.com/w/2F8TXKSNAFG4V "Buy an item on our wishlist for us")
+[![BitCoin donate button](https://img.shields.io/badge/bitcoin-donate-yellow.svg)](https://bevry.me/bitcoin "Donate once-off to this project using BitCoin")
+[![Wishlist browse button](https://img.shields.io/badge/wishlist-donate-yellow.svg)](https://bevry.me/wishlist "Buy an item on our wishlist for us")
 
 <!-- /BADGES -->
 
@@ -40,7 +40,7 @@ Common utilities and helpers to make testing assertions easier
 ### [Browserify](http://browserify.org/)
 - Use: `require('assert-helpers')`
 - Install: `npm install --save assert-helpers`
-- CDN URL: `//wzrd.in/bundle/assert-helpers@1.0.2`
+- CDN URL: `//wzrd.in/bundle/assert-helpers@2.0.0`
 
 ### [Ender](http://enderjs.com)
 - Use: `require('assert-helpers')`
@@ -51,48 +51,8 @@ Common utilities and helpers to make testing assertions easier
 
 ## Usage
 
-``` coffeescript
-assertHelpers = require('assert-helpers')
+[Technical API Documentation](https://rawgit.com/bevry/assert-helpers/master/docs/)
 
-assertHelpers.wait 1000, ->
-	# this will execute after 1 second
-
-assertHelpers.throwUnexpected()
-# ^ this will throw an error stating that the error was unexpected
-
-assertHelpers.expectEqual('actual results', 'expected results', 'the test name')
-# ^ this will check that the actual requests equals the expected results
-# it will output the comparison if the comparison fails
-
-assertHelpers.expectDeepEqual('actual results', 'expected results', 'the test name')
-# ^ this will check that the actual requests deeply equal the expected results
-# it will output the comparison if the comparison fails
-
-assertHelpers.contains('string one', 'string two', 'the test name')
-# ^ this will check that string one contains string two
-# it will output the comparison if the comparison fails
-
-assertHelpers.expectError(theErrorWeReceived, 'the error we expect it to be', 'the test name')
-# ^ this will check that the error we received is the error we expect
-# it will output the comparison if the comparison fails
-
-assertHelpers.returnViaCallback('result')
-# ^ this will return a function that will return the result
-
-assertHelpers.completeViaCallback('result', 100)
-# ^ this will return a function that will receive a completion callback as its first argument, that will call the competion callback with the result after the delay
-
-assertHelpers.returnErrorViaCallback('the error or error message')
-# ^ this will return a function that will return the error
-
-assertHelpers.expectViaCallback('expected', 'result', 'arguments')
-# ^ this will return a function that will compare it's received arguments with our expected arguments
-
-assertHelpers.expectErrorViaCallback('the error we expect', anOptionalCompletionCallback)
-# ^ this will return a function that will compare its received error (its first received argument) with the error we expect it to be
-# it will output the comparison if the comparison fails
-# it accepts an optional completion callback argument if you'd prefer not to throw the error or are doing an asynchronous test
-```
 
 <!-- HISTORY/ -->
 
@@ -128,8 +88,8 @@ No sponsors yet! Will you be the first?
 [![Gratipay donate button](https://img.shields.io/gratipay/bevry.svg)](https://www.gratipay.com/bevry/ "Donate weekly to this project using Gratipay")
 [![Flattr donate button](https://img.shields.io/badge/flattr-donate-yellow.svg)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
 [![PayPayl donate button](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
-[![BitCoin donate button](https://img.shields.io/badge/bitcoin-donate-yellow.svg)](https://coinbase.com/checkouts/9ef59f5479eec1d97d63382c9ebcb93a "Donate once-off to this project using BitCoin")
-[![Wishlist browse button](https://img.shields.io/badge/wishlist-donate-yellow.svg)](http://amzn.com/w/2F8TXKSNAFG4V "Buy an item on our wishlist for us")
+[![BitCoin donate button](https://img.shields.io/badge/bitcoin-donate-yellow.svg)](https://bevry.me/bitcoin "Donate once-off to this project using BitCoin")
+[![Wishlist browse button](https://img.shields.io/badge/wishlist-donate-yellow.svg)](https://bevry.me/wishlist "Buy an item on our wishlist for us")
 
 ### Contributors
 
