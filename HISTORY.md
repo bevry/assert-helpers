@@ -1,5 +1,8 @@
 # History
 
+## v4.0.0 September 18, 2015
+- Comparison output will now be inspected and diffed
+
 ## v3.0.0 September 11, 2015
 - `expectErrorViaCallback` now accepts the arguments `error`, `testName`, `next`
 - Added `expectFunctionToThrow`

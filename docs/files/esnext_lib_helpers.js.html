@@ -1,10 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>esnext/lib/helpers.js</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                            </ul>
+                
+                
+                            <ul id="api-modules" class="apis modules">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: esnext/lib/helpers.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
 /* eslint no-use-before-define:0 no-console:0 */
 
 // Import
-const util = require('util')
-const assert = require('assert')
-const colors = require('ansicolors')
-const diffUtil = require('diff')
+const util = require(&#x27;util&#x27;)
+const assert = require(&#x27;assert&#x27;)
+const colors = require(&#x27;ansicolors&#x27;)
+const diffUtil = require(&#x27;diff&#x27;)
 
 /**
 Alias for setTimeout with paramaters reversed
@@ -24,10 +105,10 @@ Whether or not stdout and stderr are interactive
 @private
 @static
 @method isTTY
-@return {Boolean} Yes they are, or no they aren't.
+@return {Boolean} Yes they are, or no they aren&#x27;t.
 */
 export function isTTY () {
-	return process.stdout && process.stdout.isTTY === true && process.stderr && process.stderr.isTTY === true
+	return process.stdout &amp;&amp; process.stdout.isTTY === true &amp;&amp; process.stderr &amp;&amp; process.stderr.isTTY === true
 }
 
 /**
@@ -39,12 +120,12 @@ Return a stringified version of the value with indentation and colors where appl
 @return {String} The inspected string of the value
 */
 export function inspect (value, opts = {}) {
-	// If the terminal supports colours, and the user hasn't set anything, then default to a sensible default
-	if ( isTTY() && opts.colors == null ) {
-		opts.colors = process.argv.indexOf('--no-colors') === -1
+	// If the terminal supports colours, and the user hasn&#x27;t set anything, then default to a sensible default
+	if ( isTTY() &amp;&amp; opts.colors == null ) {
+		opts.colors = process.argv.indexOf(&#x27;--no-colors&#x27;) === -1
 	}
 
-	// If the terminal doesn't support colours, then over-write whatever the user set
+	// If the terminal doesn&#x27;t support colours, then over-write whatever the user set
 	else {
 		opts.colors = false
 	}
@@ -76,42 +157,42 @@ Output a comparison of the failed result to stderr
 */
 export function logComparison (actual, expected, error) {
 	const lines = [
-		'------------------------------------',
-		'Comparison Error:',
+		&#x27;------------------------------------&#x27;,
+		&#x27;Comparison Error:&#x27;,
 		colors.green(error.stack || error.message || error),
-		'',
+		&#x27;&#x27;,
 	]
 
-	if ( typeof actual === 'string' && typeof expected === 'string' ) {
+	if ( typeof actual === &#x27;string&#x27; &amp;&amp; typeof expected === &#x27;string&#x27; ) {
 		lines.push(
-			'Comparison Diff:',
+			&#x27;Comparison Diff:&#x27;,
 			diffStrings(actual, expected),
-			''
+			&#x27;&#x27;
 		)
 	}
-	else if ( typeof actual === 'object' && typeof expected === 'object' ) {
+	else if ( typeof actual === &#x27;object&#x27; &amp;&amp; typeof expected === &#x27;object&#x27; ) {
 		lines.push(
-			'Comparison Diff:',
+			&#x27;Comparison Diff:&#x27;,
 			diffObjects(actual, expected),
-			''
+			&#x27;&#x27;
 		)
 	}
 
 	lines.push(
-		'Comparison Actual:',
+		&#x27;Comparison Actual:&#x27;,
 		inspect(actual),
-		'',
-		'Comparison Expected:',
+		&#x27;&#x27;,
+		&#x27;Comparison Expected:&#x27;,
 		inspect(expected),
-		'------------------------------------',
-		''
+		&#x27;------------------------------------&#x27;,
+		&#x27;&#x27;
 	)
 
-	process.stderr.write(lines.join('\n'))
+	process.stderr.write(lines.join(&#x27;\n&#x27;))
 }
 
 function inspectDiff (diff) {
-	let result = ''
+	let result = &#x27;&#x27;
 	diff.forEach(function (part) {
 		let value = part.value
 		if ( part.added ) {
@@ -183,7 +264,7 @@ Checks to see if the actual result contains the expected result
 @throws {Error} If the comparison failed, the failure will be thrown
 */
 export function contains (actual, expected, testName) {
-	if ( testName == null )  testName = `Expected \`${actual}\` to contain \`${expected}\``
+	if ( testName == null )  testName = &#x60;Expected \&#x60;${actual}\&#x60; to contain \&#x60;${expected}\&#x60;&#x60;
 	assert.ok(actual.indexOf(expected) !== -1, testName)
 }
 
@@ -220,7 +301,7 @@ export function errorEqual (actualError, expectedError, testName) {
 	}
 
 	try {
-		if ( actualErrorMessage && expectedErrorMessage ) {
+		if ( actualErrorMessage &amp;&amp; expectedErrorMessage ) {
 			contains(actualErrorMessage, expectedErrorMessage, testName)
 		}
 		else {
@@ -230,7 +311,7 @@ export function errorEqual (actualError, expectedError, testName) {
 
 	catch ( checkError ) {
 		logComparison(
-			actualError && (actualError.stack || actualError.message || actualError),
+			actualError &amp;&amp; (actualError.stack || actualError.message || actualError),
 			expectedErrorMessage,
 			checkError
 		)
@@ -272,10 +353,10 @@ export function completeViaCallback (result, delay = 100) {
 Generate a callback that return an error instance with the specified message/error
 @static
 @method returnErrorViaCallback
-@param {Error|String} [error='an error occured'] The error instance or message string that the callback will return
+@param {Error|String} [error=&#x27;an error occured&#x27;] The error instance or message string that the callback will return
 @return {Function} The callback that will return the specified result
 */
-export function returnErrorViaCallback (error = 'an error occured') {
+export function returnErrorViaCallback (error = &#x27;an error occured&#x27;) {
 	return function () {
 		if ( error instanceof Error ) {
 			return error
@@ -290,10 +371,10 @@ export function returnErrorViaCallback (error = 'an error occured') {
 Generate a callback that throw an error instance with the specified message/error
 @static
 @method throwErrorViaCallback
-@param {Error|String} [error='an error occured']  The error instance or message string that the callback will throw
+@param {Error|String} [error=&#x27;an error occured&#x27;]  The error instance or message string that the callback will throw
 @return {Function} The callback that will throw the specified error
 */
-export function throwErrorViaCallback (error = 'an error occured') {
+export function throwErrorViaCallback (error = &#x27;an error occured&#x27;) {
 	return function () {
 		if ( error instanceof Error ) {
 			throw error
@@ -360,3 +441,22 @@ export function expectFunctionToThrow (fn, error, testName) {
 		errorEqual(checkError, error, testName)
 	}
 }
+
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
