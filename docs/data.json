@@ -129,7 +129,79 @@
         },
         {
             "file": "esnext/lib/helpers.js",
-            "line": 138,
+            "line": 119,
+            "description": "Return a highlighted string of a diff object",
+            "static": 1,
+            "access": "private",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "inspectDiff",
+            "params": [
+                {
+                    "name": "diff",
+                    "description": "The diff data to highlight",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The highlighted comparison",
+                "type": "String"
+            },
+            "class": ""
+        },
+        {
+            "file": "esnext/lib/helpers.js",
+            "line": 142,
+            "description": "Return a highlighted comparison between the new data and the old data",
+            "static": 1,
+            "itemtype": "method",
+            "name": "diffStrings",
+            "params": [
+                {
+                    "name": "newData",
+                    "description": "The new data",
+                    "type": "Object"
+                },
+                {
+                    "name": "oldData",
+                    "description": "The old data",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The highlighted comparison",
+                "type": "String"
+            },
+            "class": ""
+        },
+        {
+            "file": "esnext/lib/helpers.js",
+            "line": 155,
+            "description": "Return a highlighted comparison between the new data and the old data",
+            "static": 1,
+            "itemtype": "method",
+            "name": "diffObjects",
+            "params": [
+                {
+                    "name": "newData",
+                    "description": "The new data",
+                    "type": "Object"
+                },
+                {
+                    "name": "oldData",
+                    "description": "The old data",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The highlighted comparison",
+                "type": "String"
+            },
+            "class": ""
+        },
+        {
+            "file": "esnext/lib/helpers.js",
+            "line": 168,
             "description": "Same as assert.equal in that it performs a strict equals check, but if a failure occurs it will output detailed information",
             "static": 1,
             "itemtype": "method",
@@ -160,7 +232,7 @@
         },
         {
             "file": "esnext/lib/helpers.js",
-            "line": 157,
+            "line": 187,
             "description": "Same as assert.deepEQual in that it performs a deep equals check, but if a failure occurs it will output detailed information",
             "static": 1,
             "itemtype": "method",
@@ -191,7 +263,7 @@
         },
         {
             "file": "esnext/lib/helpers.js",
-            "line": 176,
+            "line": 206,
             "description": "Checks to see if the actual result contains the expected result",
             "static": 1,
             "itemtype": "method",
@@ -222,7 +294,7 @@
         },
         {
             "file": "esnext/lib/helpers.js",
-            "line": 190,
+            "line": 220,
             "description": "Checks to see if an error was as expected, if a failure occurs it will output detailed information",
             "static": 1,
             "itemtype": "method",
@@ -253,7 +325,7 @@
         },
         {
             "file": "esnext/lib/helpers.js",
-            "line": 242,
+            "line": 272,
             "description": "Generate a callback that will return the specified result",
             "static": 1,
             "itemtype": "method",
@@ -273,7 +345,7 @@
         },
         {
             "file": "esnext/lib/helpers.js",
-            "line": 255,
+            "line": 285,
             "description": "Generate a callback that will receive a completion callback and call it with the specified result after the specified delay",
             "static": 1,
             "itemtype": "method",
@@ -300,7 +372,7 @@
         },
         {
             "file": "esnext/lib/helpers.js",
-            "line": 271,
+            "line": 301,
             "description": "Generate a callback that return an error instance with the specified message/error",
             "static": 1,
             "itemtype": "method",
@@ -322,7 +394,7 @@
         },
         {
             "file": "esnext/lib/helpers.js",
-            "line": 289,
+            "line": 319,
             "description": "Generate a callback that throw an error instance with the specified message/error",
             "static": 1,
             "itemtype": "method",
@@ -344,7 +416,7 @@
         },
         {
             "file": "esnext/lib/helpers.js",
-            "line": 307,
+            "line": 337,
             "description": "Generate a callback that will check the arguments it received with the arguments specified, if a failure occurs it will output detailed information",
             "static": 1,
             "itemtype": "method",
@@ -365,7 +437,7 @@
         },
         {
             "file": "esnext/lib/helpers.js",
-            "line": 321,
+            "line": 351,
             "description": "Generate a callback that will check the error (if any) it receives for the expected error (if any), if a failure occurs it will output detailed information",
             "static": 1,
             "itemtype": "method",
@@ -391,7 +463,7 @@
         },
         {
             "file": "esnext/lib/helpers.js",
-            "line": 347,
+            "line": 377,
             "description": "Expect the passed function to throw the passed error (if any)",
             "static": 1,
             "itemtype": "method",

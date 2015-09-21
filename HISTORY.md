@@ -1,6 +1,10 @@
 # History
 
-## v4.0.0 September 18, 2015
+## v4.0.1 September 21, 2015
+- Fixed missing `esnextguardian` dependency (regression since v4.0.0)
+- Better browser compatibility
+
+## v4.0.0 September 20, 2015
 - Comparison output will now be inspected and diffed
 
 ## v3.0.0 September 11, 2015

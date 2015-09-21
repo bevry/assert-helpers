@@ -103,13 +103,27 @@ export function logComparison (actual, expected, error) {
 		'',
 		'Comparison Expected:',
 		inspect(expected),
-		'------------------------------------',
-		''
+		'------------------------------------'
 	)
 
-	process.stderr.write(lines.join('\n'))
+	// Work for node
+	if ( process.stderr ) {
+		process.stderr.write(lines.join('\n') + '\n')
+	}
+	// Work for browsers
+	else {
+		console.log(lines.join('\n'))
+	}
 }
 
+/**
+Return a highlighted string of a diff object
+@static
+@private
+@method inspectDiff
+@param {Object} diff The diff data to highlight
+@return {String} The highlighted comparison
+*/
 function inspectDiff (diff) {
 	let result = ''
 	diff.forEach(function (part) {
@@ -125,11 +139,27 @@ function inspectDiff (diff) {
 	return colors.green(result)
 }
 
+/**
+Return a highlighted comparison between the new data and the old data
+@static
+@method diffStrings
+@param {Object} newData The new data
+@param {Object} oldData The old data
+@return {String} The highlighted comparison
+*/
 export function diffStrings (newData, oldData) {
 	const diff = diffUtil.diffChars(inspect(oldData, {colors: false}), inspect(newData, {colors: false}))
 	return inspectDiff(diff)
 }
 
+/**
+Return a highlighted comparison between the new data and the old data
+@static
+@method diffObjects
+@param {Object} newData The new data
+@param {Object} oldData The old data
+@return {String} The highlighted comparison
+*/
 export function diffObjects (newData, oldData) {
 	const diff = diffUtil.diffJson(inspect(oldData, {colors: false}), inspect(newData, {colors: false}))
 	return inspectDiff(diff)
