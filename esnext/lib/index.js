@@ -1,4 +1,4 @@
-/* eslint no-use-before-define:0 no-console:0 */
+'use strict'
 
 // Import
 const util = require('util')
@@ -26,7 +26,7 @@ Whether or not stdout and stderr are interactive
 @method isTTY
 @return {Boolean} Yes they are, or no they aren't.
 */
-export function isTTY () {
+function isTTY () {
 	return process.stdout && process.stdout.isTTY === true && process.stderr && process.stderr.isTTY === true
 }
 
@@ -38,7 +38,7 @@ Return a stringified version of the value with indentation and colors where appl
 @param {Object} [opts={}] The options to pass to util.inspect
 @return {String} The inspected string of the value
 */
-export function inspect (value, opts = {}) {
+function inspect (value, opts = {}) {
 	// If the terminal supports colours, and the user hasn't set anything, then default to a sensible default
 	if ( isTTY() && opts.colors == null ) {
 		opts.colors = process.argv.indexOf('--no-colors') === -1
@@ -54,13 +54,63 @@ export function inspect (value, opts = {}) {
 }
 
 /**
+Return a highlighted string of a diff object
+@static
+@private
+@method inspectDiff
+@param {Object} diff The diff data to highlight
+@return {String} The highlighted comparison
+*/
+function inspectDiff (diff) {
+	let result = ''
+	diff.forEach(function (part) {
+		let value = part.value
+		if ( part.added ) {
+			value = colors.open.black + colors.bgGreen(value) + colors.open.green
+		}
+		else if ( part.removed ) {
+			value = colors.open.black + colors.bgBrightRed(value) + colors.open.green
+		}
+		result += value
+	})
+	return colors.green(result)
+}
+
+/**
+Return a highlighted comparison between the new data and the old data
+@static
+@method diffStrings
+@param {Object} newData The new data
+@param {Object} oldData The old data
+@return {String} The highlighted comparison
+*/
+function diffStrings (newData, oldData) {
+	const diff = diffUtil.diffChars(inspect(oldData, {colors: false}), inspect(newData, {colors: false}))
+	return inspectDiff(diff)
+}
+
+/**
+Return a highlighted comparison between the new data and the old data
+@static
+@method diffObjects
+@param {Object} newData The new data
+@param {Object} oldData The old data
+@return {String} The highlighted comparison
+*/
+function diffObjects (newData, oldData) {
+	const diff = diffUtil.diffJson(inspect(oldData, {colors: false}), inspect(newData, {colors: false}))
+	return inspectDiff(diff)
+}
+
+/**
 Log the inspected values of each of the arguments to stdout
 @static
 @method log
 @param {Mixed} ...args The arguments to inspect and log
 */
-export function log (...args) {
+function log (...args) {
 	for ( const arg of args ) {
+		/* eslint no-console:0 */
 		console.log(inspect(arg))
 	}
 }
@@ -74,7 +124,7 @@ Output a comparison of the failed result to stderr
 @param {Mixed} expected The anticipated data
 @param {Error|String} error The error instance or error message string to report
 */
-export function logComparison (actual, expected, error) {
+function logComparison (actual, expected, error) {
 	const lines = [
 		'------------------------------------',
 		'Comparison Error:',
@@ -117,55 +167,6 @@ export function logComparison (actual, expected, error) {
 }
 
 /**
-Return a highlighted string of a diff object
-@static
-@private
-@method inspectDiff
-@param {Object} diff The diff data to highlight
-@return {String} The highlighted comparison
-*/
-function inspectDiff (diff) {
-	let result = ''
-	diff.forEach(function (part) {
-		let value = part.value
-		if ( part.added ) {
-			value = colors.open.black + colors.bgGreen(value) + colors.open.green
-		}
-		else if ( part.removed ) {
-			value = colors.open.black + colors.bgBrightRed(value) + colors.open.green
-		}
-		result += value
-	})
-	return colors.green(result)
-}
-
-/**
-Return a highlighted comparison between the new data and the old data
-@static
-@method diffStrings
-@param {Object} newData The new data
-@param {Object} oldData The old data
-@return {String} The highlighted comparison
-*/
-export function diffStrings (newData, oldData) {
-	const diff = diffUtil.diffChars(inspect(oldData, {colors: false}), inspect(newData, {colors: false}))
-	return inspectDiff(diff)
-}
-
-/**
-Return a highlighted comparison between the new data and the old data
-@static
-@method diffObjects
-@param {Object} newData The new data
-@param {Object} oldData The old data
-@return {String} The highlighted comparison
-*/
-export function diffObjects (newData, oldData) {
-	const diff = diffUtil.diffJson(inspect(oldData, {colors: false}), inspect(newData, {colors: false}))
-	return inspectDiff(diff)
-}
-
-/**
 Same as assert.equal in that it performs a strict equals check, but if a failure occurs it will output detailed information
 @static
 @method equal
@@ -174,7 +175,7 @@ Same as assert.equal in that it performs a strict equals check, but if a failure
 @param {String} [testName] The name of the test
 @throws {Error} If the comparison failed, the failure will be thrown
 */
-export function equal (actual, expected, testName) {
+function equal (actual, expected, testName) {
 	try {
 		assert.equal(actual, expected, testName)
 	}
@@ -193,7 +194,7 @@ Same as assert.deepEQual in that it performs a deep equals check, but if a failu
 @param {String} [testName] The name of the test
 @throws {Error} If the comparison failed, the failure will be thrown
 */
-export function deepEqual (actual, expected, testName) {
+function deepEqual (actual, expected, testName) {
 	try {
 		assert.deepEqual(actual, expected, testName)
 	}
@@ -212,7 +213,7 @@ Checks to see if the actual result contains the expected result
 @param {String} [testName] The name of the test
 @throws {Error} If the comparison failed, the failure will be thrown
 */
-export function contains (actual, expected, testName) {
+function contains (actual, expected, testName) {
 	if ( testName == null )  testName = `Expected \`${actual}\` to contain \`${expected}\``
 	assert.ok(actual.indexOf(expected) !== -1, testName)
 }
@@ -226,7 +227,7 @@ Checks to see if an error was as expected, if a failure occurs it will output de
 @param {String} [testName] The name of the test
 @throws {Error} If the comparison failed, the failure will be thrown
 */
-export function errorEqual (actualError, expectedError, testName) {
+function errorEqual (actualError, expectedError, testName) {
 	let expectedErrorMessage, actualErrorMessage
 
 	if ( expectedError ) {
@@ -276,7 +277,7 @@ Generate a callback that will return the specified result
 @param {Mixed} result The result that the callback should return
 @return {Function} The callback that will return the specified result
 */
-export function returnViaCallback (result) {
+function returnViaCallback (result) {
 	return function () {
 		return result
 	}
@@ -290,7 +291,8 @@ Generate a callback that will receive a completion callback and call it with the
 @param {Number} [delay=100] The delay in milliseconds that we should wait before calling the completion callback
 @return {Function} The callback that will provide the specified result
 */
-export function completeViaCallback (result, delay = 100) {
+/* eslint no-magic-numbers:0 */
+function completeViaCallback (result, delay = 100) {
 	return function (complete) {
 		wait(delay, function () {
 			complete(null, result)
@@ -305,7 +307,7 @@ Generate a callback that return an error instance with the specified message/err
 @param {Error|String} [error='an error occured'] The error instance or message string that the callback will return
 @return {Function} The callback that will return the specified result
 */
-export function returnErrorViaCallback (error = 'an error occured') {
+function returnErrorViaCallback (error = 'an error occured') {
 	return function () {
 		if ( error instanceof Error ) {
 			return error
@@ -323,7 +325,7 @@ Generate a callback that throw an error instance with the specified message/erro
 @param {Error|String} [error='an error occured']  The error instance or message string that the callback will throw
 @return {Function} The callback that will throw the specified error
 */
-export function throwErrorViaCallback (error = 'an error occured') {
+function throwErrorViaCallback (error = 'an error occured') {
 	return function () {
 		if ( error instanceof Error ) {
 			throw error
@@ -341,7 +343,7 @@ Generate a callback that will check the arguments it received with the arguments
 @param {Mixed} ...argsExpected The arguments that we expect the callback to receive when it is called
 @return {Function} The callback that will check the arguments it receives for the expected arguments
 */
-export function expectViaCallback (...argsExpected) {
+function expectViaCallback (...argsExpected) {
 	return function (...argsActual) {
 		deepEqual(argsActual, argsExpected)
 	}
@@ -356,7 +358,7 @@ Generate a callback that will check the error (if any) it receives for the expec
 @param {Function} [next] An optional completion callback to call with the result of the compairson, if not specified and a failure occurs, the error will be thrown
 @return {Function} The callback that will check the error (if any) it receives for the expected error (if any)
 */
-export function expectErrorViaCallback (error, testName, next) {
+function expectErrorViaCallback (error, testName, next) {
 	return function (inputError) {
 		try {
 			errorEqual(inputError, error)
@@ -382,11 +384,32 @@ Expect the passed function to throw the passed error (if any)
 @param {Mixed} error The error instance or message string that we expected, passed as the second argument to errorEqual
 @param {String} [testName] The name of the test
 */
-export function expectFunctionToThrow (fn, error, testName) {
+function expectFunctionToThrow (fn, error, testName) {
 	try {
 		fn()
 	}
 	catch ( checkError ) {
 		errorEqual(checkError, error, testName)
 	}
+}
+
+// Export
+module.exports = {
+	isTTY,
+	inspect,
+	log,
+	logComparison,
+	diffStrings,
+	diffObjects,
+	equal,
+	deepEqual,
+	contains,
+	errorEqual,
+	returnViaCallback,
+	completeViaCallback,
+	returnErrorViaCallback,
+	throwErrorViaCallback,
+	expectViaCallback,
+	expectErrorViaCallback,
+	expectFunctionToThrow,
 }
