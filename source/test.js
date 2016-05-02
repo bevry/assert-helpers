@@ -1,8 +1,6 @@
-'use strict'
-
 // Import
 const joe = require('joe')
-const helpers = require('../../')
+const helpers = require('../')
 
 // Tests
 joe.suite('assert-helpers', function (suite, test) {

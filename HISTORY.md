@@ -1,5 +1,8 @@
 # History
 
+## v4.2.0 2016 May 2
+- Updated base files
+
 ## v4.1.0 2015 December 9
 - Moved from ECMAScript Modules to CommonJS Modules due to lack of Node.js support
 - Updated dependencies
