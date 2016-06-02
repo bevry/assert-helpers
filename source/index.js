@@ -330,7 +330,7 @@ function expectViaCallback (...argsExpected) {
 
 /**
 Generate a callback that will check the error (if any) it receives for the expected error (if any), if a failure occurs it will output detailed information
-@param {*} error The error instance or message string that we expected, passed as the second argument to errorEqual
+@param {*} error The error instance or message string that we expected, passed as the second argument to {@link errorEqual}
 @param {string} [testName='expect error via callback assertion'] The name of the test
 @param {Function} [next] An optional completion callback to call with the result of the compairson, if not specified and a failure occurs, the error will be thrown
 @return {Function} The callback that will check the error (if any) it receives for the expected error (if any)
@@ -355,17 +355,45 @@ function expectErrorViaCallback (error, testName = 'expect error via callback as
 
 /**
 Expect the passed function to throw the passed error (if any)
+@deprecated in favour of {@link expectErrorViaFunction}
 @param {Function} fn The function that we will call and expect to throw the passed error
 @param {Error|string} error The error instance or message string that we expected, passed as the second argument to errorEqual
-@param {string} [testName] The name of the test
-@returns {nothing}
+@param {string} [testName='expect function to throw'] The name of the test
+@returns {void}
 */
-function expectFunctionToThrow (fn, error, testName) {
+function expectFunctionToThrow (fn, error, testName = 'expect function to throw') {
 	try {
 		fn()
 	}
 	catch ( checkError ) {
 		errorEqual(checkError, error, testName)
+	}
+}
+
+/**
+Expect the passed function to throw an error at some point
+@param {*} error The error instance or message string that we expected, passed as the second argument to {@link errorEqual}
+@param {Function} fn The function that we will call and expect to throw or emit the passed error
+@param {string} [testName='expect error via function assertion'] The name of the test
+@param {Function} [next] An optional completion callback to call with the result of the compairson, if not specified and a failure occurs, the error will be thrown
+@return {void}
+*/
+function expectErrorViaFunction (error, fn, testName = 'expect error via function assertion', next) {
+	if ( domain ) {
+		const d = domain.create()
+		d.on('error', expectErrorViaCallback(error, testName, next))
+		d.run(fn)
+	}
+	else {
+		let err = null
+		try {
+			fn()
+		}
+		catch (_err) {
+			err = _err
+		}
+		errorEqual(err, error, testName)
+		if ( next )  next()
 	}
 }
 
@@ -389,4 +417,5 @@ module.exports = {
 	expectViaCallback,
 	expectErrorViaCallback,
 	expectFunctionToThrow,
+	expectErrorViaFunction
 }

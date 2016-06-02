@@ -9,760 +9,1495 @@
   <link href='assets/github.css' type='text/css' rel='stylesheet' />
 </head>
 <body class='documentation'>
-  <div class='container'>
+  <div class='max-width-4 mx-auto'>
     <div class='clearfix md-mxn2'>
-      <div class='fixed md-show fix-3 overflow-auto max-height-100'>
+      <div class='fixed xs-hide fix-3 overflow-auto max-height-100'>
         <div class='py1 px2'>
           <h3 class='mb0 no-anchor'></h3>
           <div class='mb1'><code></code></div>
           <input
             placeholder='Filter'
             id='filter-input'
-            class='col12 block field'
+            class='col12 block input'
             type='text' />
           <div id='toc'>
-              <a
-                href='#completeViaCallback'
-                class='block bold'>
-                completeViaCallback
-              </a>
-              <a
-                href='#contains'
-                class='block bold'>
-                contains
-              </a>
-              <a
-                href='#deepEqual'
-                class='block bold'>
-                deepEqual
-              </a>
-              <a
-                href='#diffObjects'
-                class='block bold'>
-                diffObjects
-              </a>
-              <a
-                href='#diffstrings'
-                class='block bold'>
-                diffstrings
-              </a>
-              <a
-                href='#equal'
-                class='block bold'>
-                equal
-              </a>
-              <a
-                href='#errorEqual'
-                class='block bold'>
-                errorEqual
-              </a>
-              <a
-                href='#expectErrorViaCallback'
-                class='block bold'>
-                expectErrorViaCallback
-              </a>
-              <a
-                href='#expectFunctionToThrow'
-                class='block bold'>
-                expectFunctionToThrow
-              </a>
-              <a
-                href='#expectViaCallback'
-                class='block bold'>
-                expectViaCallback
-              </a>
-              <a
-                href='#inspect'
-                class='block bold'>
-                inspect
-              </a>
-              <a
-                href='#log'
-                class='block bold'>
-                log
-              </a>
-              <a
-                href='#returnErrorViaCallback'
-                class='block bold'>
-                returnErrorViaCallback
-              </a>
-              <a
-                href='#returnViaCallback'
-                class='block bold'>
-                returnViaCallback
-              </a>
-              <a
-                href='#throwErrorViaCallback'
-                class='block bold'>
-                throwErrorViaCallback
-              </a>
+            <ul class='list-reset h5 py1-ul'>
+              
+                
+                <li><a
+                  href='#inspect'
+                  class="">
+                  inspect
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#diffstrings'
+                  class="">
+                  diffstrings
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#diffObjects'
+                  class="">
+                  diffObjects
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#log'
+                  class="">
+                  log
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#equal'
+                  class="">
+                  equal
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#deepEqual'
+                  class="">
+                  deepEqual
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#contains'
+                  class="">
+                  contains
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#errorEqual'
+                  class="">
+                  errorEqual
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#returnViaCallback'
+                  class="">
+                  returnViaCallback
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#completeViaCallback'
+                  class="">
+                  completeViaCallback
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#returnErrorViaCallback'
+                  class="">
+                  returnErrorViaCallback
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#throwErrorViaCallback'
+                  class="">
+                  throwErrorViaCallback
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#expectViaCallback'
+                  class="">
+                  expectViaCallback
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#expectErrorViaCallback'
+                  class="">
+                  expectErrorViaCallback
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#expectFunctionToThrow'
+                  class="">
+                  expectFunctionToThrow
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#expectErrorViaFunction'
+                  class="">
+                  expectErrorViaFunction
+                  
+                </a>
+                
+                </li>
+              
+            </ul>
+          </div>
+          <div class='mt1 h6 quiet'>
+            <a href='http://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
           </div>
         </div>
       </div>
       <div class='fix-margin-3'>
         <div class='px2'>
-<div class='py1'><section class='py2 clearfix'>
-  <h2 id='completeViaCallback' class='mt0'>
-    completeViaCallback<span class='gray'>(result, [delay])</span>
-  </h2>
-    <p><a href='https://github.com/bevry/assert-helpers/blob/eaf36fa599db8f36b665344d08172561f5d0fdd7/./source/index.js#L271-L277'><code>./source/index.js</code></a></p>
-  
-  
-  
-  
-  
-  <p>Generate a callback that will receive a completion callback and call it with the specified result after the specified delay</p>
+          
+            
+              <section class='py2 clearfix'>
 
-    <h4>Parameters</h4>
-    <ul class='suppress-p-margin'>
-        <li>Any
- <strong>result</strong>
-          :
-          <div class='force-inline'>
-            <p>The result that the callback should pass to the completion callback</p>
+  
+  <div class='clearfix'>
+    <h2 class='fl' id='inspect'>
+      inspect
+    </h2>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/bevry/assert-helpers/blob/13f82b12b18da43c95db9a3e1a9e3449ae104f9c/./source/index.js#L41-L54'>
+      <span>./source/index.js</span>
+      </a>
+    
+  </div>
+  
 
-          </div>
-        </li>
-        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>
-=
- <strong>delay</strong>
-            (default <code>100</code>)
-          :
-          <div class='force-inline'>
-            <p>The delay in milliseconds that we should wait before calling the completion callback</p>
-
-          </div>
-        </li>
-    </ul>
-      <h4>Returns</h4>
-      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>
-</code>
-      :
-      <div class='force-inline'>
-        <p>The callback that will provide the specified result</p>
-
-      </div>
-</section>
-</div><div class='py1'><section class='py2 clearfix'>
-  <h2 id='contains' class='mt0'>
-    contains<span class='gray'>(actual, expected, [testName])</span>
-  </h2>
-    <p><a href='https://github.com/bevry/assert-helpers/blob/eaf36fa599db8f36b665344d08172561f5d0fdd7/./source/index.js#L197-L200'><code>./source/index.js</code></a></p>
-  
-  
-  
-  
-  
-  <p>Checks to see if the actual result contains the expected result</p>
-
-    <h4>Parameters</h4>
-    <ul class='suppress-p-margin'>
-        <li>Any
- <strong>actual</strong>
-          :
-          <div class='force-inline'>
-            <p>The result data</p>
-
-          </div>
-        </li>
-        <li>Any
- <strong>expected</strong>
-          :
-          <div class='force-inline'>
-            <p>The anticipated data</p>
-
-          </div>
-        </li>
-        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
-=
- <strong>testName</strong>
-          :
-          <div class='force-inline'>
-            <p>The name of the test</p>
-
-          </div>
-        </li>
-    </ul>
-      <h4>Returns</h4>
-      <code>nothing
-</code>
-      
-      <div class='force-inline'>
-        
-      </div>
-    <h4>Throws</h4>
-    <ul>
-        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>
-: <div class='force-inline'><p>If the comparison failed, the failure will be thrown</p>
-</div></li>
-    </ul>
-</section>
-</div><div class='py1'><section class='py2 clearfix'>
-  <h2 id='deepEqual' class='mt0'>
-    deepEqual<span class='gray'>(actual, expected, [testName])</span>
-  </h2>
-    <p><a href='https://github.com/bevry/assert-helpers/blob/eaf36fa599db8f36b665344d08172561f5d0fdd7/./source/index.js#L179-L187'><code>./source/index.js</code></a></p>
-  
-  
-  
-  
-  
-  <p>Same as assert.deepEQual in that it performs a deep equals check, but if a failure occurs it will output detailed information</p>
-
-    <h4>Parameters</h4>
-    <ul class='suppress-p-margin'>
-        <li>Any
- <strong>actual</strong>
-          :
-          <div class='force-inline'>
-            <p>The result data</p>
-
-          </div>
-        </li>
-        <li>Any
- <strong>expected</strong>
-          :
-          <div class='force-inline'>
-            <p>The anticipated data</p>
-
-          </div>
-        </li>
-        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
-=
- <strong>testName</strong>
-          :
-          <div class='force-inline'>
-            <p>The name of the test</p>
-
-          </div>
-        </li>
-    </ul>
-      <h4>Returns</h4>
-      <code>nothing
-</code>
-      
-      <div class='force-inline'>
-        
-      </div>
-    <h4>Throws</h4>
-    <ul>
-        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>
-: <div class='force-inline'><p>If the comparison failed, the failure will be thrown</p>
-</div></li>
-    </ul>
-</section>
-</div><div class='py1'><section class='py2 clearfix'>
-  <h2 id='diffObjects' class='mt0'>
-    diffObjects<span class='gray'>(newData, oldData)</span>
-  </h2>
-    <p><a href='https://github.com/bevry/assert-helpers/blob/eaf36fa599db8f36b665344d08172561f5d0fdd7/./source/index.js#L86-L89'><code>./source/index.js</code></a></p>
-  
-  
-  
-  
-  
-  <p>Return a highlighted comparison between the new data and the old data</p>
-
-    <h4>Parameters</h4>
-    <ul class='suppress-p-margin'>
-        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
- <strong>newData</strong>
-          :
-          <div class='force-inline'>
-            <p>The new data</p>
-
-          </div>
-        </li>
-        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
- <strong>oldData</strong>
-          :
-          <div class='force-inline'>
-            <p>The old data</p>
-
-          </div>
-        </li>
-    </ul>
-      <h4>Returns</h4>
-      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
-</code>
-      :
-      <div class='force-inline'>
-        <p>The highlighted comparison</p>
-
-      </div>
-</section>
-</div><div class='py1'><section class='py2 clearfix'>
-  <h2 id='diffstrings' class='mt0'>
-    diffstrings<span class='gray'>(newData, oldData)</span>
-  </h2>
-    <p><a href='https://github.com/bevry/assert-helpers/blob/eaf36fa599db8f36b665344d08172561f5d0fdd7/./source/index.js#L75-L78'><code>./source/index.js</code></a></p>
-  
-  
-  
-  
-  
-  <p>Return a highlighted comparison between the new data and the old data</p>
-
-    <h4>Parameters</h4>
-    <ul class='suppress-p-margin'>
-        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
- <strong>newData</strong>
-          :
-          <div class='force-inline'>
-            <p>The new data</p>
-
-          </div>
-        </li>
-        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
- <strong>oldData</strong>
-          :
-          <div class='force-inline'>
-            <p>The old data</p>
-
-          </div>
-        </li>
-    </ul>
-      <h4>Returns</h4>
-      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
-</code>
-      :
-      <div class='force-inline'>
-        <p>The highlighted comparison</p>
-
-      </div>
-</section>
-</div><div class='py1'><section class='py2 clearfix'>
-  <h2 id='equal' class='mt0'>
-    equal<span class='gray'>(actual, expected, [testName])</span>
-  </h2>
-    <p><a href='https://github.com/bevry/assert-helpers/blob/eaf36fa599db8f36b665344d08172561f5d0fdd7/./source/index.js#L161-L169'><code>./source/index.js</code></a></p>
-  
-  
-  
-  
-  
-  <p>Same as assert.equal in that it performs a strict equals check, but if a failure occurs it will output detailed information</p>
-
-    <h4>Parameters</h4>
-    <ul class='suppress-p-margin'>
-        <li>Any
- <strong>actual</strong>
-          :
-          <div class='force-inline'>
-            <p>The result data</p>
-
-          </div>
-        </li>
-        <li>Any
- <strong>expected</strong>
-          :
-          <div class='force-inline'>
-            <p>The anticipated data</p>
-
-          </div>
-        </li>
-        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
-=
- <strong>testName</strong>
-          :
-          <div class='force-inline'>
-            <p>The name of the test</p>
-
-          </div>
-        </li>
-    </ul>
-      <h4>Returns</h4>
-      <code>nothing
-</code>
-      
-      <div class='force-inline'>
-        
-      </div>
-    <h4>Throws</h4>
-    <ul>
-        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>
-: <div class='force-inline'><p>If the comparison failed, the failure will be thrown</p>
-</div></li>
-    </ul>
-</section>
-</div><div class='py1'><section class='py2 clearfix'>
-  <h2 id='errorEqual' class='mt0'>
-    errorEqual<span class='gray'>(actualError, expectedError, [testName])</span>
-  </h2>
-    <p><a href='https://github.com/bevry/assert-helpers/blob/eaf36fa599db8f36b665344d08172561f5d0fdd7/./source/index.js#L210-L250'><code>./source/index.js</code></a></p>
-  
-  
-  
-  
-  
-  <p>Checks to see if an error was as expected, if a failure occurs it will output detailed information</p>
-
-    <h4>Parameters</h4>
-    <ul class='suppress-p-margin'>
-        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>
- <strong>actualError</strong>
-          :
-          <div class='force-inline'>
-            <p>The result error</p>
-
-          </div>
-        </li>
-        <li>(
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>
-|
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
-|
-null
-)
- <strong>expectedError</strong>
-          :
-          <div class='force-inline'>
-            <p>The anticipated error instance or message, can be null if you expect there to be no error</p>
-
-          </div>
-        </li>
-        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
-=
- <strong>testName</strong>
-          :
-          <div class='force-inline'>
-            <p>The name of the test</p>
-
-          </div>
-        </li>
-    </ul>
-      <h4>Returns</h4>
-      <code>nothing
-</code>
-      
-      <div class='force-inline'>
-        
-      </div>
-    <h4>Throws</h4>
-    <ul>
-        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>
-: <div class='force-inline'><p>If the comparison failed, the failure will be thrown</p>
-</div></li>
-    </ul>
-</section>
-</div><div class='py1'><section class='py2 clearfix'>
-  <h2 id='expectErrorViaCallback' class='mt0'>
-    expectErrorViaCallback<span class='gray'>(error, [testName], [next])</span>
-  </h2>
-    <p><a href='https://github.com/bevry/assert-helpers/blob/eaf36fa599db8f36b665344d08172561f5d0fdd7/./source/index.js#L330-L346'><code>./source/index.js</code></a></p>
-  
-  
-  
-  
-  
-  <p>Generate a callback that will check the error (if any) it receives for the expected error (if any), if a failure occurs it will output detailed information</p>
-
-    <h4>Parameters</h4>
-    <ul class='suppress-p-margin'>
-        <li>Any
- <strong>error</strong>
-          :
-          <div class='force-inline'>
-            <p>The error instance or message string that we expected, passed as the second argument to errorEqual</p>
-
-          </div>
-        </li>
-        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
-=
- <strong>testName</strong>
-          :
-          <div class='force-inline'>
-            <p>The name of the test</p>
-
-          </div>
-        </li>
-        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>
-=
- <strong>next</strong>
-          :
-          <div class='force-inline'>
-            <p>An optional completion callback to call with the result of the compairson, if not specified and a failure occurs, the error will be thrown</p>
-
-          </div>
-        </li>
-    </ul>
-      <h4>Returns</h4>
-      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>
-</code>
-      :
-      <div class='force-inline'>
-        <p>The callback that will check the error (if any) it receives for the expected error (if any)</p>
-
-      </div>
-</section>
-</div><div class='py1'><section class='py2 clearfix'>
-  <h2 id='expectFunctionToThrow' class='mt0'>
-    expectFunctionToThrow<span class='gray'>(fn, error, [testName])</span>
-  </h2>
-    <p><a href='https://github.com/bevry/assert-helpers/blob/eaf36fa599db8f36b665344d08172561f5d0fdd7/./source/index.js#L355-L362'><code>./source/index.js</code></a></p>
-  
-  
-  
-  
-  
-  <p>Expect the passed function to throw the passed error (if any)</p>
-
-    <h4>Parameters</h4>
-    <ul class='suppress-p-margin'>
-        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>
- <strong>fn</strong>
-          :
-          <div class='force-inline'>
-            <p>The function that we will call and expect to throw the passed error</p>
-
-          </div>
-        </li>
-        <li>(
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>
-|
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
-)
- <strong>error</strong>
-          :
-          <div class='force-inline'>
-            <p>The error instance or message string that we expected, passed as the second argument to errorEqual</p>
-
-          </div>
-        </li>
-        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
-=
- <strong>testName</strong>
-          :
-          <div class='force-inline'>
-            <p>The name of the test</p>
-
-          </div>
-        </li>
-    </ul>
-      <h4>Returns</h4>
-      <code>nothing
-</code>
-      
-      <div class='force-inline'>
-        
-      </div>
-</section>
-</div><div class='py1'><section class='py2 clearfix'>
-  <h2 id='expectViaCallback' class='mt0'>
-    expectViaCallback<span class='gray'>(argsExpected)</span>
-  </h2>
-    <p><a href='https://github.com/bevry/assert-helpers/blob/eaf36fa599db8f36b665344d08172561f5d0fdd7/./source/index.js#L316-L320'><code>./source/index.js</code></a></p>
-  
-  
-  
-  
-  
-  <p>Generate a callback that will check the arguments it received with the arguments specified, if a failure occurs it will output detailed information</p>
-
-    <h4>Parameters</h4>
-    <ul class='suppress-p-margin'>
-        <li>...
-Any
- <strong>argsExpected</strong>
-          :
-          <div class='force-inline'>
-            <p>The arguments that we expect the callback to receive when it is called</p>
-
-          </div>
-        </li>
-    </ul>
-      <h4>Returns</h4>
-      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>
-</code>
-      :
-      <div class='force-inline'>
-        <p>The callback that will check the arguments it receives for the expected arguments</p>
-
-      </div>
-</section>
-</div><div class='py1'><section class='py2 clearfix'>
-  <h2 id='inspect' class='mt0'>
-    inspect<span class='gray'>(value, [opts])</span>
-  </h2>
-    <p><a href='https://github.com/bevry/assert-helpers/blob/eaf36fa599db8f36b665344d08172561f5d0fdd7/./source/index.js#L33-L46'><code>./source/index.js</code></a></p>
-  
-  
-  
-  
-  
   <p>Return a stringified version of the value with indentation and colors where applicable</p>
 
-    <h4>Parameters</h4>
-    <ul class='suppress-p-margin'>
-        <li>Any
- <strong>value</strong>
-          :
-          <div class='force-inline'>
-            <p>The value to inspect</p>
+
+  <div class='pre p1 fill-light'>inspect(value: Any, opts: [<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>]): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>value</span> <code class='quiet'>(Any)</code> The value to inspect
 
           </div>
-        </li>
-        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
-=
- <strong>opts</strong>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>opts</span> <code class='quiet'>([<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>]
             (default <code>{}</code>)
-          :
-          <div class='force-inline'>
-            <p>The options to pass to util.inspect</p>
+            )</code> The options to pass to util.inspect
 
           </div>
-        </li>
-    </ul>
-      <h4>Returns</h4>
-      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
-</code>
-      :
-      <div class='force-inline'>
-        <p>The inspected string of the value</p>
+          
+        </div>
+      
+    </div>
+  
 
-      </div>
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
+        The inspected string of the value
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 </section>
-</div><div class='py1'><section class='py2 clearfix'>
-  <h2 id='log' class='mt0'>
-    log<span class='gray'>(args)</span>
-  </h2>
-    <p><a href='https://github.com/bevry/assert-helpers/blob/eaf36fa599db8f36b665344d08172561f5d0fdd7/./source/index.js#L96-L101'><code>./source/index.js</code></a></p>
+
+            
+          
+            
+              <section class='py2 clearfix'>
+
+  
+  <div class='clearfix'>
+    <h2 class='fl' id='diffstrings'>
+      diffstrings
+    </h2>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/bevry/assert-helpers/blob/13f82b12b18da43c95db9a3e1a9e3449ae104f9c/./source/index.js#L83-L86'>
+      <span>./source/index.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Return a highlighted comparison between the new data and the old data</p>
+
+
+  <div class='pre p1 fill-light'>diffstrings(newData: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, oldData: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
+
+  
+
   
   
   
   
   
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>newData</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code> The new data
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>oldData</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code> The old data
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
+        The highlighted comparison
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+            
+          
+            
+              <section class='py2 clearfix'>
+
+  
+  <div class='clearfix'>
+    <h2 class='fl' id='diffObjects'>
+      diffObjects
+    </h2>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/bevry/assert-helpers/blob/13f82b12b18da43c95db9a3e1a9e3449ae104f9c/./source/index.js#L94-L97'>
+      <span>./source/index.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Return a highlighted comparison between the new data and the old data</p>
+
+
+  <div class='pre p1 fill-light'>diffObjects(newData: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, oldData: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>newData</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code> The new data
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>oldData</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code> The old data
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
+        The highlighted comparison
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+            
+          
+            
+              <section class='py2 clearfix'>
+
+  
+  <div class='clearfix'>
+    <h2 class='fl' id='log'>
+      log
+    </h2>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/bevry/assert-helpers/blob/13f82b12b18da43c95db9a3e1a9e3449ae104f9c/./source/index.js#L104-L109'>
+      <span>./source/index.js</span>
+      </a>
+    
+  </div>
+  
+
   <p>Log the inspected values of each of the arguments to stdout</p>
 
-    <h4>Parameters</h4>
-    <ul class='suppress-p-margin'>
-        <li>...
-Any
- <strong>args</strong>
-          :
-          <div class='force-inline'>
-            <p>The arguments to inspect and log</p>
 
-          </div>
-        </li>
-    </ul>
-      <h4>Returns</h4>
-      <code>nothing
-</code>
+  <div class='pre p1 fill-light'>log(args: ...Any): void</div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
       
-      <div class='force-inline'>
-        
-      </div>
-</section>
-</div><div class='py1'><section class='py2 clearfix'>
-  <h2 id='returnErrorViaCallback' class='mt0'>
-    returnErrorViaCallback<span class='gray'>([error])</span>
-  </h2>
-    <p><a href='https://github.com/bevry/assert-helpers/blob/eaf36fa599db8f36b665344d08172561f5d0fdd7/./source/index.js#L284-L293'><code>./source/index.js</code></a></p>
-  
-  
-  
-  
-  
-  <p>Generate a callback that return an error instance with the specified message/error</p>
-
-    <h4>Parameters</h4>
-    <ul class='suppress-p-margin'>
-        <li>(
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>
-|
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
-)
-=
- <strong>error</strong>
-            (default <code>&#x27;anerroroccured&#x27;</code>)
-          :
-          <div class='force-inline'>
-            <p>The error instance or message string that the callback will return</p>
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>args</span> <code class='quiet'>(...Any)</code> The arguments to inspect and log
 
           </div>
-        </li>
-    </ul>
-      <h4>Returns</h4>
-      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>
-</code>
-      :
-      <div class='force-inline'>
-        <p>The callback that will return the specified result</p>
+          
+        </div>
+      
+    </div>
+  
 
-      </div>
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>void</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 </section>
-</div><div class='py1'><section class='py2 clearfix'>
-  <h2 id='returnViaCallback' class='mt0'>
-    returnViaCallback<span class='gray'>(result)</span>
-  </h2>
-    <p><a href='https://github.com/bevry/assert-helpers/blob/eaf36fa599db8f36b665344d08172561f5d0fdd7/./source/index.js#L258-L262'><code>./source/index.js</code></a></p>
+
+            
+          
+            
+              <section class='py2 clearfix'>
+
+  
+  <div class='clearfix'>
+    <h2 class='fl' id='equal'>
+      equal
+    </h2>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/bevry/assert-helpers/blob/13f82b12b18da43c95db9a3e1a9e3449ae104f9c/./source/index.js#L169-L177'>
+      <span>./source/index.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Same as assert.equal in that it performs a strict equals check, but if a failure occurs it will output detailed information</p>
+
+
+  <div class='pre p1 fill-light'>equal(actual: Any, expected: Any, testName: [<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>]): void</div>
+
+  
+
   
   
   
   
   
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>actual</span> <code class='quiet'>(Any)</code> The result data
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>expected</span> <code class='quiet'>(Any)</code> The anticipated data
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>testName</span> <code class='quiet'>([<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>]
+            (default <code>&#39;equal comparison&#39;</code>)
+            )</code> The name of the test
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>void</code>:
+        
+      
+    
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Throws</div>
+    <ul>
+      
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>: If the comparison failed, the failure will be thrown
+</li>
+      
+    </ul>
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+            
+          
+            
+              <section class='py2 clearfix'>
+
+  
+  <div class='clearfix'>
+    <h2 class='fl' id='deepEqual'>
+      deepEqual
+    </h2>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/bevry/assert-helpers/blob/13f82b12b18da43c95db9a3e1a9e3449ae104f9c/./source/index.js#L187-L195'>
+      <span>./source/index.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Same as assert.deepEQual in that it performs a deep equals check, but if a failure occurs it will output detailed information</p>
+
+
+  <div class='pre p1 fill-light'>deepEqual(actual: Any, expected: Any, testName: [<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>]): void</div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>actual</span> <code class='quiet'>(Any)</code> The result data
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>expected</span> <code class='quiet'>(Any)</code> The anticipated data
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>testName</span> <code class='quiet'>([<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>]
+            (default <code>&#39;deep equal assertion&#39;</code>)
+            )</code> The name of the test
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>void</code>:
+        
+      
+    
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Throws</div>
+    <ul>
+      
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>: If the comparison failed, the failure will be thrown
+</li>
+      
+    </ul>
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+            
+          
+            
+              <section class='py2 clearfix'>
+
+  
+  <div class='clearfix'>
+    <h2 class='fl' id='contains'>
+      contains
+    </h2>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/bevry/assert-helpers/blob/13f82b12b18da43c95db9a3e1a9e3449ae104f9c/./source/index.js#L205-L208'>
+      <span>./source/index.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Checks to see if the actual result contains the expected result</p>
+
+
+  <div class='pre p1 fill-light'>contains(actual: Any, expected: Any, testName: [<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>]): void</div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>actual</span> <code class='quiet'>(Any)</code> The result data
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>expected</span> <code class='quiet'>(Any)</code> The anticipated data
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>testName</span> <code class='quiet'>([<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>]
+            (default <code>&#39;contains assertion&#39;</code>)
+            )</code> The name of the test
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>void</code>:
+        
+      
+    
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Throws</div>
+    <ul>
+      
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>: If the comparison failed, the failure will be thrown
+</li>
+      
+    </ul>
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+            
+          
+            
+              <section class='py2 clearfix'>
+
+  
+  <div class='clearfix'>
+    <h2 class='fl' id='errorEqual'>
+      errorEqual
+    </h2>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/bevry/assert-helpers/blob/13f82b12b18da43c95db9a3e1a9e3449ae104f9c/./source/index.js#L218-L258'>
+      <span>./source/index.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Checks to see if an error was as expected, if a failure occurs it will output detailed information</p>
+
+
+  <div class='pre p1 fill-light'>errorEqual(actualError: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>, expectedError: (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | null), testName: [<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>]): void</div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>actualError</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>)</code> The result error
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>expectedError</span> <code class='quiet'>((<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | null))</code> The anticipated error instance or message, can be null if you expect there to be no error
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>testName</span> <code class='quiet'>([<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>]
+            (default <code>&#39;error equal assertion&#39;</code>)
+            )</code> The name of the test
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>void</code>:
+        
+      
+    
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Throws</div>
+    <ul>
+      
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>: If the comparison failed, the failure will be thrown
+</li>
+      
+    </ul>
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+            
+          
+            
+              <section class='py2 clearfix'>
+
+  
+  <div class='clearfix'>
+    <h2 class='fl' id='returnViaCallback'>
+      returnViaCallback
+    </h2>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/bevry/assert-helpers/blob/13f82b12b18da43c95db9a3e1a9e3449ae104f9c/./source/index.js#L266-L270'>
+      <span>./source/index.js</span>
+      </a>
+    
+  </div>
+  
+
   <p>Generate a callback that will return the specified result</p>
 
-    <h4>Parameters</h4>
-    <ul class='suppress-p-margin'>
-        <li>Any
- <strong>result</strong>
-          :
-          <div class='force-inline'>
-            <p>The result that the callback should return</p>
+
+  <div class='pre p1 fill-light'>returnViaCallback(result: Any): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a></div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>result</span> <code class='quiet'>(Any)</code> The result that the callback should return
 
           </div>
-        </li>
-    </ul>
-      <h4>Returns</h4>
-      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>
-</code>
-      :
-      <div class='force-inline'>
-        <p>The callback that will return the specified result</p>
+          
+        </div>
+      
+    </div>
+  
 
-      </div>
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a></code>:
+        The callback that will return the specified result
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 </section>
-</div><div class='py1'><section class='py2 clearfix'>
-  <h2 id='throwErrorViaCallback' class='mt0'>
-    throwErrorViaCallback<span class='gray'>([error])</span>
-  </h2>
-    <p><a href='https://github.com/bevry/assert-helpers/blob/eaf36fa599db8f36b665344d08172561f5d0fdd7/./source/index.js#L300-L309'><code>./source/index.js</code></a></p>
+
+            
+          
+            
+              <section class='py2 clearfix'>
+
+  
+  <div class='clearfix'>
+    <h2 class='fl' id='completeViaCallback'>
+      completeViaCallback
+    </h2>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/bevry/assert-helpers/blob/13f82b12b18da43c95db9a3e1a9e3449ae104f9c/./source/index.js#L279-L285'>
+      <span>./source/index.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Generate a callback that will receive a completion callback and call it with the specified result after the specified delay</p>
+
+
+  <div class='pre p1 fill-light'>completeViaCallback(result: Any, delay: [<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>]): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a></div>
+
+  
+
   
   
   
   
   
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>result</span> <code class='quiet'>(Any)</code> The result that the callback should pass to the completion callback
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>delay</span> <code class='quiet'>([<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>]
+            (default <code>100</code>)
+            )</code> The delay in milliseconds that we should wait before calling the completion callback
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a></code>:
+        The callback that will provide the specified result
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+            
+          
+            
+              <section class='py2 clearfix'>
+
+  
+  <div class='clearfix'>
+    <h2 class='fl' id='returnErrorViaCallback'>
+      returnErrorViaCallback
+    </h2>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/bevry/assert-helpers/blob/13f82b12b18da43c95db9a3e1a9e3449ae104f9c/./source/index.js#L292-L301'>
+      <span>./source/index.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Generate a callback that return an error instance with the specified message/error</p>
+
+
+  <div class='pre p1 fill-light'>returnErrorViaCallback(error: [(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)]): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a></div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>error</span> <code class='quiet'>([(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)]
+            (default <code>&#39;an error occured&#39;</code>)
+            )</code> The error instance or message string that the callback will return
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a></code>:
+        The callback that will return the specified result
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+            
+          
+            
+              <section class='py2 clearfix'>
+
+  
+  <div class='clearfix'>
+    <h2 class='fl' id='throwErrorViaCallback'>
+      throwErrorViaCallback
+    </h2>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/bevry/assert-helpers/blob/13f82b12b18da43c95db9a3e1a9e3449ae104f9c/./source/index.js#L308-L317'>
+      <span>./source/index.js</span>
+      </a>
+    
+  </div>
+  
+
   <p>Generate a callback that throw an error instance with the specified message/error</p>
 
-    <h4>Parameters</h4>
-    <ul class='suppress-p-margin'>
-        <li>(
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>
-|
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
-)
-=
- <strong>error</strong>
-            (default <code>&#x27;anerroroccured&#x27;</code>)
-          :
-          <div class='force-inline'>
-            <p>The error instance or message string that the callback will throw</p>
+
+  <div class='pre p1 fill-light'>throwErrorViaCallback(error: [(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)]): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a></div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>error</span> <code class='quiet'>([(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)]
+            (default <code>&#39;an error occured&#39;</code>)
+            )</code> The error instance or message string that the callback will throw
 
           </div>
-        </li>
-    </ul>
-      <h4>Returns</h4>
-      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>
-</code>
-      :
-      <div class='force-inline'>
-        <p>The callback that will throw the specified error</p>
+          
+        </div>
+      
+    </div>
+  
 
-      </div>
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a></code>:
+        The callback that will throw the specified error
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 </section>
-</div>
+
+            
+          
+            
+              <section class='py2 clearfix'>
+
+  
+  <div class='clearfix'>
+    <h2 class='fl' id='expectViaCallback'>
+      expectViaCallback
+    </h2>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/bevry/assert-helpers/blob/13f82b12b18da43c95db9a3e1a9e3449ae104f9c/./source/index.js#L324-L328'>
+      <span>./source/index.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Generate a callback that will check the arguments it received with the arguments specified, if a failure occurs it will output detailed information</p>
+
+
+  <div class='pre p1 fill-light'>expectViaCallback(argsExpected: ...Any): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a></div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>argsExpected</span> <code class='quiet'>(...Any)</code> The arguments that we expect the callback to receive when it is called
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a></code>:
+        The callback that will check the arguments it receives for the expected arguments
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+            
+          
+            
+              <section class='py2 clearfix'>
+
+  
+  <div class='clearfix'>
+    <h2 class='fl' id='expectErrorViaCallback'>
+      expectErrorViaCallback
+    </h2>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/bevry/assert-helpers/blob/13f82b12b18da43c95db9a3e1a9e3449ae104f9c/./source/index.js#L338-L354'>
+      <span>./source/index.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Generate a callback that will check the error (if any) it receives for the expected error (if any), if a failure occurs it will output detailed information</p>
+
+
+  <div class='pre p1 fill-light'>expectErrorViaCallback(error: Any, testName: [<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>], next: [<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>]): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a></div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>error</span> <code class='quiet'>(Any)</code> The error instance or message string that we expected, passed as the second argument to 
+<a href="#errorEqual">errorEqual</a>
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>testName</span> <code class='quiet'>([<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>]
+            (default <code>&#39;expect error via callback assertion&#39;</code>)
+            )</code> The name of the test
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>next</span> <code class='quiet'>([<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>])</code> An optional completion callback to call with the result of the compairson, if not specified and a failure occurs, the error will be thrown
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a></code>:
+        The callback that will check the error (if any) it receives for the expected error (if any)
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+            
+          
+            
+              <section class='py2 clearfix'>
+
+  
+  <div class='clearfix'>
+    <h2 class='fl' id='expectFunctionToThrow'>
+      expectFunctionToThrow
+    </h2>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/bevry/assert-helpers/blob/13f82b12b18da43c95db9a3e1a9e3449ae104f9c/./source/index.js#L364-L371'>
+      <span>./source/index.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Expect the passed function to throw the passed error (if any)</p>
+
+
+  <div class='pre p1 fill-light'>expectFunctionToThrow(fn: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>, error: (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>), testName: [<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>]): void</div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>fn</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code> The function that we will call and expect to throw the passed error
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>error</span> <code class='quiet'>((<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>))</code> The error instance or message string that we expected, passed as the second argument to errorEqual
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>testName</span> <code class='quiet'>([<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>]
+            (default <code>&#39;expect function to throw&#39;</code>)
+            )</code> The name of the test
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>void</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+            
+          
+            
+              <section class='py2 clearfix'>
+
+  
+  <div class='clearfix'>
+    <h2 class='fl' id='expectErrorViaFunction'>
+      expectErrorViaFunction
+    </h2>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/bevry/assert-helpers/blob/13f82b12b18da43c95db9a3e1a9e3449ae104f9c/./source/index.js#L381-L398'>
+      <span>./source/index.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Expect the passed function to throw an error at some point</p>
+
+
+  <div class='pre p1 fill-light'>expectErrorViaFunction(error: Any, fn: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>, testName: [<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>], next: [<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>]): void</div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>error</span> <code class='quiet'>(Any)</code> The error instance or message string that we expected, passed as the second argument to 
+<a href="#errorEqual">errorEqual</a>
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>fn</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code> The function that we will call and expect to throw or emit the passed error
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>testName</span> <code class='quiet'>([<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>]
+            (default <code>&#39;expect error via function assertion&#39;</code>)
+            )</code> The name of the test
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>next</span> <code class='quiet'>([<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>])</code> An optional completion callback to call with the result of the compairson, if not specified and a failure occurs, the error will be thrown
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>void</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+            
+          
         </div>
       </div>
     </div>

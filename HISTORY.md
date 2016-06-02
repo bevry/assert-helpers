@@ -1,5 +1,10 @@
 # History
 
+## v4.3.0 2016 June 2
+- Added default test names
+- Better documentation
+- Added `expectErrorViaFunction`
+
 ## v4.2.0 2016 May 2
 - Updated base files
 
