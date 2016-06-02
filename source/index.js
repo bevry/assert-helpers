@@ -99,7 +99,7 @@ function diffObjects (newData, oldData) {
 /**
 Log the inspected values of each of the arguments to stdout
 @param {...*} args The arguments to inspect and log
-@returns {nothing}
+@return {void}
 */
 function log (...args) {
 	for ( const arg of args ) {
@@ -114,7 +114,7 @@ Output a comparison of the failed result to stderr
 @param {*} actual The result data
 @param {*} expected The anticipated data
 @param {Error|string} error The error instance or error message string to report
-@returns {nothing}
+@return {void}
 */
 function logComparison (actual, expected, error) {
 	const lines = [
@@ -164,7 +164,7 @@ Same as assert.equal in that it performs a strict equals check, but if a failure
 @param {*} expected The anticipated data
 @param {string} [testName='equal comparison'] The name of the test
 @throws {Error} If the comparison failed, the failure will be thrown
-@returns {nothing}
+@return {void}
 */
 function equal (actual, expected, testName = 'equal assertion') {
 	try {
@@ -182,7 +182,7 @@ Same as assert.deepEQual in that it performs a deep equals check, but if a failu
 @param {*} expected The anticipated data
 @param {string} [testName='deep equal assertion'] The name of the test
 @throws {Error} If the comparison failed, the failure will be thrown
-@returns {nothing}
+@return {void}
 */
 function deepEqual (actual, expected, testName = 'deep equal assertion') {
 	try {
@@ -200,7 +200,7 @@ Checks to see if the actual result contains the expected result
 @param {*} expected The anticipated data
 @param {string} [testName='contains assertion'] The name of the test
 @throws {Error} If the comparison failed, the failure will be thrown
-@returns {nothing}
+@return {void}
 */
 function contains (actual, expected, testName = 'contains assertion') {
 	if ( testName == null )  testName = `Expected \`${actual}\` to contain \`${expected}\``
@@ -213,7 +213,7 @@ Checks to see if an error was as expected, if a failure occurs it will output de
 @param {Error|string|null} expectedError - The anticipated error instance or message, can be null if you expect there to be no error
 @param {string} [testName='error equal assertion'] - The name of the test
 @throws {Error} If the comparison failed, the failure will be thrown
-@returns {nothing}
+@return {void}
 */
 function errorEqual (actualError, expectedError, testName = 'error equal assertion') {
 	let expectedErrorMessage, actualErrorMessage
@@ -372,6 +372,7 @@ function expectFunctionToThrow (fn, error, testName) {
 // Export
 module.exports = {
 	isTTY,
+	queue,
 	inspect,
 	log,
 	logComparison,
