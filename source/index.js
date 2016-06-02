@@ -4,6 +4,14 @@ const assert = require('assert')
 const colors = require('ansicolors')
 const diffUtil = require('diff')
 
+// Domains are crippled in the browser and on node 0.8, so don't use domains in those environments
+const domain = (process.browser || process.versions.node.substr(0, 3) === '0.8') ? null : require('domain')
+
+// Cross-platform (node 0.10+, node 0.8+, browser) compatible setImmediate
+const queue = (global || window).setImmediate || (process && process.nextTick) || function (fn) {
+	setTimeout(fn, 0)
+}
+
 /**
 Alias for setTimeout with paramaters reversed
 @private
@@ -154,11 +162,11 @@ function logComparison (actual, expected, error) {
 Same as assert.equal in that it performs a strict equals check, but if a failure occurs it will output detailed information
 @param {*} actual The result data
 @param {*} expected The anticipated data
-@param {string} [testName] The name of the test
+@param {string} [testName='equal comparison'] The name of the test
 @throws {Error} If the comparison failed, the failure will be thrown
 @returns {nothing}
 */
-function equal (actual, expected, testName) {
+function equal (actual, expected, testName = 'equal assertion') {
 	try {
 		assert.equal(actual, expected, testName)
 	}
@@ -172,11 +180,11 @@ function equal (actual, expected, testName) {
 Same as assert.deepEQual in that it performs a deep equals check, but if a failure occurs it will output detailed information
 @param {*} actual The result data
 @param {*} expected The anticipated data
-@param {string} [testName] The name of the test
+@param {string} [testName='deep equal assertion'] The name of the test
 @throws {Error} If the comparison failed, the failure will be thrown
 @returns {nothing}
 */
-function deepEqual (actual, expected, testName) {
+function deepEqual (actual, expected, testName = 'deep equal assertion') {
 	try {
 		assert.deepEqual(actual, expected, testName)
 	}
@@ -190,11 +198,11 @@ function deepEqual (actual, expected, testName) {
 Checks to see if the actual result contains the expected result
 @param {*} actual The result data
 @param {*} expected The anticipated data
-@param {string} [testName] The name of the test
+@param {string} [testName='contains assertion'] The name of the test
 @throws {Error} If the comparison failed, the failure will be thrown
 @returns {nothing}
 */
-function contains (actual, expected, testName) {
+function contains (actual, expected, testName = 'contains assertion') {
 	if ( testName == null )  testName = `Expected \`${actual}\` to contain \`${expected}\``
 	assert.ok(actual.indexOf(expected) !== -1, testName)
 }
@@ -203,11 +211,11 @@ function contains (actual, expected, testName) {
 Checks to see if an error was as expected, if a failure occurs it will output detailed information
 @param {Error} actualError - The result error
 @param {Error|string|null} expectedError - The anticipated error instance or message, can be null if you expect there to be no error
-@param {string} [testName] - The name of the test
+@param {string} [testName='error equal assertion'] - The name of the test
 @throws {Error} If the comparison failed, the failure will be thrown
 @returns {nothing}
 */
-function errorEqual (actualError, expectedError, testName) {
+function errorEqual (actualError, expectedError, testName = 'error equal assertion') {
 	let expectedErrorMessage, actualErrorMessage
 
 	if ( expectedError ) {
@@ -323,14 +331,14 @@ function expectViaCallback (...argsExpected) {
 /**
 Generate a callback that will check the error (if any) it receives for the expected error (if any), if a failure occurs it will output detailed information
 @param {*} error The error instance or message string that we expected, passed as the second argument to errorEqual
-@param {string} [testName] The name of the test
+@param {string} [testName='expect error via callback assertion'] The name of the test
 @param {Function} [next] An optional completion callback to call with the result of the compairson, if not specified and a failure occurs, the error will be thrown
 @return {Function} The callback that will check the error (if any) it receives for the expected error (if any)
 */
-function expectErrorViaCallback (error, testName, next) {
+function expectErrorViaCallback (error, testName = 'expect error via callback assertion', next) {
 	return function (inputError) {
 		try {
-			errorEqual(inputError, error)
+			errorEqual(inputError, error, testName)
 		}
 		catch ( checkError ) {
 			if ( next ) {
