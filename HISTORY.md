@@ -1,5 +1,9 @@
 # History
 
+## v4.3.0 2016 June 4
+- Added `next` callbacks to most checks
+- Fixed `expectErrorViaFunction`
+
 ## v4.3.0 2016 June 2
 - Added default test names
 - Better documentation

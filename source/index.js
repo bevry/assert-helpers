@@ -4,9 +4,6 @@ const assert = require('assert')
 const colors = require('ansicolors')
 const diffUtil = require('diff')
 
-// Domains are crippled in the browser and on node 0.8, so don't use domains in those environments
-const domain = (process.browser || process.versions.node.substr(0, 3) === '0.8') ? null : require('domain')
-
 // Cross-platform (node 0.10+, node 0.8+, browser) compatible setImmediate
 const queue = (global || window).setImmediate || (process && process.nextTick) || function (fn) {
 	setTimeout(fn, 0)
@@ -163,17 +160,25 @@ Same as assert.equal in that it performs a strict equals check, but if a failure
 @param {*} actual The result data
 @param {*} expected The anticipated data
 @param {string} [testName='equal comparison'] The name of the test
+@param {Function} [next] An optional completion callback to pass the error to rather than throwing
 @throws {Error} If the comparison failed, the failure will be thrown
 @return {void}
 */
-function equal (actual, expected, testName = 'equal assertion') {
+function equal (actual, expected, testName = 'equal assertion', next) {
 	try {
 		assert.equal(actual, expected, testName)
 	}
 	catch ( checkError ) {
 		logComparison(actual, expected, checkError)
-		throw checkError
+		if ( next ) {
+			next(checkError)
+			return
+		}
+		else {
+			throw checkError
+		}
 	}
+	if ( next )  next()
 }
 
 /**
@@ -181,17 +186,25 @@ Same as assert.deepEQual in that it performs a deep equals check, but if a failu
 @param {*} actual The result data
 @param {*} expected The anticipated data
 @param {string} [testName='deep equal assertion'] The name of the test
+@param {Function} [next] An optional completion callback to pass the error to rather than throwing
 @throws {Error} If the comparison failed, the failure will be thrown
 @return {void}
 */
-function deepEqual (actual, expected, testName = 'deep equal assertion') {
+function deepEqual (actual, expected, testName = 'deep equal assertion', next) {
 	try {
 		assert.deepEqual(actual, expected, testName)
 	}
 	catch ( checkError ) {
 		logComparison(actual, expected, checkError)
-		throw checkError
+		if ( next ) {
+			next(checkError)
+			return
+		}
+		else {
+			throw checkError
+		}
 	}
+	if ( next )  next()
 }
 
 /**
@@ -199,12 +212,25 @@ Checks to see if the actual result contains the expected result
 @param {*} actual The result data
 @param {*} expected The anticipated data
 @param {string} [testName='contains assertion'] The name of the test
+@param {Function} [next] An optional completion callback to pass the error to rather than throwing
 @throws {Error} If the comparison failed, the failure will be thrown
 @return {void}
 */
-function contains (actual, expected, testName = 'contains assertion') {
+function contains (actual, expected, testName = 'contains assertion', next) {
 	if ( testName == null )  testName = `Expected \`${actual}\` to contain \`${expected}\``
-	assert.ok(actual.indexOf(expected) !== -1, testName)
+	try {
+		assert.ok(actual.indexOf(expected) !== -1, testName)
+	}
+	catch ( checkError ) {
+		if ( next ) {
+			next(checkError)
+			return
+		}
+		else {
+			throw checkError
+		}
+	}
+	if ( next )  next()
 }
 
 /**
@@ -212,10 +238,11 @@ Checks to see if an error was as expected, if a failure occurs it will output de
 @param {Error} actualError - The result error
 @param {Error|string|null} expectedError - The anticipated error instance or message, can be null if you expect there to be no error
 @param {string} [testName='error equal assertion'] - The name of the test
+@param {Function} [next] An optional completion callback to pass the error to rather than throwing
 @throws {Error} If the comparison failed, the failure will be thrown
 @return {void}
 */
-function errorEqual (actualError, expectedError, testName = 'error equal assertion') {
+function errorEqual (actualError, expectedError, testName = 'error equal assertion', next) {
 	let expectedErrorMessage, actualErrorMessage
 
 	if ( expectedError ) {
@@ -253,8 +280,15 @@ function errorEqual (actualError, expectedError, testName = 'error equal asserti
 			expectedErrorMessage,
 			checkError
 		)
-		throw checkError
+		if ( next ) {
+			next(checkError)
+			return
+		}
+		else {
+			throw checkError
+		}
 	}
+	if ( next )  next()
 }
 
 
@@ -337,36 +371,7 @@ Generate a callback that will check the error (if any) it receives for the expec
 */
 function expectErrorViaCallback (error, testName = 'expect error via callback assertion', next) {
 	return function (inputError) {
-		try {
-			errorEqual(inputError, error, testName)
-		}
-		catch ( checkError ) {
-			if ( next ) {
-				next(checkError)
-				return
-			}
-			else {
-				throw checkError
-			}
-		}
-		if ( next )  next()
-	}
-}
-
-/**
-Expect the passed function to throw the passed error (if any)
-@deprecated in favour of {@link expectErrorViaFunction}
-@param {Function} fn The function that we will call and expect to throw the passed error
-@param {Error|string} error The error instance or message string that we expected, passed as the second argument to errorEqual
-@param {string} [testName='expect function to throw'] The name of the test
-@returns {void}
-*/
-function expectFunctionToThrow (fn, error, testName = 'expect function to throw') {
-	try {
-		fn()
-	}
-	catch ( checkError ) {
-		errorEqual(checkError, error, testName)
+		errorEqual(inputError, error, testName, next)
 	}
 }
 
@@ -379,22 +384,19 @@ Expect the passed function to throw an error at some point
 @return {void}
 */
 function expectErrorViaFunction (error, fn, testName = 'expect error via function assertion', next) {
-	if ( domain ) {
-		const d = domain.create()
-		d.on('error', expectErrorViaCallback(error, testName, next))
-		d.run(fn)
+	let err = null
+	try {
+		fn()
 	}
-	else {
-		let err = null
-		try {
-			fn()
-		}
-		catch (_err) {
-			err = _err
-		}
-		errorEqual(err, error, testName)
-		if ( next )  next()
+	catch (_err) {
+		err = _err
 	}
+	errorEqual(err, error, testName, next)
+}
+
+// Deprecated
+function expectFunctionToThrow (fn, error, testName = 'expect function to throw', next) {
+	expectErrorViaFunction(error, fn, testName, next)
 }
 
 // Export
