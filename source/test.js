@@ -1,3 +1,5 @@
+'use strict'
+
 // Import
 const joe = require('joe')
 const helpers = require('../')

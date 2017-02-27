@@ -1,5 +1,9 @@
 # History
 
+## v4.5.0 2017 February 27
+- `log` no longer uses `for of` but `for` to support older environments
+- Updated dependencies
+
 ## v4.4.0 2016 June 4
 - Added `next` callbacks to most checks
 - Fixed `expectErrorViaFunction`

@@ -1,3 +1,5 @@
+'use strict'
+
 // Import
 const util = require('util')
 const assert = require('assert')
@@ -99,9 +101,9 @@ Log the inspected values of each of the arguments to stdout
 @return {void}
 */
 function log (...args) {
-	for ( const arg of args ) {
+	for ( let i = 0; i < args.length; ++i ) {
 		/* eslint no-console:0 */
-		console.log(inspect(arg))
+		console.log(inspect(args[i]))
 	}
 }
 
@@ -118,7 +120,7 @@ function logComparison (actual, expected, error) {
 		'------------------------------------',
 		'Comparison Error:',
 		colors.green(error.stack || error.message || error),
-		'',
+		''
 	]
 
 	if ( typeof actual === 'string' && typeof expected === 'string' ) {

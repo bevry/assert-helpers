@@ -42,7 +42,7 @@ Common utilities and helpers to make testing assertions easier
 <a href="http://browserify.org" title="Browserify lets you require('modules') in the browser by bundling up all of your dependencies"><h3>Browserify</h3></a><ul>
 <li>Install: <code>npm install --save assert-helpers</code></li>
 <li>Module: <code>require('assert-helpers')</code></li>
-<li>CDN URL: <code>//wzrd.in/bundle/assert-helpers@4.4.0</code></li></ul>
+<li>CDN URL: <code>//wzrd.in/bundle/assert-helpers@4.5.0</code></li></ul>
 
 <a href="http://enderjs.com" title="Ender is a full featured package manager for your browser"><h3>Ender</h3></a><ul>
 <li>Install: <code>ender add assert-helpers</code></li>
@@ -63,8 +63,7 @@ Common utilities and helpers to make testing assertions easier
 
 ## Usage
 
-- [Technical Documentation](http://rawgit.com/bevry/assert-helpers/master/docs/)
-- [Source Code](https://github.com/bevry/assert-helpers/blob/master/source/index.js)
+[API Documentation.](http://master.assert-helpers.bevry.surge.sh/docs/)
 
 
 <!-- HISTORY/ -->
