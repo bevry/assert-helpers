@@ -1,5 +1,8 @@
 # History
 
+## v4.5.1 2018 January 31
+- Updated base files
+
 ## v4.5.0 2017 February 27
 - `log` no longer uses `for of` but `for` to support older environments
 - Updated dependencies
