@@ -1,8 +1,18 @@
 # History
 
+## v4.6.0 2018 December 4
+
+-   Rewrote in TypeScript.
+-   Inspect now defaults the depth to `50` instead of enforcing it.
+-   Removed `queue`. Now that environments now support `setImmediate` you should just use that.
+-   Internal changes:
+    -   `diffstrings` and `diffObjects` have been merged into `diff`, which on object types will use object comparison, otherwise it will use inspection comparison (before it would be a nooop on anything besides objects and strings)
+    -   `logComparison` now uses `compare` which uses `diff`
+-   Updated [base files](https://github.com/bevry/base) and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+
 ## v4.5.1 2018 January 31
 
--   Updated base files
+-   Updated [base files](https://github.com/bevry/base) and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
 
 ## v4.5.0 2017 February 27
 

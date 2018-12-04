@@ -1,71 +1,49 @@
 'use strict'
 
 // Import
-const util = require('util')
-const assert = require('assert')
-const colors = require('ansicolors')
-const diffUtil = require('diff')
+import util from 'util'
+import assert from 'assert'
+import colors from 'ansicolors'
+import diffUtil from 'diff'
 
-// Cross-platform (node 0.10+, node 0.8+, browser) compatible setImmediate
-const queue = (global || window).setImmediate || (process && process.nextTick) || function (fn) {
-	setTimeout(fn, 0)
-}
+type Errback = (error?: Error) => void
 
-/**
-Alias for setTimeout with paramaters reversed
-@private
-@param {Number} delay Delay to send to setTimeout
-@param {Function} fn Function to send to setTimeout
-@return {Object} result of the setTimeout call
-*/
-function wait (delay, fn) {
+/** Alias for setTimeout with paramaters reversed. */
+export function wait(delay: number, fn: Function) {
 	return setTimeout(fn, delay)
 }
 
-/**
-Whether or not stdout and stderr are interactive
-@private
-@return {Boolean} Yes they are, or no they aren't.
-*/
-function isTTY () {
-	return process.stdout && process.stdout.isTTY === true && process.stderr && process.stderr.isTTY === true
+/** Whether or not stdout and stderr are interactive. */
+export function isTTY(): boolean {
+	return (
+		process.stdout &&
+		process.stdout.isTTY === true &&
+		process.stderr &&
+		process.stderr.isTTY === true
+	)
 }
 
 /**
-Return a stringified version of the value with indentation and colors where applicable
-@param {*} value The value to inspect
-@param {Object} [opts={}] The options to pass to util.inspect
-@return {string} The inspected string of the value
-*/
-function inspect (value, opts = {}) {
+ * Return a stringified version of the value with indentation and colors where applicable.
+ * Colors will be applied if the environment supports it (--no-colors not present and TTY).
+ */
+export function inspect(value: any, opts: NodeJS.InspectOptions = {}): string {
 	// If the terminal supports colours, and the user hasn't specified, then default to a sensible default
-	if ( isTTY() && opts.colors == null ) {
-		opts.colors = process.argv.indexOf('--no-colors') === -1
-	}
+	const colors = isTTY() && process.argv.indexOf('--no-colors') === -1
+	const depth = 50
 
-	// If the terminal doesn't support colours, then over-write whatever the user set
-	else {
-		opts.colors = false
-	}
-
-	// Inspect and return
-	return util.inspect(value, opts)
+	// Inspect and return using our defaults
+	return util.inspect(value, { colors, depth, ...opts })
 }
 
-/**
-Return a highlighted string of a diff object
-@private
-@param {Object} diff The diff data to highlight
-@return {string} The highlighted comparison
-*/
-function inspectDiff (diff) {
+/** Return a highlighted string of a difference. */
+export function inspectDiff(diff: diffUtil.IDiffResult[]): string {
 	let result = ''
-	diff.forEach(function (part) {
+	diff.forEach(function(part) {
 		let value = part.value
-		if ( part.added ) {
+		if (part.added) {
 			value = colors.open.black + colors.bgGreen(value) + colors.open.green
-		}
-		else if ( part.removed ) {
+		} else if (part.removed) {
 			value = colors.open.black + colors.bgBrightRed(value) + colors.open.green
 		}
 		result += value
@@ -73,49 +51,36 @@ function inspectDiff (diff) {
 	return colors.green(result)
 }
 
-/**
-Return a highlighted comparison between the new data and the old data
-@param {Object} newData The new data
-@param {Object} oldData The old data
-@return {string} The highlighted comparison
-*/
-function diffstrings (newData, oldData) {
-	const diff = diffUtil.diffChars(inspect(oldData, {colors: false}), inspect(newData, {colors: false}))
-	return inspectDiff(diff)
+/** Return the difference between the new data and the old data. */
+export function diff(newData: any, oldData: any) {
+	if (typeof newData === 'object' && typeof oldData === 'object') {
+		return diffUtil.diffJson(oldData, newData)
+	} else {
+		const a = inspect(oldData, { colors: false })
+		const b = inspect(newData, { colors: false })
+		return diffUtil.diffChars(a, b)
+	}
 }
 
-/**
-Return a highlighted comparison between the new data and the old data
-@param {Object} newData The new data
-@param {Object} oldData The old data
-@return {string} The highlighted comparison
-*/
-function diffObjects (newData, oldData) {
-	const diff = diffUtil.diffJson(inspect(oldData, {colors: false}), inspect(newData, {colors: false}))
-	return inspectDiff(diff)
+/** Return a highlighted comparison between the new data and the old data. */
+export function compare(newData: any, oldData: any) {
+	return inspectDiff(diff(newData, oldData))
 }
 
-/**
-Log the inspected values of each of the arguments to stdout
-@param {...*} args The arguments to inspect and log
-@return {void}
-*/
-function log (...args) {
-	for ( let i = 0; i < args.length; ++i ) {
+/** Log the inspected values of each of the arguments to stdout */
+export function log(...args: any): void {
+	for (let i = 0; i < args.length; ++i) {
 		/* eslint no-console:0 */
 		console.log(inspect(args[i]))
 	}
 }
 
-/**
-Output a comparison of the failed result to stderr
-@private
-@param {*} actual The result data
-@param {*} expected The anticipated data
-@param {Error|string} error The error instance or error message string to report
-@return {void}
-*/
-function logComparison (actual, expected, error) {
+/** Output a comparison of the failed result to stderr */
+export function logComparison(
+	actual: any,
+	expected: any,
+	error: Error | string | any
+): void {
 	const lines = [
 		'------------------------------------',
 		'Comparison Error:',
@@ -123,20 +88,7 @@ function logComparison (actual, expected, error) {
 		''
 	]
 
-	if ( typeof actual === 'string' && typeof expected === 'string' ) {
-		lines.push(
-			'Comparison Diff:',
-			diffstrings(actual, expected),
-			''
-		)
-	}
-	else if ( typeof actual === 'object' && typeof expected === 'object' ) {
-		lines.push(
-			'Comparison Diff:',
-			diffObjects(actual, expected),
-			''
-		)
-	}
+	lines.push('Comparison Diff:', compare(actual, expected), '')
 
 	lines.push(
 		'Comparison Actual:',
@@ -148,7 +100,7 @@ function logComparison (actual, expected, error) {
 	)
 
 	// Work for node
-	if ( process.stderr ) {
+	if (process.stderr) {
 		process.stderr.write(lines.join('\n') + '\n')
 	}
 	// Work for browsers
@@ -157,269 +109,195 @@ function logComparison (actual, expected, error) {
 	}
 }
 
-/**
-Same as assert.equal in that it performs a strict equals check, but if a failure occurs it will output detailed information
-@param {*} actual The result data
-@param {*} expected The anticipated data
-@param {string} [testName='equal comparison'] The name of the test
-@param {Function} [next] An optional completion callback to pass the error to rather than throwing
-@throws {Error} If the comparison failed, the failure will be thrown
-@return {void}
-*/
-function equal (actual, expected, testName = 'equal assertion', next) {
+/** Same as assert.equal in that it performs a strict equals check, but if a failure occurs it will output detailed information */
+export function equal(
+	actual: any,
+	expected: any,
+	testName = 'equal assertion',
+	next?: Errback
+): void | never {
 	try {
 		assert.equal(actual, expected, testName)
-	}
-	catch ( checkError ) {
+	} catch (checkError) {
 		logComparison(actual, expected, checkError)
-		if ( next ) {
+		if (next) {
 			next(checkError)
 			return
-		}
-		else {
+		} else {
 			throw checkError
 		}
 	}
-	if ( next )  next()
+	if (next) next()
 }
 
-/**
-Same as assert.deepEQual in that it performs a deep equals check, but if a failure occurs it will output detailed information
-@param {*} actual The result data
-@param {*} expected The anticipated data
-@param {string} [testName='deep equal assertion'] The name of the test
-@param {Function} [next] An optional completion callback to pass the error to rather than throwing
-@throws {Error} If the comparison failed, the failure will be thrown
-@return {void}
-*/
-function deepEqual (actual, expected, testName = 'deep equal assertion', next) {
+/** Same as assert.deepEQual in that it performs a deep equals check, but if a failure occurs it will output detailed information */
+export function deepEqual(
+	actual: any,
+	expected: any,
+	testName = 'deep equal assertion',
+	next?: Errback
+): void | never {
 	try {
 		assert.deepEqual(actual, expected, testName)
-	}
-	catch ( checkError ) {
+	} catch (checkError) {
 		logComparison(actual, expected, checkError)
-		if ( next ) {
+		if (next) {
 			next(checkError)
 			return
-		}
-		else {
+		} else {
 			throw checkError
 		}
 	}
-	if ( next )  next()
+	if (next) next()
 }
 
-/**
-Checks to see if the actual result contains the expected result
-@param {*} actual The result data
-@param {*} expected The anticipated data
-@param {string} [testName='contains assertion'] The name of the test
-@param {Function} [next] An optional completion callback to pass the error to rather than throwing
-@throws {Error} If the comparison failed, the failure will be thrown
-@return {void}
-*/
-function contains (actual, expected, testName = 'contains assertion', next) {
-	if ( testName == null )  testName = `Expected \`${actual}\` to contain \`${expected}\``
+/** Checks to see if the actual result contains the expected result .*/
+export function contains(
+	actual: any,
+	expected: any,
+	testName = 'contains assertion',
+	next?: Errback
+): void | never {
+	if (testName == null)
+		testName = `Expected [${actual}] to contain [${expected}]`
 	try {
 		assert.ok(actual.indexOf(expected) !== -1, testName)
-	}
-	catch ( checkError ) {
-		if ( next ) {
+	} catch (checkError) {
+		if (next) {
 			next(checkError)
 			return
-		}
-		else {
+		} else {
 			throw checkError
 		}
 	}
-	if ( next )  next()
+	if (next) next()
 }
 
-/**
-Checks to see if an error was as expected, if a failure occurs it will output detailed information
-@param {Error} actualError - The result error
-@param {Error|string|null} expectedError - The anticipated error instance or message, can be null if you expect there to be no error
-@param {string} [testName='error equal assertion'] - The name of the test
-@param {Function} [next] An optional completion callback to pass the error to rather than throwing
-@throws {Error} If the comparison failed, the failure will be thrown
-@return {void}
-*/
-function errorEqual (actualError, expectedError, testName = 'error equal assertion', next) {
+/** Checks to see if an error was as expected, if a failure occurs it will output detailed information */
+export function errorEqual(
+	actualError: any,
+	expectedError: any,
+	testName = 'error equal assertion',
+	next?: Errback
+): void | never {
 	let expectedErrorMessage, actualErrorMessage
 
-	if ( expectedError ) {
-		if ( expectedError instanceof Error ) {
+	if (expectedError) {
+		if (expectedError instanceof Error) {
 			expectedErrorMessage = expectedError.message
-		}
-		else {
+		} else {
 			expectedErrorMessage = expectedError
 			expectedError = new Error(expectedErrorMessage)
 		}
 	}
 
-	if ( actualError ) {
-		if ( actualError instanceof Error ) {
+	if (actualError) {
+		if (actualError instanceof Error) {
 			actualErrorMessage = actualError.message
-		}
-		else {
+		} else {
 			actualErrorMessage = actualError
 			actualError = new Error(actualErrorMessage)
 		}
 	}
 
 	try {
-		if ( actualErrorMessage && expectedErrorMessage ) {
+		if (actualErrorMessage && expectedErrorMessage) {
 			contains(actualErrorMessage, expectedErrorMessage, testName)
-		}
-		else {
+		} else {
 			equal(actualError, expectedError || null, testName)
 		}
-	}
-
-	catch ( checkError ) {
+	} catch (checkError) {
 		logComparison(
 			actualError && (actualError.stack || actualError.message || actualError),
 			expectedErrorMessage,
 			checkError
 		)
-		if ( next ) {
+		if (next) {
 			next(checkError)
 			return
-		}
-		else {
+		} else {
 			throw checkError
 		}
 	}
-	if ( next )  next()
+	if (next) next()
 }
 
-
-/**
-Generate a callback that will return the specified result
-@param {*} result The result that the callback should return
-@return {Function} The callback that will return the specified result
-*/
-function returnViaCallback (result) {
-	return function () {
-		return result
+/** Generate a callback that will return the specified value. */
+export function returnViaCallback(value: any): () => typeof value {
+	return function() {
+		return value
 	}
 }
 
-/**
-Generate a callback that will receive a completion callback and call it with the specified result after the specified delay
-@param {*} result The result that the callback should pass to the completion callback
-@param {Number} [delay=100] The delay in milliseconds that we should wait before calling the completion callback
-@return {Function} The callback that will provide the specified result
-*/
+/** Generate a callback that will receive a completion callback and call it with the specified result after the specified delay. */
 /* eslint no-magic-numbers:0 */
-function completeViaCallback (result, delay = 100) {
-	return function (complete) {
-		wait(delay, function () {
-			complete(null, result)
+export function completeViaCallback(value: any, delay = 100) {
+	return function(complete: (error: null, result: typeof value) => void): void {
+		wait(delay, function() {
+			complete(null, value)
 		})
 	}
 }
 
-/**
-Generate a callback that return an error instance with the specified message/error
-@param {Error|string} [error='an error occured'] The error instance or message string that the callback will return
-@return {Function} The callback that will return the specified result
-*/
-function returnErrorViaCallback (error = 'an error occured') {
-	return function () {
-		if ( error instanceof Error ) {
+/** Generate a callback that return an error instance with the specified message/error. */
+export function returnErrorViaCallback(
+	error: Error | string = 'an error occured'
+) {
+	return function(): Error {
+		if (error instanceof Error) {
 			return error
-		}
-		else {
+		} else {
 			return new Error(error)
 		}
 	}
 }
 
-/**
-Generate a callback that throw an error instance with the specified message/error
-@param {Error|string} [error='an error occured']  The error instance or message string that the callback will throw
-@return {Function} The callback that will throw the specified error
-*/
-function throwErrorViaCallback (error = 'an error occured') {
-	return function () {
-		if ( error instanceof Error ) {
+/** Generate a callback that throw an error instance with the specified message/error. */
+export function throwErrorViaCallback(
+	error: Error | string = 'an error occured'
+) {
+	return function(): never {
+		if (error instanceof Error) {
 			throw error
-		}
-		else {
+		} else {
 			throw new Error(error)
 		}
 	}
 }
 
-/**
-Generate a callback that will check the arguments it received with the arguments specified, if a failure occurs it will output detailed information
-@param {...*} argsExpected The arguments that we expect the callback to receive when it is called
-@return {Function} The callback that will check the arguments it receives for the expected arguments
-*/
-function expectViaCallback (...argsExpected) {
-	return function (...argsActual) {
-		deepEqual(argsActual, argsExpected)
-	}
+/** Generate a callback that will check the arguments it received with the arguments specified, if a failure occurs it will output detailed information. */
+export function expectViaCallback(...expected: any) {
+	return (...actual: any) => deepEqual(actual, expected)
 }
 
-
-/**
-Generate a callback that will check the error (if any) it receives for the expected error (if any), if a failure occurs it will output detailed information
-@param {*} error The error instance or message string that we expected, passed as the second argument to {@link errorEqual}
-@param {string} [testName='expect error via callback assertion'] The name of the test
-@param {Function} [next] An optional completion callback to call with the result of the compairson, if not specified and a failure occurs, the error will be thrown
-@return {Function} The callback that will check the error (if any) it receives for the expected error (if any)
-*/
-function expectErrorViaCallback (error, testName = 'expect error via callback assertion', next) {
-	return function (inputError) {
-		errorEqual(inputError, error, testName, next)
-	}
+/** Generate a callback that will check the error (if any) it receives for the expected error (if any), if a failure occurs it will output detailed information. */
+export function expectErrorViaCallback(
+	expected: Error | string,
+	testName = 'expect error via callback assertion',
+	next?: Errback
+) {
+	return (actual: Error | string) =>
+		errorEqual(actual, expected, testName, next)
 }
 
-/**
-Expect the passed function to throw an error at some point
-@param {*} error The error instance or message string that we expected, passed as the second argument to {@link errorEqual}
-@param {Function} fn The function that we will call and expect to throw or emit the passed error
-@param {string} [testName='expect error via function assertion'] The name of the test
-@param {Function} [next] An optional completion callback to call with the result of the compairson, if not specified and a failure occurs, the error will be thrown
-@return {void}
-*/
-function expectErrorViaFunction (error, fn, testName = 'expect error via function assertion', next) {
-	let err = null
+/** Expect the passed function to throw an error at some point. */
+export function expectThrowViaFunction(
+	expected: Error | string,
+	fn: () => never,
+	testName = 'expect error via function assertion',
+	next?: Errback
+) {
+	let actual = null
 	try {
 		fn()
+	} catch (error) {
+		actual = error
 	}
-	catch (_err) {
-		err = _err
-	}
-	errorEqual(err, error, testName, next)
+	errorEqual(actual, expected, testName, next)
 }
 
-// Deprecated
-function expectFunctionToThrow (fn, error, testName = 'expect function to throw', next) {
-	expectErrorViaFunction(error, fn, testName, next)
-}
+/** Deprecated. Use {@link expectErrorViaFunction} instead. */
+export const expectErrorViaFunction = expectThrowViaFunction
 
-// Export
-module.exports = {
-	isTTY,
-	queue,
-	inspect,
-	log,
-	logComparison,
-	diffstrings,
-	diffObjects,
-	equal,
-	deepEqual,
-	contains,
-	errorEqual,
-	returnViaCallback,
-	completeViaCallback,
-	returnErrorViaCallback,
-	throwErrorViaCallback,
-	expectViaCallback,
-	expectErrorViaCallback,
-	expectFunctionToThrow,
-	expectErrorViaFunction
-}
+/** Deprecated. Use {@link expectErrorViaFunction} instead. */
+export const expectFunctionToThrow = expectThrowViaFunction

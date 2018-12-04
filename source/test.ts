@@ -1,12 +1,13 @@
-'use strict'
-
 // Import
-const joe = require('joe')
-const helpers = require('../')
+import kava from 'kava'
+import * as helpers from './'
 
 // Tests
-joe.suite('assert-helpers', function (suite, test) {
-	test('no tests yet', function () {
-		console.log('nope, none')
+kava.suite('assert-helpers', function(suite, test) {
+	test('node v' + process.versions.node, function() {
+		console.log(__filename)
 	})
 })
+
+// Ensure that the complation includes the helpers
+export default helpers
