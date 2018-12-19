@@ -13,10 +13,17 @@ export function wait(delay: number, fn: Function) {
 	return setTimeout(fn, delay)
 }
 
+/** Whether or not we are running in the node environment */
+export function isNode(): boolean {
+	return Boolean(
+		typeof process !== 'undefined' && process.versions && process.versions.node
+	)
+}
+
 /** Whether or not stdout and stderr are interactive. */
 export function isTTY(): boolean {
 	return (
-		process &&
+		isNode() &&
 		process.stdout &&
 		process.stdout.isTTY === true &&
 		process.stderr &&
@@ -35,12 +42,13 @@ export function bool(value: any): boolean | null {
 
 /** Whether or not colors are desired on this environment */
 export function useColors(): boolean {
-	if (!process) return isTTY()
-	const env = bool(process.env.COLOR || process.env.COLORS)
+	const env = isNode() && bool(process.env.COLOR || process.env.COLORS)
 	if (typeof env === 'boolean') return env
 	if (isTTY()) return true
-	return !(
-		process.argv.includes('--no-colors') || process.argv.includes('--no-color')
+	return (
+		isNode() &&
+		!process.argv.includes('--no-colors') &&
+		!process.argv.includes('--no-color')
 	)
 }
 
@@ -108,7 +116,7 @@ export function inpectDiff(newData: any, oldData: any) {
 
 /** Log the inspected values of each of the arguments to stdout */
 export function log(...args: any): void {
-	if (process && process.env.ASSERT_SILENCE) return
+	if (isNode() && process.env.ASSERT_SILENCE) return
 	for (let i = 0; i < args.length; ++i) {
 		console.log(inspect(args[i]))
 	}
@@ -120,7 +128,7 @@ export function logComparison(
 	expected: any,
 	error: Error | string | any
 ): void {
-	if (process && process.env.ASSERT_SILENCE) return
+	if (isNode() && process.env.ASSERT_SILENCE) return
 
 	const lines = [
 		'------------------------------------',
@@ -141,7 +149,7 @@ export function logComparison(
 	)
 
 	// Work for node
-	if (process && process.stderr) {
+	if (isNode() && process.stderr) {
 		process.stderr.write(lines.join('\n') + '\n')
 	}
 	// Work for browsers

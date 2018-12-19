@@ -1,5 +1,9 @@
 # History
 
+## v4.9.1 2018 December 19
+
+-   More robust cross-browser-node support
+
 ## v4.9.0 2018 December 19
 
 -   Add support for browsers via jspm

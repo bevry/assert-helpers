@@ -5,6 +5,8 @@ declare module "index" {
     type Errback = (error?: Error) => void;
     /** Alias for setTimeout with paramaters reversed. */
     export function wait(delay: number, fn: Function): number;
+    /** Whether or not we are running in the node environment */
+    export function isNode(): boolean;
     /** Whether or not stdout and stderr are interactive. */
     export function isTTY(): boolean;
     /** Convert a value to its boolean equivalent */
