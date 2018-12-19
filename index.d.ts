@@ -1,7 +1,8 @@
 /// <reference types="node" />
 /// <reference types="diff" />
 declare module "index" {
-    import * as diffUtil from 'diff';
+    import diffDefault, * as diffUtil from 'diff';
+    /** Type for a callback that receives an optional error as the first argument */
     type Errback = (error?: Error) => void;
     /** Alias for setTimeout with paramaters reversed. */
     export function wait(delay: number, fn: Function): number;
@@ -23,7 +24,7 @@ declare module "index" {
     /** Return a highlighted string of a difference. */
     export function inspectDiffResult(diff: diffUtil.IDiffResult[]): string;
     /** Return the difference between the new data and the old data. */
-    export function diff(newData: any, oldData: any): diffUtil.IDiffResult[];
+    export function diff(newData: any, oldData: any): diffDefault.IDiffResult[];
     /** Return the highlighted comparison between the new data and the old data. */
     export function compare(newData: any, oldData: any): string;
     /** Alias for {@link compare} */

@@ -4,8 +4,13 @@
 import util from 'util'
 import assert from 'assert'
 import ansicolors from 'ansicolors'
-import * as diffUtil from 'diff'
 
+// Import workaround as `diff` seems to work differently between node and jspm
+import diffDefault, * as diffUtil from 'diff'
+const diffJson = diffUtil.diffJson || diffDefault.diffJson
+const diffChars = diffUtil.diffChars || diffDefault.diffChars
+
+/** Type for a callback that receives an optional error as the first argument */
 type Errback = (error?: Error) => void
 
 /** Alias for setTimeout with paramaters reversed. */
@@ -96,11 +101,11 @@ export function inspectDiffResult(diff: diffUtil.IDiffResult[]): string {
 /** Return the difference between the new data and the old data. */
 export function diff(newData: any, oldData: any) {
 	if (typeof newData === 'object' && typeof oldData === 'object') {
-		return diffUtil.diffJson(oldData, newData)
+		return diffJson(oldData, newData)
 	} else {
 		const a = inspect(oldData, { colors: false })
 		const b = inspect(newData, { colors: false })
-		return diffUtil.diffChars(a, b)
+		return diffChars(a, b)
 	}
 }
 
