@@ -1,13 +1,11 @@
 // Import
 import kava from 'kava'
 import * as helpers from './'
+import ok from 'assert'
 
 // Tests
 kava.suite('assert-helpers', function(suite, test) {
 	test('node v' + process.versions.node, function() {
-		console.log(__filename)
+		ok(helpers)
 	})
 })
-
-// Ensure that the complation includes the helpers
-export default helpers
