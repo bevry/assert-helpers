@@ -3,7 +3,7 @@
 // Import
 import util from 'util'
 import assert from 'assert'
-import colors from 'ansicolors'
+import ansicolors from 'ansicolors'
 import * as diffUtil from 'diff'
 
 type Errback = (error?: Error) => void
@@ -23,13 +23,38 @@ export function isTTY(): boolean {
 	)
 }
 
+/** Convert a value to its boolean equivalent */
+export function bool(value: any): boolean | null {
+	if (value === 'no' || value === 'false' || value === 'n' || value === 'N') {
+		return false
+	}
+	if (value === 'null' || value === 'NULL') return null
+	return Boolean(value)
+}
+
+/** Whether or not colors are desired on this environment */
+export function useColors(): boolean {
+	const env = bool(process.env.COLOR || process.env.COLORS)
+	if (typeof env === 'boolean') return env
+	return (
+		isTTY() &&
+		!process.argv.includes('--no-colors') &&
+		!process.argv.includes('--no-color')
+	)
+}
+
+/** Applies the color to the value if desired */
+export function color(value: any, color: Function): string {
+	return useColors() ? color(value) : value
+}
+
 /**
  * Return a stringified version of the value with indentation and colors where applicable.
  * Colors will be applied if the environment supports it (--no-colors not present and TTY).
  */
 export function inspect(value: any, opts: NodeJS.InspectOptions = {}): string {
 	// If the terminal supports colours, and the user hasn't specified, then default to a sensible default
-	const colors = isTTY() && process.argv.indexOf('--no-colors') === -1
+	const colors = useColors()
 	const depth = 50
 
 	// Inspect and return using our defaults
@@ -38,17 +63,25 @@ export function inspect(value: any, opts: NodeJS.InspectOptions = {}): string {
 
 /** Return a highlighted string of a difference. */
 export function inspectDiffResult(diff: diffUtil.IDiffResult[]): string {
-	let result = ''
-	diff.forEach(function(part) {
+	const colors = useColors()
+	const result = diff.reduce(function(accumulator, part) {
 		let value = part.value
-		if (part.added) {
-			value = colors.open.black + colors.bgGreen(value) + colors.open.green
-		} else if (part.removed) {
-			value = colors.open.black + colors.bgBrightRed(value) + colors.open.green
+		if (colors) {
+			if (part.added) {
+				value =
+					ansicolors.open.black +
+					ansicolors.bgGreen(value) +
+					ansicolors.open.green
+			} else if (part.removed) {
+				value =
+					ansicolors.open.black +
+					ansicolors.bgBrightRed(value) +
+					ansicolors.open.green
+			}
 		}
-		result += value
-	})
-	return colors.green(result)
+		return accumulator + value
+	}, '')
+	return colors ? ansicolors.green(result) : result
 }
 
 /** Return the difference between the new data and the old data. */
@@ -91,7 +124,7 @@ export function logComparison(
 	const lines = [
 		'------------------------------------',
 		'Comparison Error:',
-		colors.green(error.stack || error.message || error),
+		color(error.stack || error.message || error, ansicolors.green),
 		''
 	]
 

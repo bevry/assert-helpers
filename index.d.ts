@@ -7,6 +7,12 @@ declare module "index" {
     export function wait(delay: number, fn: Function): number;
     /** Whether or not stdout and stderr are interactive. */
     export function isTTY(): boolean;
+    /** Convert a value to its boolean equivalent */
+    export function bool(value: any): boolean | null;
+    /** Whether or not colors are desired on this environment */
+    export function useColors(): boolean;
+    /** Applies the color to the value if desired */
+    export function color(value: any, color: Function): string;
     /**
      * Return a stringified version of the value with indentation and colors where applicable.
      * Colors will be applied if the environment supports it (--no-colors not present and TTY).

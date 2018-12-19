@@ -15,9 +15,15 @@ kava.suite('assert-helpers', function(suite, test) {
 		helpers.isTTY()
 	})
 	test('inspect', function() {
+		process.env.COLORS = 'no'
+		equal(helpers.inspect({ a: 1 }), '{ a: 1 }')
+		process.env.COLORS = 'yes'
 		equal(helpers.inspect({ a: 1 }), '{ a: \u001b[33m1\u001b[39m }')
 	})
 	test('compare', function() {
+		process.env.COLORS = 'no'
+		equal(helpers.compare({ a: 1 }, { a: 2 }), `{\n  "a": 2\n  "a": 1\n}`)
+		process.env.COLORS = 'yes'
 		equal(
 			helpers.compare({ a: 1 }, { a: 2 }),
 			`\u001b[32m{\n\u001b[30m\u001b[101m  "a": 2\n\u001b[49m\u001b[32m\u001b[30m\u001b[42m  "a": 1\n\u001b[49m\u001b[32m}\u001b[39m`
