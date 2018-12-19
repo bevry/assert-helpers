@@ -38,24 +38,25 @@ Common utilities and helpers to make testing assertions easier
 
 <h2>Install</h2>
 
-<a href="https://npmjs.com" title="npm is a package manager for javascript"><h3>NPM</h3></a><ul>
+<a href="https://npmjs.com" title="npm is a package manager for javascript"><h3>npm</h3></a>
+<ul>
 <li>Install: <code>npm install --save assert-helpers</code></li>
-<li>Module: <code>require('assert-helpers')</code></li></ul>
+<li>Require: <code>require('assert-helpers')</code></li>
+</ul>
 
-<a href="http://browserify.org" title="Browserify lets you require('modules') in the browser by bundling up all of your dependencies"><h3>Browserify</h3></a><ul>
-<li>Install: <code>npm install --save assert-helpers</code></li>
-<li>Module: <code>require('assert-helpers')</code></li>
-<li>CDN URL: <code>//wzrd.in/bundle/assert-helpers@4.9.2</code></li></ul>
+<a href="https://jspm.io" title="Native ES Modules CDN"><h3>jspm</h3></a>
 
-<a href="http://enderjs.com" title="Ender is a full featured package manager for your browser"><h3>Ender</h3></a><ul>
-<li>Install: <code>ender add assert-helpers</code></li>
-<li>Module: <code>require('assert-helpers')</code></li></ul>
+``` html
+<script type="module">
+    import * as pkg from '//dev.jspm.io/assert-helpers'
+</script>
+```
 
-<h3><a href="https://github.com/bevry/editions" title="Editions are the best way to produce and consume packages you care about.">Editions</a></h3>
+<h3><a href="https://editions.bevry.me" title="Editions are the best way to produce and consume packages you care about.">Editions</a></h3>
 
 <p>This package is published with the following editions:</p>
 
-<ul><li><code>assert-helpers</code> aliases <code>assert-helpers/index.js</code> which uses <a href="https://github.com/bevry/editions" title="Editions are the best way to produce and consume packages you care about.">Editions</a> to automatically select the correct edition for the consumers environment</li>
+<ul><li><code>assert-helpers</code> aliases <code>assert-helpers/index.js</code> which uses <a href="https://editions.bevry.me" title="Editions are the best way to produce and consume packages you care about.">Editions</a> to automatically select the correct edition for the consumers environment</li>
 <li><code>assert-helpers/source/index.ts</code> is typescript source code with import for modules</li>
 <li><code>assert-helpers/edition-browsers/index.js</code> is typescript compiled for browsers with import for modules</li>
 <li><code>assert-helpers/edition-node-11/index.js</code> is typescript compiled for node.js 11 with require for modules</li>
