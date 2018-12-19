@@ -1,5 +1,10 @@
 # History
 
+## v4.8.0 2018 December 19
+
+-   Fixed `TypeError: Cannot read property 'diffChars' of undefined` (regression since v4.6.0)
+-   Added tests
+
 ## v4.7.0 2018 December 19
 
 -   `package.json:types` is now a declaration file instead of a source file
