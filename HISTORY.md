@@ -1,5 +1,10 @@
 # History
 
+## v4.7.0 2018 December 19
+
+-   `package.json:types` is now a declaration file instead of a source file
+-   Updated [base files](https://github.com/bevry/base) and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+
 ## v4.6.0 2018 December 4
 
 -   Rewrote in TypeScript.
