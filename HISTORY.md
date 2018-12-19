@@ -1,5 +1,9 @@
 # History
 
+## v4.9.0 2018 December 19
+
+-   Add support for browsers via jspm
+
 ## v4.8.0 2018 December 19
 
 -   Fixed `TypeError: Cannot read property 'diffChars' of undefined` (regression since v4.6.0)
