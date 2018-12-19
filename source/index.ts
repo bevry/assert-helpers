@@ -4,7 +4,7 @@
 import util from 'util'
 import assert from 'assert'
 import colors from 'ansicolors'
-import diffUtil from 'diff'
+import * as diffUtil from 'diff'
 
 type Errback = (error?: Error) => void
 
@@ -37,7 +37,7 @@ export function inspect(value: any, opts: NodeJS.InspectOptions = {}): string {
 }
 
 /** Return a highlighted string of a difference. */
-export function inspectDiff(diff: diffUtil.IDiffResult[]): string {
+export function inspectDiffResult(diff: diffUtil.IDiffResult[]): string {
 	let result = ''
 	diff.forEach(function(part) {
 		let value = part.value
@@ -62,15 +62,20 @@ export function diff(newData: any, oldData: any) {
 	}
 }
 
-/** Return a highlighted comparison between the new data and the old data. */
+/** Return the highlighted comparison between the new data and the old data. */
 export function compare(newData: any, oldData: any) {
-	return inspectDiff(diff(newData, oldData))
+	return inspectDiffResult(diff(newData, oldData))
+}
+
+/** Alias for {@link compare} */
+export function inpectDiff(newData: any, oldData: any) {
+	return compare(newData, oldData)
 }
 
 /** Log the inspected values of each of the arguments to stdout */
 export function log(...args: any): void {
+	if (process && process.env && process.env.ASSERT_SILENCE) return
 	for (let i = 0; i < args.length; ++i) {
-		/* eslint no-console:0 */
 		console.log(inspect(args[i]))
 	}
 }
@@ -81,6 +86,8 @@ export function logComparison(
 	expected: any,
 	error: Error | string | any
 ): void {
+	if (process && process.env && process.env.ASSERT_SILENCE) return
+
 	const lines = [
 		'------------------------------------',
 		'Comparison Error:',
@@ -229,7 +236,7 @@ export function returnViaCallback(value: any): () => typeof value {
 	}
 }
 
-/** Generate a callback that will receive a completion callback and call it with the specified result after the specified delay. */
+/** Generate a callback that will receive a completion callback whcih it will call with the specified result after the specified delay. */
 /* eslint no-magic-numbers:0 */
 export function completeViaCallback(value: any, delay = 100) {
 	return function(complete: (error: null, result: typeof value) => void): void {
@@ -239,6 +246,15 @@ export function completeViaCallback(value: any, delay = 100) {
 	}
 }
 
+/** Generate a callback that will receive a completion callback which it will call with the passed error after the specified delay. */
+/* eslint no-magic-numbers:0 */
+export function errorViaCallback(error: Error | string, delay = 100) {
+	return function(complete: (error: Error | string) => void): void {
+		wait(delay, function() {
+			complete(error)
+		})
+	}
+}
 /** Generate a callback that return an error instance with the specified message/error. */
 export function returnErrorViaCallback(
 	error: Error | string = 'an error occured'
@@ -270,7 +286,9 @@ export function expectViaCallback(...expected: any) {
 	return (...actual: any) => deepEqual(actual, expected)
 }
 
-/** Generate a callback that will check the error (if any) it receives for the expected error (if any), if a failure occurs it will output detailed information. */
+/**
+ * Generate a callback that will check its error (the actual error) against the passed error (the expected error).
+ * If a failure occurs it will output detailed information. */
 export function expectErrorViaCallback(
 	expected: Error | string,
 	testName = 'expect error via callback assertion',
