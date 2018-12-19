@@ -1,5 +1,9 @@
 # History
 
+## v4.9.3 2018 December 19
+
+-   Updated [base files](https://github.com/bevry/base) and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+
 ## v4.9.2 2018 December 19
 
 -   Even more robust cross-browser-node support
