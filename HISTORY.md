@@ -1,5 +1,9 @@
 # History
 
+## v4.9.6 2019 January 2
+
+-   Moved `@types/*` dev dependencies into dependencies, as otherwise TypeScript consumers would encounter issues
+
 ## v4.9.5 2019 January 2
 
 -   Removed `index.d.ts` file which should have been trimmed in v4.9.4
