@@ -1,5 +1,10 @@
 # History
 
+## v4.9.4 2019 January 2
+
+-   Fixed TypeScript consumption of types
+-   Updated [base files](https://github.com/bevry/base) and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+
 ## v4.9.3 2018 December 19
 
 -   Updated [base files](https://github.com/bevry/base) and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
