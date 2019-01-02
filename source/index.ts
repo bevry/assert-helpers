@@ -4,7 +4,7 @@
 import util from 'util'
 import assert from 'assert'
 import ansicolors from 'ansicolors'
-import { diffJson, diffChars } from 'diff'
+import { diffJson, diffChars, IDiffResult } from 'diff'
 
 /** Type for a callback that receives an optional error as the first argument */
 type Errback = (error?: Error) => void
@@ -72,7 +72,7 @@ export function inspect(value: any, opts: NodeJS.InspectOptions = {}): string {
 }
 
 /** Return a highlighted string of a difference. */
-export function inspectDiffResult(diff: diffUtil.IDiffResult[]): string {
+export function inspectDiffResult(diff: IDiffResult[]): string {
 	const colors = useColors()
 	const result = diff.reduce(function(accumulator, part) {
 		let value = part.value

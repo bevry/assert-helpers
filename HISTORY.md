@@ -1,5 +1,10 @@
 # History
 
+## v4.9.5 2019 January 2
+
+-   Removed `index.d.ts` file which should have been trimmed in v4.9.4
+-   Reverted jspm workaround between v4.9.0-4.9.2 as it caused issues with node consumption
+
 ## v4.9.4 2019 January 2
 
 -   Fixed TypeScript consumption of types
