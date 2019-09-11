@@ -59,6 +59,15 @@ export function color(value: any, color: Function): string {
 }
 
 /**
+ * Checks to see if a value is an object
+ * https://github.com/bevry/typechecker/blob/69008d42927749d7e21cfe9816e478dd8d15ab88/source/index.js#L22-L30
+ */
+function isObject(value: any): boolean {
+	// null is object, hence the extra check
+	return value !== null && typeof value === 'object'
+}
+
+/**
  * Return a stringified version of the value with indentation and colors where applicable.
  * Colors will be applied if the environment supports it (--no-colors not present and TTY).
  */
@@ -73,13 +82,19 @@ export function inspect(value: any, opts: NodeJS.InspectOptions = {}): string {
 
 /** Return the difference between the new data and the old data. */
 export function diff(newData: any, oldData: any) {
-	if (typeof newData === 'object' && typeof oldData === 'object') {
-		return diffJson(oldData, newData)
-	} else {
-		const a = inspect(oldData, { colors: false })
-		const b = inspect(newData, { colors: false })
-		return diffChars(a, b)
+	// robust check for object, and try catch
+	// to prevent https://github.com/bevry/assert-helpers/issues/5
+	if (isObject(newData) && isObject(oldData)) {
+		try {
+			return diffJson(oldData, newData)
+		} catch (err) {
+			// continue
+		}
 	}
+	// otherwise, continue with classical inspection
+	const a = inspect(oldData, { colors: false })
+	const b = inspect(newData, { colors: false })
+	return diffChars(a, b)
 }
 
 /** Return a highlighted string of a difference. */

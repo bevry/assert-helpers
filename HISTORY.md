@@ -1,5 +1,11 @@
 # History
 
+## v4.9.7 2019 September 11
+
+-   Fix `TypeError: obj.hasOwnProperty is not a function` under special circumstances
+    -   Closes [issue #5](https://github.com/bevry/assert-helpers/issues/5)
+-   Updated [base files](https://github.com/bevry/base) and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+
 ## v4.9.6 2019 January 2
 
 -   Moved `@types/*` dev dependencies into dependencies, as otherwise TypeScript consumers would encounter issues
