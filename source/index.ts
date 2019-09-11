@@ -4,7 +4,7 @@
 import util from 'util'
 import assert from 'assert'
 import ansicolors from 'ansicolors'
-import { diffJson, diffChars, IDiffResult } from 'diff'
+import { diffJson, diffChars } from 'diff'
 
 /** Type for a callback that receives an optional error as the first argument */
 type Errback = (error?: Error) => void
@@ -71,10 +71,21 @@ export function inspect(value: any, opts: NodeJS.InspectOptions = {}): string {
 	return util.inspect(value, { colors, depth, ...opts })
 }
 
+/** Return the difference between the new data and the old data. */
+export function diff(newData: any, oldData: any) {
+	if (typeof newData === 'object' && typeof oldData === 'object') {
+		return diffJson(oldData, newData)
+	} else {
+		const a = inspect(oldData, { colors: false })
+		const b = inspect(newData, { colors: false })
+		return diffChars(a, b)
+	}
+}
+
 /** Return a highlighted string of a difference. */
-export function inspectDiffResult(diff: IDiffResult[]): string {
+export function inspectDiffResult(d: ReturnType<typeof diff>): string {
 	const colors = useColors()
-	const result = diff.reduce(function(accumulator, part) {
+	const result = d.reduce(function(accumulator, part) {
 		let value = part.value
 		if (colors) {
 			if (part.added) {
@@ -92,17 +103,6 @@ export function inspectDiffResult(diff: IDiffResult[]): string {
 		return accumulator + value
 	}, '')
 	return colors ? ansicolors.green(result) : result
-}
-
-/** Return the difference between the new data and the old data. */
-export function diff(newData: any, oldData: any) {
-	if (typeof newData === 'object' && typeof oldData === 'object') {
-		return diffJson(oldData, newData)
-	} else {
-		const a = inspect(oldData, { colors: false })
-		const b = inspect(newData, { colors: false })
-		return diffChars(a, b)
-	}
 }
 
 /** Return the highlighted comparison between the new data and the old data. */

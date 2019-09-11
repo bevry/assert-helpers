@@ -97,12 +97,9 @@ kava.suite('assert-helpers', function(suite, test) {
 	})
 	test('expectThrowViaFunction', function() {
 		const a = new Error('abc')
-		helpers.expectThrowViaFunction(
-			a,
-			(): never => {
-				throw a
-			}
-		)
+		helpers.expectThrowViaFunction(a, (): never => {
+			throw a
+		})
 		try {
 			helpers.expectThrowViaFunction(a, () => false as never)
 		} catch (err) {}
