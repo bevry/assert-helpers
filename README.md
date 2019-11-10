@@ -54,11 +54,10 @@ Common utilities and helpers to make testing assertions easier
 
 <p>This package is published with the following editions:</p>
 
-<ul><li><code>assert-helpers</code> aliases <code>assert-helpers/index.js</code> which uses <a href="https://editions.bevry.me" title="Editions are the best way to produce and consume packages you care about.">Editions</a> to automatically select the correct edition for the consumers environment</li>
-<li><code>assert-helpers/source/index.ts</code> is typescript source code with import for modules</li>
+<ul><li><code>assert-helpers/source/index.ts</code> is typescript source code with import for modules</li>
 <li><code>assert-helpers/edition-browsers/index.js</code> is typescript compiled for browsers with import for modules</li>
-<li><code>assert-helpers/edition-node-13/index.js</code> is typescript compiled for node.js 13 with require for modules</li>
-<li><code>assert-helpers/edition-node-0.12/index.js</code> is typescript compiled for node.js 0.12 with require for modules</li></ul>
+<li><code>assert-helpers</code> aliases <code>assert-helpers/edition-node-12/index.js</code></li>
+<li><code>assert-helpers/edition-node-12/index.js</code> is typescript compiled for node.js 12 with require for modules</li></ul>
 
 <!-- /INSTALL -->
 

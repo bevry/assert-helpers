@@ -1,7 +1,7 @@
 {
   "title": "Assert Helpers",
   "name": "assert-helpers",
-  "version": "4.10.0",
+  "version": "5.0.0",
   "description": "Common utilities and helpers to make testing assertions easier",
   "homepage": "https://github.com/bevry/assert-helpers",
   "license": "MIT",
@@ -62,7 +62,7 @@
     "url": "https://github.com/bevry/assert-helpers.git"
   },
   "engines": {
-    "node": ">=0.12"
+    "node": ">=8"
   },
   "editions": [
     {
@@ -89,34 +89,21 @@
       }
     },
     {
-      "description": "typescript compiled for node.js 13 with require for modules",
-      "directory": "edition-node-13",
+      "description": "typescript compiled for node.js 12 with require for modules",
+      "directory": "edition-node-12",
       "entry": "index.js",
       "tags": [
         "javascript",
         "require"
       ],
       "engines": {
-        "node": "6 || 8 || 10 || 12 || 13",
-        "browsers": false
-      }
-    },
-    {
-      "description": "typescript compiled for node.js 0.12 with require for modules",
-      "directory": "edition-node-0.12",
-      "entry": "index.js",
-      "tags": [
-        "javascript",
-        "require"
-      ],
-      "engines": {
-        "node": "0.12 || 4 || 6 || 8 || 10 || 12 || 13",
+        "node": "8 || 10 || 12",
         "browsers": false
       }
     }
   ],
   "types": "source/index.ts",
-  "main": "index.js",
+  "main": "edition-node-12/index.js",
   "browser": "edition-browsers/index.js",
   "module": "edition-browsers/index.js",
   "dependencies": {
@@ -124,8 +111,7 @@
     "@types/diff": "^4.0.2",
     "@types/node": "^12.12.7",
     "ansicolors": "^0.3.2",
-    "diff": "^4.0.1",
-    "editions": "^2.2.0"
+    "diff": "^4.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.0",
@@ -151,10 +137,9 @@
   },
   "scripts": {
     "our:clean": "rm -Rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",
-    "our:compile": "npm run our:compile:edition-browsers && npm run our:compile:edition-node-0.12 && npm run our:compile:edition-node-13",
+    "our:compile": "npm run our:compile:edition-browsers && npm run our:compile:edition-node-12",
     "our:compile:edition-browsers": "env BABEL_ENV=edition-browsers babel --extensions \".ts,.tsx\" --out-dir ./edition-browsers ./source",
-    "our:compile:edition-node-0.12": "env BABEL_ENV=edition-node-0.12 babel --extensions \".ts,.tsx\" --out-dir ./edition-node-0.12 ./source",
-    "our:compile:edition-node-13": "env BABEL_ENV=edition-node-13 babel --extensions \".ts,.tsx\" --out-dir ./edition-node-13 ./source",
+    "our:compile:edition-node-12": "env BABEL_ENV=edition-node-12 babel --extensions \".ts,.tsx\" --out-dir ./edition-node-12 ./source",
     "our:deploy": "echo no need for this project",
     "our:meta": "npm run our:meta:docs && npm run our:meta:projectz",
     "our:meta:docs": "npm run our:meta:docs:typedoc",
@@ -174,7 +159,7 @@
     "our:verify:eslint": "eslint --fix --ignore-pattern '**/*.d.ts' --ignore-pattern '**/vendor/' --ignore-pattern '**/node_modules/' --ext .mjs,.js,.jsx,.ts,.tsx ./source",
     "our:verify:prettier": "prettier --write ./source/**",
     "our:verify:typescript": "tsc --noEmit --project .",
-    "test": "node ./test.js"
+    "test": "node ./edition-node-12/test.js"
   },
   "eslintConfig": {
     "extends": [
@@ -205,34 +190,14 @@
           "add-module-exports"
         ]
       },
-      "edition-node-13": {
+      "edition-node-12": {
         "sourceType": "module",
         "presets": [
           [
             "@babel/preset-env",
             {
               "targets": {
-                "node": "13"
-              },
-              "modules": "commonjs"
-            }
-          ],
-          "@babel/preset-typescript"
-        ],
-        "plugins": [
-          "@babel/proposal-object-rest-spread",
-          "@babel/proposal-class-properties",
-          "add-module-exports"
-        ]
-      },
-      "edition-node-0.12": {
-        "sourceType": "module",
-        "presets": [
-          [
-            "@babel/preset-env",
-            {
-              "targets": {
-                "node": "0.12"
+                "node": "12"
               },
               "modules": "commonjs"
             }

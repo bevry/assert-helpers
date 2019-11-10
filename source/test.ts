@@ -38,7 +38,7 @@ kava.suite('assert-helpers', function(suite, test) {
 			ok(false)
 		} catch (err) {}
 	})
-	test('deepEQual', function() {
+	test('deepEqual', function() {
 		helpers.deepEqual({ a: 1 }, { a: 1 })
 		try {
 			helpers.deepEqual({ a: 1 }, { a: 2 })

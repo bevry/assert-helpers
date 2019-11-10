@@ -174,7 +174,7 @@ export function logComparison(
 	}
 }
 
-/** Same as assert.equal in that it performs a strict equals check, but if a failure occurs it will output detailed information */
+/** Same as assert.strictEquals in that it performs a strict equals check, but if a failure occurs it will output detailed information */
 export function equal(
 	actual: any,
 	expected: any,
@@ -182,7 +182,7 @@ export function equal(
 	next?: Errback
 ): void | never {
 	try {
-		assert.equal(actual, expected, testName)
+		assert.strictEqual(actual, expected, testName)
 	} catch (checkError) {
 		logComparison(actual, expected, checkError)
 		if (next) {
@@ -195,7 +195,7 @@ export function equal(
 	if (next) next()
 }
 
-/** Same as assert.deepEQual in that it performs a deep equals check, but if a failure occurs it will output detailed information */
+/** Same as assert.deepStrictEqual in that it performs a deep strict equals check, but if a failure occurs it will output detailed information */
 export function deepEqual(
 	actual: any,
 	expected: any,
@@ -203,7 +203,7 @@ export function deepEqual(
 	next?: Errback
 ): void | never {
 	try {
-		assert.deepEqual(actual, expected, testName)
+		assert.deepStrictEqual(actual, expected, testName)
 	} catch (checkError) {
 		logComparison(actual, expected, checkError)
 		if (next) {
@@ -372,8 +372,16 @@ export function expectThrowViaFunction(
 	errorEqual(actual, expected, testName, next)
 }
 
-/** Deprecated. Use {@link expectErrorViaFunction} instead. */
-export const expectErrorViaFunction = expectThrowViaFunction
+/** @deprecated Use {@link expectErrorViaFunction} instead */
+export function expectErrorViaFunction(): never {
+	throw new Error(
+		'expectErrorViaFunction has been deprecated, use expectThrowViaFunction instead'
+	)
+}
 
-/** Deprecated. Use {@link expectErrorViaFunction} instead. */
-export const expectFunctionToThrow = expectThrowViaFunction
+/** @deprecated Use {@link expectErrorViaFunction} instead */
+export function expectFunctionToThrow(): never {
+	throw new Error(
+		'expectFunctionToThrow has been deprecated, use expectThrowViaFunction instead'
+	)
+}

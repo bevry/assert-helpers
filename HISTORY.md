@@ -1,5 +1,12 @@
 # History
 
+## v5.0.0 2019 November 10
+
+-   Updated [base files](https://github.com/bevry/base) and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+-   Changed `equal` and `deepEqual` to use their strict variants, which was first introduced in node.js v4, this [solves several issues with the prior variants](https://github.com/nodejs/node/issues/30350) which node.js deprecated
+    -   As such, the minimum supported node version has changed from `0.12` to the latest LTS at the time of this release which is `8`
+-   Changed `expectErrorViaFunction` and `expectFunctionToThrow` to now throw instead of failing silently due to their deprecation
+
 ## v4.10.0 2019 November 10
 
 -   Updated [base files](https://github.com/bevry/base) and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
