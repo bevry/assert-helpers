@@ -64,14 +64,20 @@ kava.suite('assert-helpers', function(suite, test) {
 		equal(helpers.returnViaCallback('a')(), 'a')
 	})
 	test('completeViaCallback', function() {
-		helpers.completeViaCallback('a', 0)(function(err, result) {
+		helpers.completeViaCallback(
+			'a',
+			0
+		)(function(err, result) {
 			equal(err, null)
 			equal(result, 'a')
 		})
 	})
 	test('errorViaCallback', function() {
 		const a = new Error('abc')
-		helpers.errorViaCallback(a, 0)(function(err) {
+		helpers.errorViaCallback(
+			a,
+			0
+		)(function(err) {
 			equal(err, a)
 		})
 	})
