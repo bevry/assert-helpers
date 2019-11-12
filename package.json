@@ -1,7 +1,7 @@
 {
   "title": "Assert Helpers",
   "name": "assert-helpers",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "description": "Common utilities and helpers to make testing assertions easier",
   "homepage": "https://github.com/bevry/assert-helpers",
   "license": "MIT",
@@ -52,7 +52,8 @@
     "Benjamin Lupton <b@lupton.cc> (http://balupton.com)"
   ],
   "contributors": [
-    "Benjamin Lupton <b@lupton.cc> (http://balupton.com)"
+    "Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
+    "dependabot-preview[bot] (http://github.com/apps/dependabot-preview)"
   ],
   "bugs": {
     "url": "https://github.com/bevry/assert-helpers/issues"

@@ -195,6 +195,26 @@ export function equal(
 	if (next) next()
 }
 
+/** Ensure what is passed is undefined, otherwise fail and output what it is */
+export function undef(
+	actual: any,
+	testName = 'undef assertion',
+	next?: Errback
+) {
+	try {
+		assert.strictEqual(typeof actual, 'undefined', testName)
+	} catch (checkError) {
+		logComparison(actual, 'undefined', checkError)
+		if (next) {
+			next(checkError)
+			return
+		} else {
+			throw checkError
+		}
+	}
+	if (next) next()
+}
+
 /** Same as assert.deepStrictEqual in that it performs a deep strict equals check, but if a failure occurs it will output detailed information */
 export function deepEqual(
 	actual: any,

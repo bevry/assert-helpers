@@ -1,10 +1,14 @@
 // Import
 import kava from 'kava'
 import * as helpers from './'
-import { ok, equal } from 'assert'
+import { equal } from 'assert'
 
 // Don't confuse the tester
 process.env.ASSERT_SILENCE = 'yes'
+function fail() {
+	console.error(new Error('a expected failure did not occur'))
+	process.exit(1)
+}
 
 // Tests
 kava.suite('assert-helpers', function(suite, test) {
@@ -35,21 +39,29 @@ kava.suite('assert-helpers', function(suite, test) {
 		helpers.equal(1, 1)
 		try {
 			helpers.equal(1, 2)
-			ok(false)
+			fail()
+		} catch (err) {}
+	})
+	test('undef', function() {
+		// @ts-ignore
+		helpers.undef()
+		try {
+			helpers.undef(null)
+			fail()
 		} catch (err) {}
 	})
 	test('deepEqual', function() {
 		helpers.deepEqual({ a: 1 }, { a: 1 })
 		try {
 			helpers.deepEqual({ a: 1 }, { a: 2 })
-			ok(false)
+			fail()
 		} catch (err) {}
 	})
 	test('contains', function() {
 		helpers.contains('ab', 'a')
 		try {
 			helpers.contains('ab', 'c')
-			ok(false)
+			fail()
 		} catch (err) {}
 	})
 	test('errorEqual', function() {
@@ -57,7 +69,7 @@ kava.suite('assert-helpers', function(suite, test) {
 		helpers.errorEqual(a, 'abc')
 		try {
 			helpers.errorEqual(a, 'xyz')
-			ok(false)
+			fail()
 		} catch (err) {}
 	})
 	test('returnViaCallback', function() {
@@ -98,7 +110,7 @@ kava.suite('assert-helpers', function(suite, test) {
 		helpers.expectErrorViaCallback(a)(a)
 		try {
 			helpers.expectErrorViaCallback(a)('xyz')
-			ok(false)
+			fail()
 		} catch (err) {}
 	})
 	test('expectThrowViaFunction', function() {
