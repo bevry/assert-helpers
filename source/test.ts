@@ -50,6 +50,15 @@ kava.suite('assert-helpers', function(suite, test) {
 			fail()
 		} catch (err) {}
 	})
+	test('nullish', function() {
+		// @ts-ignore
+		helpers.nullish()
+		helpers.nullish(null)
+		try {
+			helpers.nullish(false)
+			fail()
+		} catch (err) {}
+	})
 	test('deepEqual', function() {
 		helpers.deepEqual({ a: 1 }, { a: 1 })
 		try {

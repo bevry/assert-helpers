@@ -5,6 +5,7 @@ import util from 'util'
 import assert from 'assert'
 import ansicolors from 'ansicolors'
 import { diffJson, diffChars } from 'diff'
+import Errlop from 'errlop'
 
 /** Type for a callback that receives an optional error as the first argument */
 type Errback = (error?: Error) => void
@@ -210,6 +211,31 @@ export function undef(
 			return
 		} else {
 			throw checkError
+		}
+	}
+	if (next) next()
+}
+
+/** Ensure what is passed is undefined or null, otherwise fail and output what it is */
+export function nullish(
+	actual: any,
+	testName = 'nullish assertion',
+	next?: Errback
+) {
+	try {
+		assert.strictEqual(typeof actual, 'undefined', testName)
+	} catch (e1) {
+		try {
+			assert.strictEqual(actual, null, testName)
+		} catch (e2) {
+			const error = new Errlop(e2, e1)
+			logComparison(actual, 'undefined', error)
+			if (next) {
+				next(error)
+				return
+			} else {
+				throw error
+			}
 		}
 	}
 	if (next) next()

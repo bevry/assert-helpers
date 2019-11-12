@@ -1,5 +1,9 @@
 # History
 
+## v5.2.0 2019 November 13
+
+-   Add `nullish` assertion
+
 ## v5.1.0 2019 November 13
 
 -   Add `undef` assertion
