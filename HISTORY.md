@@ -1,5 +1,9 @@
 # History
 
+## v5.2.1 2019 November 13
+
+-   Correct failure message on `nullish` assertion
+
 ## v5.2.0 2019 November 13
 
 -   Add `nullish` assertion

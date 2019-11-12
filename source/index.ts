@@ -229,7 +229,7 @@ export function nullish(
 			assert.strictEqual(actual, null, testName)
 		} catch (e2) {
 			const error = new Errlop(e2, e1)
-			logComparison(actual, 'undefined', error)
+			logComparison(actual, 'nullish', error)
 			if (next) {
 				next(error)
 				return
