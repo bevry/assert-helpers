@@ -56,8 +56,8 @@ Common utilities and helpers to make testing assertions easier
 
 <ul><li><code>assert-helpers/source/index.ts</code> is typescript source code with import for modules</li>
 <li><code>assert-helpers/edition-browsers/index.js</code> is typescript compiled for browsers with import for modules</li>
-<li><code>assert-helpers</code> aliases <code>assert-helpers/edition-node-12/index.js</code></li>
-<li><code>assert-helpers/edition-node-12/index.js</code> is typescript compiled for node.js 12 with require for modules</li></ul>
+<li><code>assert-helpers</code> aliases <code>assert-helpers/edition-node-13/index.js</code></li>
+<li><code>assert-helpers/edition-node-13/index.js</code> is typescript compiled for node.js 13 with require for modules</li></ul>
 
 <!-- /INSTALL -->
 
