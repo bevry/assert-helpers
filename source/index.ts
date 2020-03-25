@@ -101,7 +101,7 @@ export function diff(newData: any, oldData: any) {
 /** Return a highlighted string of a difference. */
 export function inspectDiffResult(d: ReturnType<typeof diff>): string {
 	const colors = useColors()
-	const result = d.reduce(function(accumulator, part) {
+	const result = d.reduce(function (accumulator, part) {
 		let value = part.value
 		if (colors) {
 			if (part.added) {
@@ -151,7 +151,7 @@ export function logComparison(
 		'------------------------------------',
 		'Comparison Error:',
 		color(error.stack || error.message || error, ansicolors.green),
-		''
+		'',
 	]
 
 	lines.push('Comparison Diff:', compare(actual, expected), '')
@@ -335,7 +335,7 @@ export function errorEqual(
 
 /** Generate a callback that will return the specified value. */
 export function returnViaCallback(value: any): () => typeof value {
-	return function() {
+	return function () {
 		return value
 	}
 }
@@ -343,8 +343,10 @@ export function returnViaCallback(value: any): () => typeof value {
 /** Generate a callback that will receive a completion callback whcih it will call with the specified result after the specified delay. */
 /* eslint no-magic-numbers:0 */
 export function completeViaCallback(value: any, delay = 100) {
-	return function(complete: (error: null, result: typeof value) => void): void {
-		wait(delay, function() {
+	return function (
+		complete: (error: null, result: typeof value) => void
+	): void {
+		wait(delay, function () {
 			complete(null, value)
 		})
 	}
@@ -353,8 +355,8 @@ export function completeViaCallback(value: any, delay = 100) {
 /** Generate a callback that will receive a completion callback which it will call with the passed error after the specified delay. */
 /* eslint no-magic-numbers:0 */
 export function errorViaCallback(error: Error | string, delay = 100) {
-	return function(complete: (error: Error | string) => void): void {
-		wait(delay, function() {
+	return function (complete: (error: Error | string) => void): void {
+		wait(delay, function () {
 			complete(error)
 		})
 	}
@@ -363,7 +365,7 @@ export function errorViaCallback(error: Error | string, delay = 100) {
 export function returnErrorViaCallback(
 	error: Error | string = 'an error occured'
 ) {
-	return function(): Error {
+	return function (): Error {
 		if (error instanceof Error) {
 			return error
 		} else {
@@ -376,7 +378,7 @@ export function returnErrorViaCallback(
 export function throwErrorViaCallback(
 	error: Error | string = 'an error occured'
 ) {
-	return function(): never {
+	return function (): never {
 		if (error instanceof Error) {
 			throw error
 		} else {
