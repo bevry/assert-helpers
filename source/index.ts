@@ -11,7 +11,7 @@ import Errlop from 'errlop'
 type Errback = (error?: Error) => void
 
 /** Alias for setTimeout with paramaters reversed. */
-export function wait(delay: number, fn: Function) {
+export function wait(delay: number, fn: (...args: any[]) => void) {
 	return setTimeout(fn, delay)
 }
 

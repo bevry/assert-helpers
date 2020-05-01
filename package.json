@@ -1,7 +1,7 @@
 {
   "title": "Assert Helpers",
   "name": "assert-helpers",
-  "version": "6.0.0",
+  "version": "6.1.0",
   "description": "Common utilities and helpers to make testing assertions easier",
   "homepage": "https://github.com/bevry/assert-helpers",
   "license": "MIT",
@@ -80,19 +80,6 @@
       "engines": false
     },
     {
-      "description": "TypeScript compiled against ESNext for web browsers with Import for modules",
-      "directory": "edition-browsers",
-      "entry": "index.js",
-      "tags": [
-        "javascript",
-        "import"
-      ],
-      "engines": {
-        "node": false,
-        "browsers": "defaults"
-      }
-    },
-    {
       "description": "TypeScript compiled against ESNext for Node.js with Require for modules",
       "directory": "edition-esnext",
       "entry": "index.js",
@@ -102,8 +89,21 @@
         "require"
       ],
       "engines": {
-        "node": "10 || 12",
+        "node": "10 || 12 || 13 || 14",
         "browsers": false
+      }
+    },
+    {
+      "description": "TypeScript compiled against ES2019 for web browsers with Import for modules",
+      "directory": "edition-browsers",
+      "entry": "index.js",
+      "tags": [
+        "javascript",
+        "import"
+      ],
+      "engines": {
+        "node": false,
+        "browsers": "defaults"
       }
     }
   ],
@@ -115,23 +115,24 @@
   "dependencies": {
     "@types/ansicolors": "^0.0.31",
     "@types/diff": "^4.0.2",
-    "@types/node": "^12.12.31",
+    "@types/node": "^13.13.4",
     "ansicolors": "^0.3.2",
     "diff": "^4.0.2",
-    "errlop": "^2.0.0"
+    "errlop": "^2.1.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.25.0",
-    "@typescript-eslint/parser": "^2.25.0",
+    "@bevry/update-contributors": "^1.0.1",
+    "@typescript-eslint/eslint-plugin": "^2.30.0",
+    "@typescript-eslint/parser": "^2.30.0",
     "eslint": "^6.8.0",
-    "eslint-config-bevry": "^2.3.0",
-    "eslint-config-prettier": "^6.10.1",
-    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-config-bevry": "^3.3.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.3",
     "kava": "^4.4.0",
-    "prettier": "^2.0.2",
-    "projectz": "^1.19.0",
+    "prettier": "^2.0.5",
+    "projectz": "^1.19.1",
     "surge": "^0.21.3",
-    "typedoc": "^0.17.3",
+    "typedoc": "^0.17.6",
     "typescript": "^3.8.3",
     "valid-directory": "^1.6.0",
     "valid-module": "^1.0.0"
@@ -139,10 +140,11 @@
   "scripts": {
     "our:clean": "rm -Rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",
     "our:compile": "npm run our:compile:edition-browsers && npm run our:compile:edition-esnext",
-    "our:compile:edition-browsers": "tsc --module ESNext --target ESNext --outDir ./edition-browsers --project tsconfig.json && test -d edition-browsers/source && ( mv edition-browsers/source edition-temp && rm -Rf edition-browsers && mv edition-temp edition-browsers ) || true",
+    "our:compile:edition-browsers": "tsc --module ESNext --target ES2019 --outDir ./edition-browsers --project tsconfig.json && test -d edition-browsers/source && ( mv edition-browsers/source edition-temp && rm -Rf edition-browsers && mv edition-temp edition-browsers ) || true",
     "our:compile:edition-esnext": "tsc --module commonjs --target ESNext --outDir ./edition-esnext --project tsconfig.json && test -d edition-esnext/source && ( mv edition-esnext/source edition-temp && rm -Rf edition-esnext && mv edition-temp edition-esnext ) || true",
     "our:deploy": "echo no need for this project",
-    "our:meta": "npm run our:meta:docs && npm run our:meta:projectz",
+    "our:meta": "npm run our:meta:contributors && npm run our:meta:docs && npm run our:meta:projectz",
+    "our:meta:contributors": "update-contributors",
     "our:meta:docs": "npm run our:meta:docs:typedoc",
     "our:meta:docs:typedoc": "rm -Rf ./docs && typedoc --mode file --exclude '**/+(*test*|node_modules)' --excludeExternals --name \"$npm_package_name\" --readme ./README.md --out ./docs ./source",
     "our:meta:projectz": "projectz compile",
