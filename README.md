@@ -52,7 +52,7 @@ Common utilities and helpers to make testing assertions easier
 
 ``` html
 <script type="module">
-    import * as pkg from '//cdn.pika.dev/assert-helpers/^6.4.0'
+    import * as pkg from '//cdn.pika.dev/assert-helpers/^6.5.0'
 </script>
 ```
 
@@ -60,7 +60,7 @@ Common utilities and helpers to make testing assertions easier
 
 ``` html
 <script type="module">
-    import * as pkg from '//unpkg.com/assert-helpers@^6.4.0'
+    import * as pkg from '//unpkg.com/assert-helpers@^6.5.0'
 </script>
 ```
 
@@ -68,7 +68,7 @@ Common utilities and helpers to make testing assertions easier
 
 ``` html
 <script type="module">
-    import * as pkg from '//dev.jspm.io/assert-helpers@6.4.0'
+    import * as pkg from '//dev.jspm.io/assert-helpers@6.5.0'
 </script>
 ```
 
