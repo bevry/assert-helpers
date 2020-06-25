@@ -1,7 +1,7 @@
 {
   "title": "Assert Helpers",
   "name": "assert-helpers",
-  "version": "6.12.0",
+  "version": "6.13.0",
   "description": "Common utilities and helpers to make testing assertions easier",
   "homepage": "https://github.com/bevry/assert-helpers",
   "license": "MIT",
@@ -120,28 +120,28 @@
   "dependencies": {
     "@types/ansicolors": "^0.0.33",
     "@types/diff": "^4.0.2",
-    "@types/node": "^14.0.13",
+    "@types/node": "^14.0.14",
     "ansicolors": "^0.3.2",
     "diff": "^4.0.2",
-    "errlop": "3.5.0"
+    "errlop": "3.9.0"
   },
   "devDependencies": {
-    "@bevry/update-contributors": "^1.9.0",
-    "@typescript-eslint/eslint-plugin": "^3.3.0",
-    "@typescript-eslint/parser": "^3.3.0",
-    "eslint": "^7.3.0",
-    "eslint-config-bevry": "^3.8.0",
-    "eslint-config-prettier": "^6.7.0",
+    "@bevry/update-contributors": "^1.12.0",
+    "@typescript-eslint/eslint-plugin": "^3.4.0",
+    "@typescript-eslint/parser": "^3.4.0",
+    "eslint": "^7.3.1",
+    "eslint-config-bevry": "^3.12.0",
+    "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "kava": "^5.7.0",
-    "make-deno-edition": "^0.9.1",
+    "make-deno-edition": "^0.13.0",
     "prettier": "^2.0.5",
-    "projectz": "^2.9.0",
+    "projectz": "^2.10.1",
     "surge": "^0.21.3",
     "typedoc": "^0.17.7",
     "typescript": "^3.9.5",
     "valid-directory": "^2.5.0",
-    "valid-module": "^1.6.0"
+    "valid-module": "^1.7.0"
   },
   "scripts": {
     "our:clean": "rm -Rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",
