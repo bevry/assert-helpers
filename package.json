@@ -127,7 +127,7 @@
   ],
   "types": "./compiled-types/",
   "type": "module",
-  "main": "index",
+  "main": "index.cjs",
   "browser": "edition-browsers/index.js",
   "module": "edition-browsers/index.js",
   "dependencies": {
