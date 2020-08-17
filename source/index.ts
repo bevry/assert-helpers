@@ -3,7 +3,7 @@
 // Import
 import util from 'util'
 import assert from 'assert'
-import ansi from '@bevry/ansi'
+import * as ansi from '@bevry/ansi'
 import Errlop from 'errlop'
 
 /** Type for a callback that receives an optional error as the first argument */

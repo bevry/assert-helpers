@@ -1,5 +1,9 @@
 # History
 
+## v7.0.1 2020 August 18
+
+-   Fixed `SyntaxError: The requested module '@bevry/ansi' does not provide an export named 'default'` error
+
 ## v7.0.0 2020 August 18
 
 -   Deno support
