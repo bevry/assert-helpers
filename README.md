@@ -48,11 +48,11 @@ Common utilities and helpers to make testing assertions easier
 <li>Require: <code>const pkg = require('assert-helpers')</code></li>
 </ul>
 
-<a href="https://www.pika.dev/cdn" title="100% Native ES Modules CDN"><h3>pika</h3></a>
+<a href="https://www.skypack.dev" title="Skypack is a JavaScript Delivery Network for modern web apps"><h3>Skypack</h3></a>
 
 ``` html
 <script type="module">
-    import * as pkg from '//cdn.pika.dev/assert-helpers/^6.19.0'
+    import * as pkg from '//cdn.skypack.dev/assert-helpers@^6.20.0'
 </script>
 ```
 
@@ -60,7 +60,7 @@ Common utilities and helpers to make testing assertions easier
 
 ``` html
 <script type="module">
-    import * as pkg from '//unpkg.com/assert-helpers@^6.19.0'
+    import * as pkg from '//unpkg.com/assert-helpers@^6.20.0'
 </script>
 ```
 
@@ -68,7 +68,7 @@ Common utilities and helpers to make testing assertions easier
 
 ``` html
 <script type="module">
-    import * as pkg from '//dev.jspm.io/assert-helpers@6.19.0'
+    import * as pkg from '//dev.jspm.io/assert-helpers@6.20.0'
 </script>
 ```
 
