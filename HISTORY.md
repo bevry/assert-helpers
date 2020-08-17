@@ -1,5 +1,14 @@
 # History
 
+## v7.0.0 2020 August 18
+
+-   Deno support
+-   Dropped difference comparison (actual and expected comparison remains)
+    -   The difference comparison hardly worked as expected, was complicated to implement, and didn't support ESM environments such as .mjs and Deno
+-   Added `gt`, `gte`, `lt`, `lte` assertions
+-   Better color usage detection
+-   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+
 ## v6.20.0 2020 August 17
 
 -   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)

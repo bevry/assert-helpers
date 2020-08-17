@@ -3,8 +3,7 @@
 // Import
 import util from 'util'
 import assert from 'assert'
-import ansicolors from 'ansicolors'
-import { diffJson, diffChars } from 'diff'
+import ansi from '@bevry/ansi'
 import Errlop from 'errlop'
 
 /** Type for a callback that receives an optional error as the first argument */
@@ -38,20 +37,23 @@ export function bool(value: any): boolean | null {
 	if (value === 'no' || value === 'false' || value === 'n' || value === 'N') {
 		return false
 	}
-	if (value === 'null' || value === 'NULL') return null
+	if (value == null || value === '' || value === 'null' || value === 'NULL')
+		return null
 	return Boolean(value)
 }
 
 /** Whether or not colors are desired on this environment */
 export function useColors(): boolean {
-	const env = isNode() && bool(process.env.COLOR || process.env.COLORS)
-	if (typeof env === 'boolean') return env
-	if (isTTY()) return true
-	return (
-		isNode() &&
-		!process.argv.includes('--no-colors') &&
-		!process.argv.includes('--no-color')
+	// if unsupported, return false
+	if (!isNode()) return false
+	// if disabled, return false
+	if (
+		process.argv.includes('--no-colors') ||
+		process.argv.includes('--no-color')
 	)
+		return false
+	// if unspecfied, use default (tty)
+	return bool(process.env.COLOR) ?? bool(process.env.COLORS) ?? isTTY()
 }
 
 /** Applies the color to the value if desired */
@@ -81,56 +83,6 @@ export function inspect(value: any, opts: NodeJS.InspectOptions = {}): string {
 	return util.inspect(value, { colors, depth, ...opts })
 }
 
-/** Return the difference between the new data and the old data. */
-export function diff(newData: any, oldData: any) {
-	// robust check for object, and try catch
-	// to prevent https://github.com/bevry/assert-helpers/issues/5
-	if (isObject(newData) && isObject(oldData)) {
-		try {
-			return diffJson(oldData, newData)
-		} catch (err) {
-			// continue
-		}
-	}
-	// otherwise, continue with classical inspection
-	const a = inspect(oldData, { colors: false })
-	const b = inspect(newData, { colors: false })
-	return diffChars(a, b)
-}
-
-/** Return a highlighted string of a difference. */
-export function inspectDiffResult(d: ReturnType<typeof diff>): string {
-	const colors = useColors()
-	const result = d.reduce(function (accumulator, part) {
-		let value = part.value
-		if (colors) {
-			if (part.added) {
-				value =
-					ansicolors.open.black +
-					ansicolors.bgGreen(value) +
-					ansicolors.open.green
-			} else if (part.removed) {
-				value =
-					ansicolors.open.black +
-					ansicolors.bgBrightRed(value) +
-					ansicolors.open.green
-			}
-		}
-		return accumulator + value
-	}, '')
-	return colors ? ansicolors.green(result) : result
-}
-
-/** Return the highlighted comparison between the new data and the old data. */
-export function compare(newData: any, oldData: any) {
-	return inspectDiffResult(diff(newData, oldData))
-}
-
-/** Alias for {@link compare} */
-export function inpectDiff(newData: any, oldData: any) {
-	return compare(newData, oldData)
-}
-
 /** Log the inspected values of each of the arguments to stdout */
 export function log(...args: any): void {
 	if (isNode() && process.env.ASSERT_SILENCE) return
@@ -150,11 +102,9 @@ export function logComparison(
 	const lines = [
 		'------------------------------------',
 		'Comparison Error:',
-		color(error.stack || error.message || error, ansicolors.green),
+		color(error.stack || error.message || error, ansi.green),
 		'',
 	]
-
-	lines.push('Comparison Diff:', compare(actual, expected), '')
 
 	lines.push(
 		'Comparison Actual:',
@@ -184,6 +134,90 @@ export function equal(
 ): void | never {
 	try {
 		assert.strictEqual(actual, expected, testName)
+	} catch (checkError) {
+		logComparison(actual, expected, checkError)
+		if (next) {
+			next(checkError)
+			return
+		} else {
+			throw checkError
+		}
+	}
+	if (next) next()
+}
+
+/** Is greater than or equal to */
+export function gte(
+	actual: any,
+	expected: any,
+	testName = 'is greater than or equal to assertion',
+	next?: Errback
+): void | never {
+	try {
+		assert.strictEqual(actual >= expected, true, testName)
+	} catch (checkError) {
+		logComparison(actual, expected, checkError)
+		if (next) {
+			next(checkError)
+			return
+		} else {
+			throw checkError
+		}
+	}
+	if (next) next()
+}
+
+/** Is less than or equal to */
+export function lte(
+	actual: any,
+	expected: any,
+	testName = 'is less than or equal to assertion',
+	next?: Errback
+): void | never {
+	try {
+		assert.strictEqual(actual <= expected, true, testName)
+	} catch (checkError) {
+		logComparison(actual, expected, checkError)
+		if (next) {
+			next(checkError)
+			return
+		} else {
+			throw checkError
+		}
+	}
+	if (next) next()
+}
+
+/** Is greater than */
+export function gt(
+	actual: any,
+	expected: any,
+	testName = 'is greater than assertion',
+	next?: Errback
+): void | never {
+	try {
+		assert.strictEqual(actual > expected, true, testName)
+	} catch (checkError) {
+		logComparison(actual, expected, checkError)
+		if (next) {
+			next(checkError)
+			return
+		} else {
+			throw checkError
+		}
+	}
+	if (next) next()
+}
+
+/** Is less than */
+export function lt(
+	actual: any,
+	expected: any,
+	testName = 'is less than assertion',
+	next?: Errback
+): void | never {
+	try {
+		assert.strictEqual(actual < expected, true, testName)
 	} catch (checkError) {
 		logComparison(actual, expected, checkError)
 		if (next) {
