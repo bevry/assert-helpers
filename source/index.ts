@@ -1,10 +1,15 @@
 'use strict'
 
 // Import
-import util from 'util'
-import assert from 'assert'
+import {
+	ok as _ok,
+	strictEqual as _strictEqual,
+	deepStrictEqual as _deepStrictEqual,
+} from 'assert'
+import { inspect as _inspect } from 'util'
 import * as ansi from '@bevry/ansi'
 import Errlop from 'errlop'
+import { argv, env, stdout, stderr, versions } from 'process'
 
 /** Type for a callback that receives an optional error as the first argument */
 type Errback = (error?: Error) => void
@@ -16,19 +21,17 @@ export function wait(delay: number, fn: (...args: any[]) => void) {
 
 /** Whether or not we are running in the node environment */
 export function isNode(): boolean {
-	return Boolean(
-		typeof process !== 'undefined' && process.versions && process.versions.node
-	)
+	return Boolean(versions && versions.node)
 }
 
 /** Whether or not stdout and stderr are interactive. */
 export function isTTY(): boolean {
 	return (
 		isNode() &&
-		process.stdout &&
-		process.stdout.isTTY === true &&
-		process.stderr &&
-		process.stderr.isTTY === true
+		stdout &&
+		stdout.isTTY === true &&
+		stderr &&
+		stderr.isTTY === true
 	)
 }
 
@@ -47,13 +50,9 @@ export function useColors(): boolean {
 	// if unsupported, return false
 	if (!isNode()) return false
 	// if disabled, return false
-	if (
-		process.argv.includes('--no-colors') ||
-		process.argv.includes('--no-color')
-	)
-		return false
+	if (argv.includes('--no-colors') || argv.includes('--no-color')) return false
 	// if unspecfied, use default (tty)
-	return bool(process.env.COLOR) ?? bool(process.env.COLORS) ?? isTTY()
+	return bool(env.COLOR) ?? bool(env.COLORS) ?? isTTY()
 }
 
 /** Applies the color to the value if desired */
@@ -73,19 +72,20 @@ function isObject(value: any): boolean {
 /**
  * Return a stringified version of the value with indentation and colors where applicable.
  * Colors will be applied if the environment supports it (--no-colors not present and TTY).
+ * For the available options, refer to https://nodejs.org/dist/latest-v14.x/docs/api/util.html#util_util_inspect_object_options for Node.js
  */
-export function inspect(value: any, opts: NodeJS.InspectOptions = {}): string {
+export function inspect(value: any, opts: any = {}): string {
 	// If the terminal supports colours, and the user hasn't specified, then default to a sensible default
 	const colors = useColors()
 	const depth = 50
 
 	// Inspect and return using our defaults
-	return util.inspect(value, { colors, depth, ...opts })
+	return _inspect(value, { colors, depth, ...opts })
 }
 
 /** Log the inspected values of each of the arguments to stdout */
 export function log(...args: any): void {
-	if (isNode() && process.env.ASSERT_SILENCE) return
+	if (isNode() && env.ASSERT_SILENCE) return
 	for (let i = 0; i < args.length; ++i) {
 		console.log(inspect(args[i]))
 	}
@@ -97,7 +97,7 @@ export function logComparison(
 	expected: any,
 	error: Error | string | any
 ): void {
-	if (isNode() && process.env.ASSERT_SILENCE) return
+	if (isNode() && env.ASSERT_SILENCE) return
 
 	const lines = [
 		'------------------------------------',
@@ -116,8 +116,8 @@ export function logComparison(
 	)
 
 	// Work for node
-	if (isNode() && process.stderr) {
-		process.stderr.write(lines.join('\n') + '\n')
+	if (isNode() && stderr) {
+		stderr.write(lines.join('\n') + '\n')
 	}
 	// Work for browsers
 	else {
@@ -125,7 +125,7 @@ export function logComparison(
 	}
 }
 
-/** Same as assert.strictEquals in that it performs a strict equals check, but if a failure occurs it will output detailed information */
+/** Same as assert.strictEqual in that it performs a strict equals check, but if a failure occurs it will output detailed information */
 export function equal(
 	actual: any,
 	expected: any,
@@ -133,7 +133,7 @@ export function equal(
 	next?: Errback
 ): void | never {
 	try {
-		assert.strictEqual(actual, expected, testName)
+		_strictEqual(actual, expected, testName)
 	} catch (checkError) {
 		logComparison(actual, expected, checkError)
 		if (next) {
@@ -154,7 +154,7 @@ export function gte(
 	next?: Errback
 ): void | never {
 	try {
-		assert.strictEqual(actual >= expected, true, testName)
+		_strictEqual(actual >= expected, true, testName)
 	} catch (checkError) {
 		logComparison(actual, expected, checkError)
 		if (next) {
@@ -175,7 +175,7 @@ export function lte(
 	next?: Errback
 ): void | never {
 	try {
-		assert.strictEqual(actual <= expected, true, testName)
+		_strictEqual(actual <= expected, true, testName)
 	} catch (checkError) {
 		logComparison(actual, expected, checkError)
 		if (next) {
@@ -196,7 +196,7 @@ export function gt(
 	next?: Errback
 ): void | never {
 	try {
-		assert.strictEqual(actual > expected, true, testName)
+		_strictEqual(actual > expected, true, testName)
 	} catch (checkError) {
 		logComparison(actual, expected, checkError)
 		if (next) {
@@ -217,7 +217,7 @@ export function lt(
 	next?: Errback
 ): void | never {
 	try {
-		assert.strictEqual(actual < expected, true, testName)
+		_strictEqual(actual < expected, true, testName)
 	} catch (checkError) {
 		logComparison(actual, expected, checkError)
 		if (next) {
@@ -237,7 +237,7 @@ export function undef(
 	next?: Errback
 ) {
 	try {
-		assert.strictEqual(typeof actual, 'undefined', testName)
+		_strictEqual(typeof actual, 'undefined', testName)
 	} catch (checkError) {
 		logComparison(actual, 'undefined', checkError)
 		if (next) {
@@ -257,10 +257,10 @@ export function nullish(
 	next?: Errback
 ) {
 	try {
-		assert.strictEqual(typeof actual, 'undefined', testName)
+		_strictEqual(typeof actual, 'undefined', testName)
 	} catch (e1) {
 		try {
-			assert.strictEqual(actual, null, testName)
+			_strictEqual(actual, null, testName)
 		} catch (e2) {
 			const error = new Errlop(e2, e1)
 			logComparison(actual, 'nullish', error)
@@ -283,7 +283,7 @@ export function deepEqual(
 	next?: Errback
 ): void | never {
 	try {
-		assert.deepStrictEqual(actual, expected, testName)
+		_deepStrictEqual(actual, expected, testName)
 	} catch (checkError) {
 		logComparison(actual, expected, checkError)
 		if (next) {
@@ -306,7 +306,7 @@ export function contains(
 	if (testName == null)
 		testName = `Expected [${actual}] to contain [${expected}]`
 	try {
-		assert.ok(actual.indexOf(expected) !== -1, testName)
+		_ok(actual.indexOf(expected) !== -1, testName)
 	} catch (checkError) {
 		if (next) {
 			next(checkError)
