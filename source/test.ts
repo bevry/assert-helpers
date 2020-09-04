@@ -1,7 +1,7 @@
 // Import
 import kava from 'kava'
-import * as helpers from './'
-import { equal } from 'assert'
+import * as helpers from './index.js'
+import { strictEqual } from 'assert'
 
 // Don't confuse the tester
 process.env.ASSERT_SILENCE = 'yes'
@@ -20,11 +20,11 @@ kava.suite('assert-helpers', function (suite, test) {
 	})
 	test('inspect', function () {
 		process.env.COLORS = 'no'
-		equal(helpers.useColors(), false, 'colors should be disabled')
-		equal(helpers.inspect({ a: 1 }), '{ a: 1 }')
+		strictEqual(helpers.useColors(), false, 'colors should be disabled')
+		strictEqual(helpers.inspect({ a: 1 }), '{ a: 1 }')
 		process.env.COLORS = 'yes'
-		equal(helpers.useColors(), true, 'colors should be enabled')
-		equal(helpers.inspect({ a: 1 }), '{ a: \u001b[33m1\u001b[39m }')
+		strictEqual(helpers.useColors(), true, 'colors should be enabled')
+		strictEqual(helpers.inspect({ a: 1 }), '{ a: \u001b[33m1\u001b[39m }')
 	})
 	// skip log
 	// skip logComparison
@@ -103,15 +103,15 @@ kava.suite('assert-helpers', function (suite, test) {
 		} catch (err) {}
 	})
 	test('returnViaCallback', function () {
-		equal(helpers.returnViaCallback('a')(), 'a')
+		strictEqual(helpers.returnViaCallback('a')(), 'a')
 	})
 	test('completeViaCallback', function () {
 		helpers.completeViaCallback(
 			'a',
 			0
 		)(function (err, result) {
-			equal(err, null)
-			equal(result, 'a')
+			strictEqual(err, null)
+			strictEqual(result, 'a')
 		})
 	})
 	test('errorViaCallback', function () {
@@ -120,19 +120,19 @@ kava.suite('assert-helpers', function (suite, test) {
 			a,
 			0
 		)(function (err) {
-			equal(err, a)
+			strictEqual(err, a)
 		})
 	})
 	test('returnErrorViaCallback', function () {
 		const a = new Error('abc')
-		equal(helpers.returnErrorViaCallback(a)(), a)
+		strictEqual(helpers.returnErrorViaCallback(a)(), a)
 	})
 	test('throwErrorViaCallback', function () {
 		const a = new Error('abc')
 		try {
 			helpers.throwErrorViaCallback(a)()
 		} catch (err) {
-			equal(err, a)
+			strictEqual(err, a)
 		}
 	})
 	test('expectErrorViaCallback', function () {
