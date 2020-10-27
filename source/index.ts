@@ -51,6 +51,13 @@ export function bool(value: any): boolean | null {
 	}
 	if (value == null || value === '' || value === 'null' || value === 'NULL')
 		return null
+	// node.js 15 compatibility
+	// which sets COLOR to 0 (is TTY) 1 (not TTY)
+	// which is the opposite of what one would reasonable expect
+	// so ignore such pollution, such that decision is determined by another factor
+	if (value === '0') return null
+	if (value === '1') return null
+	// return boolean version
 	return Boolean(value)
 }
 

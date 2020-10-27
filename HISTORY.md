@@ -1,5 +1,9 @@
 # History
 
+## v8.0.1 2020 October 27
+
+-   Fixed Node.js v15 compatibility
+
 ## v8.0.0 2020 October 27
 
 -   Changed engines from Node.js `>=10` to `>=4`, to allow greater compatibility throughout the Bevry ecosystem
