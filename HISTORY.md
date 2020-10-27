@@ -1,5 +1,10 @@
 # History
 
+## v8.0.0 2020 October 27
+
+-   Changed engines from Node.js `>=10` to `>=4`, to allow greater compatibility throughout the Bevry ecosystem
+-   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+
 ## v7.2.0 2020 September 4
 
 -   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)

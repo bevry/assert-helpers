@@ -1,5 +1,13 @@
 'use strict'
 
+// Polyfill for older node versions
+if (Array.prototype.includes == null) {
+	// eslint-disable-next-line no-extend-native
+	Array.prototype.includes = function (searchElement) {
+		return this.indexOf(searchElement) !== -1
+	}
+}
+
 // Import
 import {
 	ok as _ok,
@@ -16,6 +24,7 @@ type Errback = (error?: Error) => void
 
 /** Alias for setTimeout with paramaters reversed. */
 export function wait(delay: number, fn: (...args: any[]) => void) {
+	// @ts-ignore
 	return setTimeout(fn, delay)
 }
 
@@ -51,7 +60,7 @@ export function useColors(): boolean {
 	if (!isNode()) return false
 	// if disabled, return false
 	if (argv.includes('--no-colors') || argv.includes('--no-color')) return false
-	// if unspecfied, use default (tty)
+	// if unspecified, use default (tty)
 	return bool(env.COLOR) ?? bool(env.COLORS) ?? isTTY()
 }
 
