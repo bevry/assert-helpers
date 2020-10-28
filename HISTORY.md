@@ -1,5 +1,9 @@
 # History
 
+## v8.1.0 2020 October 29
+
+-   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+
 ## v8.0.1 2020 October 27
 
 -   Fixed Node.js v15 compatibility
