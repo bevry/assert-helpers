@@ -195,7 +195,7 @@
   "browser": "edition-browsers/index.js",
   "module": "edition-browsers/index.js",
   "dependencies": {
-    "@bevry/ansi": "^2.1.0",
+    "@bevry/ansi": "^3.0.0",
     "editions": "^6.0.0",
     "errlop": "^4.0.0"
   },
