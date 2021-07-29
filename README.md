@@ -35,7 +35,7 @@ Common utilities and helpers to make testing assertions easier
 
 ## Usage
 
-[Complete API Documentation.](http://master.assert-helpers.bevry.surge.sh/docs/globals.html)
+[Complete API Documentation.](http://master.assert-helpers.bevry.surge.sh/docs/)
 
 <!-- INSTALL/ -->
 
@@ -52,7 +52,7 @@ Common utilities and helpers to make testing assertions easier
 
 ``` html
 <script type="module">
-    import * as pkg from '//cdn.skypack.dev/assert-helpers@^8.3.0'
+    import * as pkg from '//cdn.skypack.dev/assert-helpers@^8.4.0'
 </script>
 ```
 
@@ -60,7 +60,7 @@ Common utilities and helpers to make testing assertions easier
 
 ``` html
 <script type="module">
-    import * as pkg from '//unpkg.com/assert-helpers@^8.3.0'
+    import * as pkg from '//unpkg.com/assert-helpers@^8.4.0'
 </script>
 ```
 
@@ -68,7 +68,7 @@ Common utilities and helpers to make testing assertions easier
 
 ``` html
 <script type="module">
-    import * as pkg from '//dev.jspm.io/assert-helpers@8.3.0'
+    import * as pkg from '//dev.jspm.io/assert-helpers@8.4.0'
 </script>
 ```
 
