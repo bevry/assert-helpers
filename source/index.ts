@@ -111,7 +111,7 @@ export function log(...args: any): void {
 export function logComparison(
 	actual: any,
 	expected: any,
-	error: Error | string | any
+	error: Error | string | any,
 ): void {
 	if (isNode() && env.ASSERT_SILENCE) return
 
@@ -128,7 +128,7 @@ export function logComparison(
 		'',
 		'Comparison Expected:',
 		inspect(expected),
-		'------------------------------------'
+		'------------------------------------',
 	)
 
 	// Work for node
@@ -146,11 +146,11 @@ export function equal(
 	actual: any,
 	expected: any,
 	testName = 'equal assertion',
-	next?: Errback
+	next?: Errback,
 ): void | never {
 	try {
 		_strictEqual(actual, expected, testName)
-	} catch (checkError) {
+	} catch (checkError: any) {
 		logComparison(actual, expected, checkError)
 		if (next) {
 			next(checkError)
@@ -167,11 +167,11 @@ export function gte(
 	actual: any,
 	expected: any,
 	testName = 'is greater than or equal to assertion',
-	next?: Errback
+	next?: Errback,
 ): void | never {
 	try {
 		_strictEqual(actual >= expected, true, testName)
-	} catch (checkError) {
+	} catch (checkError: any) {
 		logComparison(actual, expected, checkError)
 		if (next) {
 			next(checkError)
@@ -188,11 +188,11 @@ export function lte(
 	actual: any,
 	expected: any,
 	testName = 'is less than or equal to assertion',
-	next?: Errback
+	next?: Errback,
 ): void | never {
 	try {
 		_strictEqual(actual <= expected, true, testName)
-	} catch (checkError) {
+	} catch (checkError: any) {
 		logComparison(actual, expected, checkError)
 		if (next) {
 			next(checkError)
@@ -209,11 +209,11 @@ export function gt(
 	actual: any,
 	expected: any,
 	testName = 'is greater than assertion',
-	next?: Errback
+	next?: Errback,
 ): void | never {
 	try {
 		_strictEqual(actual > expected, true, testName)
-	} catch (checkError) {
+	} catch (checkError: any) {
 		logComparison(actual, expected, checkError)
 		if (next) {
 			next(checkError)
@@ -230,11 +230,11 @@ export function lt(
 	actual: any,
 	expected: any,
 	testName = 'is less than assertion',
-	next?: Errback
+	next?: Errback,
 ): void | never {
 	try {
 		_strictEqual(actual < expected, true, testName)
-	} catch (checkError) {
+	} catch (checkError: any) {
 		logComparison(actual, expected, checkError)
 		if (next) {
 			next(checkError)
@@ -250,11 +250,11 @@ export function lt(
 export function undef(
 	actual: any,
 	testName = 'undef assertion',
-	next?: Errback
+	next?: Errback,
 ) {
 	try {
 		_strictEqual(typeof actual, 'undefined', testName)
-	} catch (checkError) {
+	} catch (checkError: any) {
 		logComparison(actual, 'undefined', checkError)
 		if (next) {
 			next(checkError)
@@ -270,14 +270,14 @@ export function undef(
 export function nullish(
 	actual: any,
 	testName = 'nullish assertion',
-	next?: Errback
+	next?: Errback,
 ) {
 	try {
 		_strictEqual(typeof actual, 'undefined', testName)
-	} catch (e1) {
+	} catch (e1: any) {
 		try {
 			_strictEqual(actual, null, testName)
-		} catch (e2) {
+		} catch (e2: any) {
 			const error = new Errlop(e2, e1)
 			logComparison(actual, 'nullish', error)
 			if (next) {
@@ -296,11 +296,11 @@ export function deepEqual(
 	actual: any,
 	expected: any,
 	testName = 'deep equal assertion',
-	next?: Errback
+	next?: Errback,
 ): void | never {
 	try {
 		_deepStrictEqual(actual, expected, testName)
-	} catch (checkError) {
+	} catch (checkError: any) {
 		logComparison(actual, expected, checkError)
 		if (next) {
 			next(checkError)
@@ -317,13 +317,13 @@ export function contains(
 	actual: any,
 	expected: any,
 	testName = 'contains assertion',
-	next?: Errback
+	next?: Errback,
 ): void | never {
 	if (testName == null)
 		testName = `Expected [${actual}] to contain [${expected}]`
 	try {
 		_ok(actual.indexOf(expected) !== -1, testName)
-	} catch (checkError) {
+	} catch (checkError: any) {
 		if (next) {
 			next(checkError)
 			return
@@ -339,7 +339,7 @@ export function errorEqual(
 	actualError: any,
 	expectedError: any,
 	testName = 'error equal assertion',
-	next?: Errback
+	next?: Errback,
 ): void | never {
 	let expectedErrorMessage, actualErrorMessage
 
@@ -367,11 +367,11 @@ export function errorEqual(
 		} else {
 			equal(actualError, expectedError || null, testName)
 		}
-	} catch (checkError) {
+	} catch (checkError: any) {
 		logComparison(
 			actualError && (actualError.stack || actualError.message || actualError),
 			expectedErrorMessage,
-			checkError
+			checkError,
 		)
 		if (next) {
 			next(checkError)
@@ -394,7 +394,7 @@ export function returnViaCallback(value: any): () => typeof value {
 /* eslint no-magic-numbers:0 */
 export function completeViaCallback(value: any, delay = 100) {
 	return function (
-		complete: (error: null, result: typeof value) => void
+		complete: (error: null, result: typeof value) => void,
 	): void {
 		wait(delay, function () {
 			complete(null, value)
@@ -413,7 +413,7 @@ export function errorViaCallback(error: Error | string, delay = 100) {
 }
 /** Generate a callback that return an error instance with the specified message/error. */
 export function returnErrorViaCallback(
-	error: Error | string = 'an error occured'
+	error: Error | string = 'an error occurred',
 ) {
 	return function (): Error {
 		if (error instanceof Error) {
@@ -426,7 +426,7 @@ export function returnErrorViaCallback(
 
 /** Generate a callback that throw an error instance with the specified message/error. */
 export function throwErrorViaCallback(
-	error: Error | string = 'an error occured'
+	error: Error | string = 'an error occurred',
 ) {
 	return function (): never {
 		if (error instanceof Error) {
@@ -448,7 +448,7 @@ export function expectViaCallback(...expected: any) {
 export function expectErrorViaCallback(
 	expected: Error | string,
 	testName = 'expect error via callback assertion',
-	next?: Errback
+	next?: Errback,
 ) {
 	return (actual: Error | string) =>
 		errorEqual(actual, expected, testName, next)
@@ -459,7 +459,7 @@ export function expectThrowViaFunction(
 	expected: Error | string,
 	fn: () => never,
 	testName = 'expect error via function assertion',
-	next?: Errback
+	next?: Errback,
 ) {
 	let actual = null
 	try {
@@ -473,13 +473,13 @@ export function expectThrowViaFunction(
 /** @deprecated Use {@link expectErrorViaFunction} instead */
 export function expectErrorViaFunction(): never {
 	throw new Error(
-		'expectErrorViaFunction has been deprecated, use expectThrowViaFunction instead'
+		'expectErrorViaFunction has been deprecated, use expectThrowViaFunction instead',
 	)
 }
 
 /** @deprecated Use {@link expectErrorViaFunction} instead */
 export function expectFunctionToThrow(): never {
 	throw new Error(
-		'expectFunctionToThrow has been deprecated, use expectThrowViaFunction instead'
+		'expectFunctionToThrow has been deprecated, use expectThrowViaFunction instead',
 	)
 }
