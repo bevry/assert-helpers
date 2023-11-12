@@ -1,7 +1,7 @@
 {
   "title": "Assert Helpers",
   "name": "assert-helpers",
-  "version": "10.2.0",
+  "version": "11.0.0",
   "description": "Common utilities and helpers to make testing assertions easier",
   "homepage": "https://github.com/bevry/assert-helpers",
   "license": "Artistic-2.0",
@@ -11,6 +11,7 @@
     "es2017",
     "es2019",
     "es2022",
+    "es5",
     "expect",
     "module",
     "node",
@@ -74,7 +75,7 @@
     "url": "https://github.com/bevry/assert-helpers.git"
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=4"
   },
   "editions": [
     {
@@ -148,6 +149,21 @@
       }
     },
     {
+      "description": "TypeScript compiled against ES5 for Node.js 4 || 6 || 8 || 10 || 12 || 14 || 16 || 18 || 20 || 21 with Require for modules",
+      "directory": "edition-es5",
+      "entry": "index.js",
+      "tags": [
+        "compiled",
+        "javascript",
+        "es5",
+        "require"
+      ],
+      "engines": {
+        "node": "4 || 6 || 8 || 10 || 12 || 14 || 16 || 18 || 20 || 21",
+        "browsers": false
+      }
+    },
+    {
       "description": "TypeScript compiled against ES2019 for Node.js 12 || 14 || 16 || 18 || 20 || 21 with Import for modules",
       "directory": "edition-es2019-esm",
       "entry": "index.js",
@@ -179,9 +195,9 @@
   "browser": "edition-browsers/index.js",
   "module": "edition-browsers/index.js",
   "dependencies": {
-    "@bevry/ansi": "^5.0.0",
+    "@bevry/ansi": "2.1.0",
     "editions": "^6.9.0",
-    "errlop": "^5.0.0"
+    "errlop": "4.6.0"
   },
   "devDependencies": {
     "@bevry/update-contributors": "^1.23.0",
@@ -204,12 +220,13 @@
   },
   "scripts": {
     "our:clean": "rm -Rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",
-    "our:compile": "npm run our:compile:edition-browsers && npm run our:compile:edition-es2017 && npm run our:compile:edition-es2019 && npm run our:compile:edition-es2019-esm && npm run our:compile:edition-es2022 && npm run our:compile:types",
+    "our:compile": "npm run our:compile:edition-browsers && npm run our:compile:edition-es2017 && npm run our:compile:edition-es2019 && npm run our:compile:edition-es2019-esm && npm run our:compile:edition-es2022 && npm run our:compile:edition-es5 && npm run our:compile:types",
     "our:compile:edition-browsers": "tsc --module ESNext --target ES2022 --outDir ./edition-browsers --project tsconfig.json && ( test ! -d edition-browsers/source || ( mv edition-browsers/source edition-temp && rm -Rf edition-browsers && mv edition-temp edition-browsers ) )",
     "our:compile:edition-es2017": "tsc --module commonjs --target ES2017 --outDir ./edition-es2017 --project tsconfig.json && ( test ! -d edition-es2017/source || ( mv edition-es2017/source edition-temp && rm -Rf edition-es2017 && mv edition-temp edition-es2017 ) ) && printf '%s' '{\"type\": \"commonjs\"}' > edition-es2017/package.json",
     "our:compile:edition-es2019": "tsc --module commonjs --target ES2019 --outDir ./edition-es2019 --project tsconfig.json && ( test ! -d edition-es2019/source || ( mv edition-es2019/source edition-temp && rm -Rf edition-es2019 && mv edition-temp edition-es2019 ) ) && printf '%s' '{\"type\": \"commonjs\"}' > edition-es2019/package.json",
     "our:compile:edition-es2019-esm": "tsc --module ESNext --target ES2019 --outDir ./edition-es2019-esm --project tsconfig.json && ( test ! -d edition-es2019-esm/source || ( mv edition-es2019-esm/source edition-temp && rm -Rf edition-es2019-esm && mv edition-temp edition-es2019-esm ) ) && printf '%s' '{\"type\": \"module\"}' > edition-es2019-esm/package.json",
     "our:compile:edition-es2022": "tsc --module commonjs --target ES2022 --outDir ./edition-es2022 --project tsconfig.json && ( test ! -d edition-es2022/source || ( mv edition-es2022/source edition-temp && rm -Rf edition-es2022 && mv edition-temp edition-es2022 ) ) && printf '%s' '{\"type\": \"commonjs\"}' > edition-es2022/package.json",
+    "our:compile:edition-es5": "tsc --module commonjs --target ES5 --outDir ./edition-es5 --project tsconfig.json && ( test ! -d edition-es5/source || ( mv edition-es5/source edition-temp && rm -Rf edition-es5 && mv edition-temp edition-es5 ) ) && printf '%s' '{\"type\": \"commonjs\"}' > edition-es5/package.json",
     "our:compile:types": "tsc --project tsconfig.json --emitDeclarationOnly --declaration --declarationMap --declarationDir ./compiled-types && ( test ! -d compiled-types/source || ( mv compiled-types/source edition-temp && rm -Rf compiled-types && mv edition-temp compiled-types ) )",
     "our:deploy": "printf '%s\n' 'no need for this project'",
     "our:meta": "npm run our:meta:contributors && npm run our:meta:docs && npm run our:meta:projectz",
