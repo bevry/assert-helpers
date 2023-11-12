@@ -51,7 +51,7 @@ Common utilities and helpers to make testing assertions easier
 
 ``` html
 <script type="module">
-    import * as pkg from '//cdn.skypack.dev/assert-helpers@^10.0.0'
+    import * as pkg from '//cdn.skypack.dev/assert-helpers@^10.1.0'
 </script>
 ```
 
@@ -59,7 +59,7 @@ Common utilities and helpers to make testing assertions easier
 
 ``` html
 <script type="module">
-    import * as pkg from '//unpkg.com/assert-helpers@^10.0.0'
+    import * as pkg from '//unpkg.com/assert-helpers@^10.1.0'
 </script>
 ```
 
@@ -67,7 +67,7 @@ Common utilities and helpers to make testing assertions easier
 
 ``` html
 <script type="module">
-    import * as pkg from '//dev.jspm.io/assert-helpers@10.0.0'
+    import * as pkg from '//dev.jspm.io/assert-helpers@10.1.0'
 </script>
 ```
 
