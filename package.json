@@ -1,13 +1,15 @@
 {
   "title": "Assert Helpers",
   "name": "assert-helpers",
-  "version": "9.0.0",
+  "version": "10.0.0",
   "description": "Common utilities and helpers to make testing assertions easier",
   "homepage": "https://github.com/bevry/assert-helpers",
   "license": "Artistic-2.0",
   "keywords": [
     "assert",
     "browser",
+    "es2017",
+    "es2019",
     "es2022",
     "expect",
     "module",
@@ -72,7 +74,7 @@
     "url": "https://github.com/bevry/assert-helpers.git"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=6"
   },
   "editions": [
     {
@@ -116,27 +118,58 @@
       }
     },
     {
-      "description": "TypeScript compiled against ES2022 for Node.js 14 || 16 || 18 || 20 || 21 with Import for modules",
-      "directory": "edition-es2022-esm",
+      "description": "TypeScript compiled against ES2019 for Node.js 8 || 10 || 12 || 14 || 16 || 18 || 20 || 21 with Require for modules",
+      "directory": "edition-es2019",
       "entry": "index.js",
       "tags": [
         "compiled",
         "javascript",
-        "es2022",
+        "es2019",
+        "require"
+      ],
+      "engines": {
+        "node": "8 || 10 || 12 || 14 || 16 || 18 || 20 || 21",
+        "browsers": false
+      }
+    },
+    {
+      "description": "TypeScript compiled against ES2017 for Node.js 6 || 8 || 10 || 12 || 14 || 16 || 18 || 20 || 21 with Require for modules",
+      "directory": "edition-es2017",
+      "entry": "index.js",
+      "tags": [
+        "compiled",
+        "javascript",
+        "es2017",
+        "require"
+      ],
+      "engines": {
+        "node": "6 || 8 || 10 || 12 || 14 || 16 || 18 || 20 || 21",
+        "browsers": false
+      }
+    },
+    {
+      "description": "TypeScript compiled against ES2019 for Node.js 12 || 14 || 16 || 18 || 20 || 21 with Import for modules",
+      "directory": "edition-es2019-esm",
+      "entry": "index.js",
+      "tags": [
+        "compiled",
+        "javascript",
+        "es2019",
         "import"
       ],
       "engines": {
-        "node": "14 || 16 || 18 || 20 || 21",
+        "node": "12 || 14 || 16 || 18 || 20 || 21",
         "browsers": false
       }
     }
   ],
   "types": "./compiled-types/",
   "type": "module",
-  "main": "edition-es2022/index.js",
+  "main": "index.cjs",
   "exports": {
     "node": {
-      "import": "./edition-es2022-esm/index.js",
+      "import": "./edition-es2019-esm/index.js",
+      "default": "./index.cjs",
       "require": "./edition-es2022/index.js"
     },
     "browser": {
@@ -147,6 +180,7 @@
   "module": "edition-browsers/index.js",
   "dependencies": {
     "@bevry/ansi": "^4.0.0",
+    "editions": "^6.8.0",
     "errlop": "^4.6.0"
   },
   "devDependencies": {
@@ -170,10 +204,12 @@
   },
   "scripts": {
     "our:clean": "rm -Rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",
-    "our:compile": "npm run our:compile:edition-browsers && npm run our:compile:edition-es2022 && npm run our:compile:edition-es2022-esm && npm run our:compile:types",
+    "our:compile": "npm run our:compile:edition-browsers && npm run our:compile:edition-es2017 && npm run our:compile:edition-es2019 && npm run our:compile:edition-es2019-esm && npm run our:compile:edition-es2022 && npm run our:compile:types",
     "our:compile:edition-browsers": "tsc --module ESNext --target ES2022 --outDir ./edition-browsers --project tsconfig.json && ( test ! -d edition-browsers/source || ( mv edition-browsers/source edition-temp && rm -Rf edition-browsers && mv edition-temp edition-browsers ) )",
+    "our:compile:edition-es2017": "tsc --module commonjs --target ES2017 --outDir ./edition-es2017 --project tsconfig.json && ( test ! -d edition-es2017/source || ( mv edition-es2017/source edition-temp && rm -Rf edition-es2017 && mv edition-temp edition-es2017 ) ) && printf '%s' '{\"type\": \"commonjs\"}' > edition-es2017/package.json",
+    "our:compile:edition-es2019": "tsc --module commonjs --target ES2019 --outDir ./edition-es2019 --project tsconfig.json && ( test ! -d edition-es2019/source || ( mv edition-es2019/source edition-temp && rm -Rf edition-es2019 && mv edition-temp edition-es2019 ) ) && printf '%s' '{\"type\": \"commonjs\"}' > edition-es2019/package.json",
+    "our:compile:edition-es2019-esm": "tsc --module ESNext --target ES2019 --outDir ./edition-es2019-esm --project tsconfig.json && ( test ! -d edition-es2019-esm/source || ( mv edition-es2019-esm/source edition-temp && rm -Rf edition-es2019-esm && mv edition-temp edition-es2019-esm ) ) && printf '%s' '{\"type\": \"module\"}' > edition-es2019-esm/package.json",
     "our:compile:edition-es2022": "tsc --module commonjs --target ES2022 --outDir ./edition-es2022 --project tsconfig.json && ( test ! -d edition-es2022/source || ( mv edition-es2022/source edition-temp && rm -Rf edition-es2022 && mv edition-temp edition-es2022 ) ) && printf '%s' '{\"type\": \"commonjs\"}' > edition-es2022/package.json",
-    "our:compile:edition-es2022-esm": "tsc --module ESNext --target ES2022 --outDir ./edition-es2022-esm --project tsconfig.json && ( test ! -d edition-es2022-esm/source || ( mv edition-es2022-esm/source edition-temp && rm -Rf edition-es2022-esm && mv edition-temp edition-es2022-esm ) ) && printf '%s' '{\"type\": \"module\"}' > edition-es2022-esm/package.json",
     "our:compile:types": "tsc --project tsconfig.json --emitDeclarationOnly --declaration --declarationMap --declarationDir ./compiled-types && ( test ! -d compiled-types/source || ( mv compiled-types/source edition-temp && rm -Rf compiled-types && mv edition-temp compiled-types ) )",
     "our:deploy": "printf '%s\n' 'no need for this project'",
     "our:meta": "npm run our:meta:contributors && npm run our:meta:docs && npm run our:meta:projectz",
@@ -195,7 +231,7 @@
     "our:verify:eslint": "eslint --fix --ignore-pattern '**/*.d.ts' --ignore-pattern '**/vendor/' --ignore-pattern '**/node_modules/' --ext .mjs,.js,.jsx,.ts,.tsx ./source",
     "our:verify:module": "valid-module",
     "our:verify:prettier": "prettier --write .",
-    "test": "node ./edition-es2022/test.js"
+    "test": "node ./test.cjs"
   },
   "eslintConfig": {
     "extends": [
