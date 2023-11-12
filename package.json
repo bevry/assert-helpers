@@ -1,7 +1,7 @@
 {
   "title": "Assert Helpers",
   "name": "assert-helpers",
-  "version": "11.0.0",
+  "version": "11.1.0",
   "description": "Common utilities and helpers to make testing assertions easier",
   "homepage": "https://github.com/bevry/assert-helpers",
   "license": "Artistic-2.0",
@@ -195,9 +195,9 @@
   "browser": "edition-browsers/index.js",
   "module": "edition-browsers/index.js",
   "dependencies": {
-    "@bevry/ansi": "2.1.0",
+    "@bevry/ansi": "^6.0.0",
     "editions": "^6.9.0",
-    "errlop": "4.6.0"
+    "errlop": "^7.0.0"
   },
   "devDependencies": {
     "@bevry/update-contributors": "^1.23.0",
