@@ -181,7 +181,7 @@
   "dependencies": {
     "@bevry/ansi": "^4.0.0",
     "editions": "^6.8.0",
-    "errlop": "^4.6.0"
+    "errlop": "^5.0.0"
   },
   "devDependencies": {
     "@bevry/update-contributors": "^1.23.0",
