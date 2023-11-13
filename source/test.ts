@@ -108,7 +108,7 @@ kava.suite('assert-helpers', function (suite, test) {
 	test('completeViaCallback', function () {
 		helpers.completeViaCallback(
 			'a',
-			0,
+			0
 		)(function (err, result) {
 			strictEqual(err, null)
 			strictEqual(result, 'a')
@@ -118,7 +118,7 @@ kava.suite('assert-helpers', function (suite, test) {
 		const a = new Error('abc')
 		helpers.errorViaCallback(
 			a,
-			0,
+			0
 		)(function (err) {
 			strictEqual(err, a)
 		})

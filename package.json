@@ -1,7 +1,7 @@
 {
   "title": "Assert Helpers",
   "name": "assert-helpers",
-  "version": "11.1.0",
+  "version": "11.2.0",
   "description": "Common utilities and helpers to make testing assertions easier",
   "homepage": "https://github.com/bevry/assert-helpers",
   "license": "Artistic-2.0",
@@ -195,9 +195,9 @@
   "browser": "edition-browsers/index.js",
   "module": "edition-browsers/index.js",
   "dependencies": {
-    "@bevry/ansi": "^6.0.0",
-    "editions": "^6.9.0",
-    "errlop": "^7.0.0"
+    "@bevry/ansi": "^6.1.0",
+    "editions": "^6.10.0",
+    "errlop": "^7.1.0"
   },
   "devDependencies": {
     "@bevry/update-contributors": "^1.23.0",
@@ -209,8 +209,8 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
     "filedirname": "^2.8.0",
-    "kava": "6.0.0",
-    "prettier": "^3.0.3",
+    "kava": "^7.0.0",
+    "prettier": "^3.1.0",
     "projectz": "^2.23.0",
     "surge": "^0.23.1",
     "typedoc": "^0.25.3",
@@ -257,6 +257,7 @@
   },
   "prettier": {
     "semi": false,
-    "singleQuote": true
+    "singleQuote": true,
+    "trailingComma": "es5"
   }
 }
