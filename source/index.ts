@@ -2,11 +2,13 @@
 
 // Polyfill for older node versions
 if (Array.prototype.includes == null) {
+	// Array.prototype.includes missing on Node.js v4, first added in Node.js v6
 	// eslint-disable-next-line no-extend-native
 	Array.prototype.includes = function (searchElement) {
 		return this.indexOf(searchElement) !== -1
 	}
 }
+// String.prototype.includes included on Node.js v4
 
 // Import
 import {
@@ -322,8 +324,9 @@ export function contains(
 	if (testName == null)
 		testName = `Expected [${actual}] to contain [${expected}]`
 	try {
-		_ok(actual.indexOf(expected) !== -1, testName)
+		_ok(actual.includes(expected) === true, testName)
 	} catch (checkError: any) {
+		logComparison(actual, expected, checkError)
 		if (next) {
 			next(checkError)
 			return
@@ -334,6 +337,28 @@ export function contains(
 	if (next) next()
 }
 
+/** Checks to see if the actual result does not contain the expected result .*/
+export function notContains(
+	actual: any,
+	expected: any,
+	testName = 'does not contain assertion',
+	next?: Errback
+): void | never {
+	if (testName == null)
+		testName = `Expected [${actual}] to not contain [${expected}]`
+	try {
+		_ok(actual.includes(expected) === false, testName)
+	} catch (checkError: any) {
+		logComparison(actual, expected, checkError)
+		if (next) {
+			next(checkError)
+			return
+		} else {
+			throw checkError
+		}
+	}
+	if (next) next()
+}
 /** Checks to see if an error was as expected, if a failure occurs it will output detailed information */
 export function errorEqual(
 	actualError: any,

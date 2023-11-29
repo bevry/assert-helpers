@@ -1,5 +1,9 @@
 # History
 
+-   Added `notContains`
+-   `contains` and `notContains` now output the failed comparison, rather than just the failure
+-   No need to not use `String.prototype.includes` as it is supported by all environments we support
+
 ## v11.6.0 2023 November 24
 
 -   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)

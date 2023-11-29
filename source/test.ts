@@ -94,6 +94,13 @@ kava.suite('assert-helpers', function (suite, test) {
 			fail()
 		} catch (err) {}
 	})
+	test('notContains', function () {
+		helpers.notContains('ab', 'c')
+		try {
+			helpers.notContains('ab', 'a')
+			fail()
+		} catch (err) {}
+	})
 	test('errorEqual', function () {
 		const a = new Error('abc')
 		helpers.errorEqual(a, 'abc')
