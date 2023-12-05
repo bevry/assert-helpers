@@ -1,5 +1,9 @@
 # History
 
+## v11.8.0 2023 December 5
+
+-   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+
 ## v11.7.0 2023 November 29
 
 -   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)

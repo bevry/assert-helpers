@@ -1,7 +1,7 @@
 {
   "title": "Assert Helpers",
   "name": "assert-helpers",
-  "version": "11.7.0",
+  "version": "11.8.0",
   "description": "Common utilities and helpers to make testing assertions easier",
   "homepage": "https://github.com/bevry/assert-helpers",
   "license": "Artistic-2.0",
@@ -215,22 +215,22 @@
   "browser": "edition-browsers/index.js",
   "module": "edition-browsers/index.js",
   "dependencies": {
-    "@bevry/ansi": "^6.5.0",
-    "editions": "^6.16.0",
-    "errlop": "^7.5.0"
+    "@bevry/ansi": "^6.6.0",
+    "editions": "^6.17.0",
+    "errlop": "^8.1.0"
   },
   "devDependencies": {
     "@bevry/update-contributors": "^1.23.0",
-    "@types/node": "^20.10.0",
-    "@typescript-eslint/eslint-plugin": "^6.13.1",
-    "@typescript-eslint/parser": "^6.13.1",
-    "eslint": "^8.54.0",
+    "@types/node": "^20.10.3",
+    "@typescript-eslint/eslint-plugin": "^6.13.2",
+    "@typescript-eslint/parser": "^6.13.2",
+    "eslint": "^8.55.0",
     "eslint-config-bevry": "^5.2.0",
-    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.0.1",
     "filedirname": "^3.1.0",
     "kava": "^7.4.0",
-    "make-deno-edition": "^2.0.0",
+    "make-deno-edition": "^2.0.1",
     "prettier": "^3.1.0",
     "projectz": "^3.4.0",
     "typedoc": "^0.25.4",
@@ -278,6 +278,7 @@
   "prettier": {
     "semi": false,
     "singleQuote": true,
-    "trailingComma": "es5"
+    "trailingComma": "es5",
+    "endOfLine": "lf"
   }
 }
