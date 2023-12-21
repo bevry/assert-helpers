@@ -1,5 +1,9 @@
 # History
 
+## v11.10.1 2023 December 21
+
+-   Republish as npm seems to have lost the previous version
+
 ## v11.10.0 2023 December 21
 
 -   Rewrote `errorEqual` to better support empty checks, code checks, and contain checks
@@ -15,10 +19,10 @@
 
 ## v11.7.0 2023 November 29
 
--   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
 -   Added `notContains`
 -   `contains` and `notContains` now output the failed comparison, rather than just the failure
 -   No need to not use `String.prototype.includes` as it is supported by all environments we support
+-   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
 
 ## v11.6.0 2023 November 24
 
