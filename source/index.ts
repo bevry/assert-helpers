@@ -359,6 +359,7 @@ export function notContains(
 	}
 	if (next) next()
 }
+
 /** Checks to see if an error was as expected, if a failure occurs it will output detailed information */
 export function errorEqual(
 	actualError: any,
@@ -366,38 +367,25 @@ export function errorEqual(
 	testName = 'error equal assertion',
 	next?: Errback
 ): void | never {
-	let expectedErrorMessage, actualErrorMessage
-
-	if (expectedError) {
-		if (expectedError instanceof Error) {
-			expectedErrorMessage = expectedError.message
-		} else {
-			expectedErrorMessage = expectedError
-			expectedError = new Error(expectedErrorMessage)
-		}
-	}
-
-	if (actualError) {
-		if (actualError instanceof Error) {
-			actualErrorMessage = actualError.message
-		} else {
-			actualErrorMessage = actualError
-			actualError = new Error(actualErrorMessage)
-		}
-	}
-
 	try {
-		if (actualErrorMessage && expectedErrorMessage) {
-			contains(actualErrorMessage, expectedErrorMessage, testName)
+		// needs to work with errlop codes, hence usage of stack, as errlop tostring doesn't include code for now, unfortunately
+		if (!actualError || !expectedError) {
+			equal(actualError || '', expectedError || '', testName + ' (empty check)')
+		} else if (actualError.code === (expectedError?.code || expectedError)) {
+			equal(
+				actualError.code,
+				expectedError?.code || expectedError,
+				testName + ' (.code check)'
+			)
 		} else {
-			equal(actualError, expectedError || null, testName)
+			contains(
+				actualError.toString(),
+				expectedError.toString(),
+				testName + ' (contains check)'
+			)
 		}
 	} catch (checkError: any) {
-		logComparison(
-			actualError && (actualError.stack || actualError.message || actualError),
-			expectedErrorMessage,
-			checkError
-		)
+		logComparison(actualError, expectedError, checkError)
 		if (next) {
 			next(checkError)
 			return
